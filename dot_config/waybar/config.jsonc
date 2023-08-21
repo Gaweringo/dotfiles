@@ -1,0 +1,8 @@
+{
+  "include": [
+    "/usr/share/sway/templates/waybar/config.jsonc"
+  ],
+  "custom/weather": {
+    "exec": "/usr/share/sway/scripts/weather.py -c Enns"
+  }
+}
