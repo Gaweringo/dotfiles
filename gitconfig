@@ -1,0 +1,60 @@
+{{#if (eq dotter.os "windows")}}
+[credential "helperselector"]
+	selected = manager
+[credential "https://github.com"]
+	helper = 
+	helper = !'C:\\Users\\Martin\\scoop\\apps\\gh\\current\\bin\\gh.exe' auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !'C:\\Users\\Martin\\scoop\\apps\\gh\\current\\bin\\gh.exe' auth git-credential
+{{else}}
+[credential "https://github.com"]
+	helper =
+	helper = !/user/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/user/bin/gh auth git-credential
+{{/if}}
+[user]
+	email = 40121865+Gaweringo@users.noreply.github.com
+	name = Gaweringo
+[init]
+	defaultBranch = main
+[alias]
+	lg = lg1
+	lg1 = lg1-specific --all
+	lg2 = lg2-specific --all
+	lg3 = lg3-specific --all
+	lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+	lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+	s = status
+[core]
+	editor = neovide --nofork
+{{#if (is_executable "meld")}}
+[diff]
+	guitool = meld
+{{/if}}
+[difftool "vscode"]
+	path = C:/Users/Martin/AppData/Local/Programs/Microsoft VS Code/Code.exe
+	cmd = \"C:/Users/Martin/AppData/Local/Programs/Microsoft VS Code/Code.exe\" --new-window --wait --diff \"$LOCAL\" \"$REMOTE\"
+[merge]
+	guitool = vscode
+[mergetool "vscode"]
+	path = C:/Users/Martin/AppData/Local/Programs/Microsoft VS Code/Code.exe
+	cmd = \"C:/Users/Martin/AppData/Local/Programs/Microsoft VS Code/Code.exe\" --new-window --wait --merge \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\"
+[pull]
+	rebase = false
+	ff = only
+[fetch]
+	prune = false
+[rebase]
+	autoStash = false
+	autosquash = false
+	updateRefs = false
+
+{{#if (is_executable "meld")}}
+[difftool "meld"]
+	path = C:/Users/Martin/scoop/apps/meld/current/Meld.exe
+	cmd = \"C:/Users/Martin/scoop/apps/meld/current/Meld.exe\" \"$LOCAL\" \"$REMOTE\"
+{{/if}}

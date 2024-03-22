@@ -1,0 +1,22 @@
+# User-defined functions to be executed inside templates.
+[helpers]
+
+[default]
+# 'depends': packages that also ge tenabled when this one gets enabled
+depends = []
+
+# .files is the mapping between the path of the file relative to
+# the repository root and its location in the filesystem
+# On Windows: '~' is 'C:\Users\<USERNAME>\'
+[default.files]
+"README.md" = ""
+"config/nvim" = "~/.config/nvim"
+gitconfig = "~/.gitconfig"
+wezterm = "~/.wezterm.lua"
+
+[idea.files]
+ideavimrc = "~/.ideavimrc"
+
+# variables are constants for templated files
+[default.variables]
+
