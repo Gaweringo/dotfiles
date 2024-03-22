@@ -12,7 +12,7 @@ depends = []
 "README.md" = ""
 "config/nvim" = "~/.config/nvim"
 gitconfig = "~/.gitconfig"
-wezterm = "~/.wezterm.lua"
+"wezterm.lua" = "~/.wezterm.lua"
 
 [idea.files]
 ideavimrc = "~/.ideavimrc"
