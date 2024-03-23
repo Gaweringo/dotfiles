@@ -1,2 +1,2 @@
 [default.files]
-"config/nvim" = "~/AppData/Local/nvim"
+"config/nvim" = { target = "~/AppData/Local/nvim", type = "symbolic", recurse = false }
