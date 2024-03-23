@@ -135,7 +135,7 @@ return {
         clangd = {},
         gopls = {},
         html = {},
-        emmet_ls = {},
+        emmet_language_server = {},
         htmx = {},
         -- pyright = {},
         rust_analyzer = {},

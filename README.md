@@ -15,6 +15,11 @@ includes = [".dotter/include/windows.toml"]
 
 # which packages should be used on this machine
 packages = ["default"]
+
+# variables to be substituted in the other toml files
+[variables]
+email = "40121865+Gaweringo@users.noreply.github.com"
+git_username = "Gaweringo"
 ```
 5. Deploy the config by running `dotter`
     - *Check with* `--dry-run` *before*

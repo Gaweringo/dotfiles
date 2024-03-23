@@ -67,6 +67,9 @@ return {
             require('telescope.themes').get_dropdown(),
           },
         },
+        defaults = {
+          hidden = true
+        }
       }
 
       -- Enable telescope extensions, if they are installed
@@ -106,7 +109,7 @@ return {
 
       -- Shortcut for searching your neovim configuration files
       vim.keymap.set('n', '<leader>sn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config' }
+        builtin.find_files { cwd = vim.fn.stdpath 'config', follow = true}
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
