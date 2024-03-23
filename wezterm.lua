@@ -6,8 +6,14 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+{{#if (is_executable "fish")}}
 -- Spawn a fish shell in login mode
+config.default_prog = { "fish" }
+{{/if}}
+{{#if (is_executable "pwsh")}}
+-- Spawn a pwsh shell in login mode
 config.default_prog = { "pwsh" }
+{{/if}}
 
 -- config.font = wezterm.font("JetBrains Mono")
 config.color_scheme = "Tokyo Night (Gogh)"
