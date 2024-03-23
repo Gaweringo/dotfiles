@@ -1,2 +1,2 @@
-[nvim.files]
+[default.files]
 "config/nvim" = "~/AppData/Local/nvim"

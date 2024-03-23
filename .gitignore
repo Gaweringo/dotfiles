@@ -1,3 +1,4 @@
-.dotter/*
-!.dotter/include/
-!.dotter/global.toml
+.dotter/cache*
+.dotter/local.toml
+# !.dotter/include/
+# !.dotter/global.toml
