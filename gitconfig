@@ -3,8 +3,14 @@
 	selected = manager
 [credential "https://github.com"]
 	helper = !gh auth git-credential
+{{#if git_username}}
+	username = {{git_username}}
+{{/if}}
 [credential "https://gist.github.com"]
 	helper = !gh auth git-credential
+{{#if git_username}}
+	username = {{git_username}}
+{{/if}}
 {{/if}}
 {{#if (and email git_username)}}
 [user]
