@@ -14,41 +14,47 @@ config.color_scheme = "Tokyo Night (Gogh)"
 config.colors = {
 	cursor_fg = "black",
 }
--- config.color_scheme = "tokyonight_night"
+
 config.use_fancy_tab_bar = false
 config.font_size = 10
 config.window_background_opacity = 0.95
 config.hide_tab_bar_if_only_one_tab = true
-config.hide_tab_bar_if_only_one_tab = true
 config.tab_and_split_indices_are_zero_based = true
-config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
+
+-- startup maximized
+wezterm.on('gui-startup', function(cmd)
+  local _, _, window = wezterm.mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
+
 local act = wezterm.action
+config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
 	{
 		mods = "LEADER",
 		key = "-",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{
 		mods = "LEADER",
 		key = "|",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
 		mods = "LEADER",
 		key = "c",
-		action = wezterm.action.SpawnTab("CurrentPaneDomain"),
+		action = act.SpawnTab("CurrentPaneDomain"),
 	},
 	{
 		key = "q",
 		mods = "ALT",
-		action = wezterm.action.CloseCurrentPane({ confirm = false }),
+		action = act.CloseCurrentPane({ confirm = false }),
 	},
 	{
 		-- Make CTRL+SHIFT+2 actually go to the second tab
 		key = '"',
 		mods = "CTRL|SHIFT",
-		action = wezterm.action.ActivateTab(2 - 1),
+		action = act.ActivateTab(2 - 1),
 	},
 
 	{ key = "0", mods = "LEADER", action = act.ActivateTab(0) },
