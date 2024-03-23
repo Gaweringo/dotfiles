@@ -20,6 +20,8 @@ packages = ["default"]
 [variables]
 email = "40121865+Gaweringo@users.noreply.github.com"
 git_username = "Gaweringo"
+sen_folder = 'P:\..\SEN1\UEZ\'
+programming_folder = 'P:\..\Programming'
 ```
 5. Deploy the config by running `dotter`
     - *Check with* `--dry-run` *before*

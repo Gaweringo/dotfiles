@@ -1,2 +1,4 @@
 [default.files]
 "config/nvim" = { target = "~/AppData/Local/nvim", type = "symbolic", recurse = false }
+"Windows/Microsoft.Powershell_profile.ps1" = "~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1"
+
