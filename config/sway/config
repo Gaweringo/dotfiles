@@ -21,6 +21,7 @@ set $term foot
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
+include $HOME/.config/sway/definitions.d/*
 
 ### Output configuration
 #

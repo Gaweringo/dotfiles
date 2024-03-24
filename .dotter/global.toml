@@ -18,7 +18,7 @@ gitconfig = "~/.gitconfig"
 ideavimrc = "~/.ideavimrc"
 
 [sway.files]
-"config/sway" = { target = "~/.config/sway/", type = "symbolic", recurse = false }
+"config/sway" = { target = "~/.config/sway", type = "symbolic", recurse = false }
 
 # variables are constants for templated files
 [default.variables]
