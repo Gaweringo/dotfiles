@@ -1,12 +1,16 @@
-{{#if (is_executable  "gh")}}
+{{#if (eq dotter.os "windows")}}
 [credential "helperselector"]
 	selected = manager
+{{/if}}
+{{#if (is_executable  "gh")}}
 [credential "https://github.com"]
+	helper = 
 	helper = !gh auth git-credential
 {{#if git_username}}
 	username = {{git_username}}
 {{/if}}
 [credential "https://gist.github.com"]
+	helper = 
 	helper = !gh auth git-credential
 {{#if git_username}}
 	username = {{git_username}}
