@@ -25,3 +25,29 @@ programming_folder = 'P:\..\Programming'
 ```
 5. Deploy the config by running `dotter`
     - *Check with* `--dry-run` *before*
+
+## Things to install that are in config:
+### General
+- [starship](https://starship.rs)
+- [wezterm](https://wezfurlong.org/wezterm/index.html)
+- [zoxide](https://github.com/ajeetdsouza/zoxide)
+- [lazygit](https://github.com/jesseduffield/lazygit)
+
+### Windows
+- [pwsh](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows)
+    - `Install-Module -Name Terminal-Icons -Repository PSGallery` [Terminal-Icons](https://github.com/devblackops/Terminal-Icons) (optional)
+    - `Install-Module DockerCompletion` (optional)
+- [scoop](https://scoop.sh)
+- [sfsu](https://github.com/jewlexx/sfsu) `scoop install sfsu`
+- [gsudo](https://github.com/gerardog/gsudo) `scoop install gsudo`
+
+### Linux
+- [fish](https://fishshell.com/)
+- [exa](https://the.exa.website/)
+
+
+### Things to install for nvim (to install LSPs)
+- [go](https://go.dev/)
+- [rust/rustup/cargo](https://rustup.rs/)
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+    - For `emmet_language_server`
