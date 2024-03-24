@@ -11,7 +11,7 @@ depends = ["nvim"]
 [default.files]
 "README.md" = ""
 gitconfig = "~/.gitconfig"
-"wezterm.lua" = "~/.wezterm.lua"
+"wezterm.lua" = { target = "~/.wezterm.lua", type = "symbolic", if = '(is_executable "wezterm")' }
 
 [nvim.files]
 "config/nvim" = { target = "~/.config/nvim", type = "symbolic", recurse = false }
