@@ -3,16 +3,18 @@
 
 [default]
 # 'depends': packages that also ge tenabled when this one gets enabled
-depends = []
+depends = ["nvim"]
 
 # .files is the mapping between the path of the file relative to
 # the repository root and its location in the filesystem
 # On Windows: '~' is 'C:\Users\<USERNAME>\'
 [default.files]
 "README.md" = ""
-"config/nvim" = { target = "~/.config/nvim", type = "symbolic", recurse = false }
 gitconfig = "~/.gitconfig"
 "wezterm.lua" = "~/.wezterm.lua"
+
+[nvim.files]
+"config/nvim" = { target = "~/.config/nvim", type = "symbolic", recurse = false }
 
 [idea.files]
 ideavimrc = "~/.ideavimrc"
