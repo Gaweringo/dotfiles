@@ -42,13 +42,20 @@
 	autosquash = false
 	updateRefs = false
 [core]
-{{#if (is_executable "nvim")}}
+	{{#if (eq dotter.os "windows")}}
+	symlinks = true
+	autocrlf = true
+	{{else}}
+	autocrlf = input
+	{{/if}}
+	{{#if (is_executable "nvim")}}
 	editor = nvim
 	longpaths = true
-{{/if}}
-{{#if (and (eq dotter.os "unix") (is_executable "less"))}}
+	{{/if}}
+	{{#if (and (eq dotter.os "unix") (is_executable "less"))}}
 	pager = less -F -X
-{{/if}}
+	{{/if}}
+
 {{#if (is_executable "difft")}}
 [diff]
     external = "difft"
