@@ -29,6 +29,11 @@ if status is-interactive
     fish_add_path ~/go/bin/
     {{/if}}
 
+    # appr
     abbr --add 'refresh' 'source ~/.config/fish/config.fish'
+    {{#if (is_executable "git")}}
+    abbr --add 'gc' 'git commit -m'
+    abbr --add 'ga' 'git add'
+    {{/if}}
 end
 
