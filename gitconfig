@@ -41,8 +41,15 @@
 	autoStash = false
 	autosquash = false
 	updateRefs = false
-{{#if (is_executable "nvim")}}
 [core]
+{{#if (is_executable "nvim")}}
 	editor = nvim
 	longpaths = true
+{{/if}}
+{{#if (and (eq dotter.os "unix") (is_executable "less"))}}
+	pager = less -F -X
+{{/if}}
+{{#if (is_executable "difft")}}
+[diff]
+    external = "difft"
 {{/if}}
