@@ -36,32 +36,12 @@ end)
 local act = wezterm.action
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
-	{
-		mods = "LEADER",
-		key = "-",
-		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		mods = "LEADER",
-		key = "|",
-		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		mods = "LEADER",
-		key = "c",
-		action = act.SpawnTab("CurrentPaneDomain"),
-	},
-	{
-		key = "q",
-		mods = "ALT",
-		action = act.CloseCurrentPane({ confirm = false }),
-	},
-	{
-		-- Make CTRL+SHIFT+2 actually go to the second tab
-		key = '"',
-		mods = "CTRL|SHIFT",
-		action = act.ActivateTab(2 - 1),
-	},
+	{ mods = "LEADER", key = "-", action = act.SplitVertical({ domain = "CurrentPaneDomain" }), },
+	{ mods = "LEADER", key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
+	{ mods = "LEADER", key = "v", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
+	{ mods = "LEADER", key = "c", action = act.SpawnTab("CurrentPaneDomain"), },
+
+	{ key = "q", mods = "ALT", action = act.CloseCurrentPane({ confirm = false }), },
 
 	{ key = "0", mods = "LEADER", action = act.ActivateTab(0) },
 	{ key = "1", mods = "LEADER", action = act.ActivateTab(1) },
@@ -76,18 +56,12 @@ config.keys = {
 
 	{ key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
 	{ key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
-	{
-		key = "Enter",
-		mods = "LEADER",
-		action = wezterm.action.ActivateCopyMode,
-	},
+	{ key = "Enter", mods = "LEADER", action = wezterm.action.ActivateCopyMode, },
+
 	{ key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection 'Left', },
 	{ key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right', },
 	{ key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up', },
 	{ key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down', },
 }
--- config.cursor_blink_rate = 200
--- config.default_cursor_style = "BlinkingBlock"
--- config.custom_block_glyphs = false
 
 return config
