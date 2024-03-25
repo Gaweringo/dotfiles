@@ -22,6 +22,11 @@ ideavimrc = "~/.ideavimrc"
 [sway.files]
 "config/sway" = { target = "~/.config/sway", type = "symbolic", recurse = false }
 
+[fish.files]
+"config/fish/config.fish" = "~/.config/fish/config.fish"
+"config/fish/completions/render.fish" = { target = "~/.config/fish/completions/render.fish", type = "symbolic", if = '(is_executable "render")' }
+# "config/fish/completions/rustup.fish" = { target = "~/.config/fish/completions/rustup.fish", type = "symbolic", if = '(is_executable "rustup")' }
+
 # variables are constants for templated files
 [default.variables]
 
