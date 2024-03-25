@@ -1,0 +1,9 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+right_format = '$os'
+
+[os]
+format = '[$name $symbol]($style)'
+disabled = false
+

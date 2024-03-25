@@ -3,7 +3,7 @@
 
 [default]
 # 'depends': packages that also ge tenabled when this one gets enabled
-depends = ["nvim"]
+depends = ["nvim", "starship"]
 
 # .files is the mapping between the path of the file relative to
 # the repository root and its location in the filesystem
@@ -26,6 +26,9 @@ ideavimrc = "~/.ideavimrc"
 "config/fish/config.fish" = "~/.config/fish/config.fish"
 "config/fish/completions/render.fish" = { target = "~/.config/fish/completions/render.fish", type = "symbolic", if = '(is_executable "render")' }
 # "config/fish/completions/rustup.fish" = { target = "~/.config/fish/completions/rustup.fish", type = "symbolic", if = '(is_executable "rustup")' }
+
+[starship.files]
+"config/starship.toml" = { target = "~/.config/starship.toml", type="symbolic", if = '(is_executable "starship")'}
 
 # variables are constants for templated files
 [default.variables]
