@@ -3,7 +3,7 @@
 
 [default]
 # 'depends': packages that also ge tenabled when this one gets enabled
-depends = ["nvim", "starship"]
+depends = ["nvim", "starship", "foot"]
 
 # .files is the mapping between the path of the file relative to
 # the repository root and its location in the filesystem
@@ -29,6 +29,9 @@ ideavimrc = "~/.ideavimrc"
 
 [starship.files]
 "config/starship.toml" = { target = "~/.config/starship.toml", type="symbolic", if = '(is_executable "starship")'}
+
+[foot.files]
+"config/foot/foot.ini" = { target = "~/.config/foot/foot.ini", type="template", if = '(is_executable "foot")'}
 
 # variables are constants for templated files
 [default.variables]
