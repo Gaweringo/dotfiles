@@ -3,7 +3,7 @@
 
 [default]
 # 'depends': packages that also ge tenabled when this one gets enabled
-depends = ["nvim", "starship", "foot"]
+depends = ["nvim", "starship", "foot", "tmux"]
 
 # .files is the mapping between the path of the file relative to
 # the repository root and its location in the filesystem
@@ -32,6 +32,9 @@ ideavimrc = "~/.ideavimrc"
 
 [foot.files]
 "config/foot/foot.ini" = { target = "~/.config/foot/foot.ini", type="template", if = '(is_executable "foot")'}
+
+[tmux.files]
+"tmux.conf" = { target = "~/.tmux.conf", type="symbolic", if = '(is_executable "tmux")'}
 
 # variables are constants for templated files
 [default.variables]
