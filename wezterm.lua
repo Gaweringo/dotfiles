@@ -39,6 +39,7 @@ config.keys = {
 	{ mods = "LEADER", key = "-", action = act.SplitVertical({ domain = "CurrentPaneDomain" }), },
 	{ mods = "LEADER", key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
 	{ mods = "LEADER", key = "v", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
+
 	{ mods = "LEADER", key = "c", action = act.SpawnTab("CurrentPaneDomain"), },
 
 	{ key = "q", mods = "ALT", action = act.CloseCurrentPane({ confirm = false }), },
@@ -62,6 +63,11 @@ config.keys = {
 	{ key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right', },
 	{ key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up', },
 	{ key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down', },
+
+	-- tmux style
+	{ mods = "LEADER", key = "%", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
+	{ mods = "LEADER", key = '"', action = act.SplitVertical({ domain = "CurrentPaneDomain" }), },
+	{ mods = "LEADER", key = "x", action = act.CloseCurrentPane({ confirm = true }), },
 }
 
 return config
