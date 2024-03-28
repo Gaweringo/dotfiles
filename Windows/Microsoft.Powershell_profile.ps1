@@ -22,11 +22,6 @@ if (Test-Path($ChocolateyProfile)) {
 }
 {{/if}}
 
-#
-# To initialize zoxide, add this to your configuration (find it by running
-# `echo $profile` in PowerShell):
-#
-Invoke-Expression (& { $hook = if ($PSVersionTable.PSVersion.Major -ge 6) { 'pwd' } else { 'prompt' } (zoxide init powershell --hook $hook | Out-String) })
 
 # ALIAS
 # lazygit alias
@@ -72,3 +67,9 @@ Invoke-Expression (&{(caddy completion powershell | Out-String)})
 
 # Starship prompt
 Invoke-Expression (& 'starship' init powershell --print-full-init | Out-String)
+
+# Needs to be at the bottom
+# To initialize zoxide, add this to your configuration (find it by running
+# `echo $profile` in PowerShell):
+#
+Invoke-Expression (& { $hook = if ($PSVersionTable.PSVersion.Major -ge 6) { 'pwd' } else { 'prompt' } (zoxide init powershell --hook $hook | Out-String) })
