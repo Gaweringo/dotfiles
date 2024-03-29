@@ -1,0 +1,1 @@
+function scoop { switch ($args[0]) {   'search' { return sfsu.exe $args }   'hook' { return sfsu.exe $args }   'unused-buckets' { return sfsu.exe $args }   'describe' { return sfsu.exe $args }   'info' { return sfsu.exe $args }   'outdated' { return sfsu.exe $args }   'depends' { return sfsu.exe $args } default { scoop.ps1 @args } } }

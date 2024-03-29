@@ -12,7 +12,7 @@ Import-Module -Name Terminal-Icons
 Import-Module 'gsudoModule'
 
 # super fast scoop utils
-Invoke-Expression (&sfsu hook --disable list)
+. "$PSScriptRoot\Completions\sfsu.ps1"
 
 {{#if (is_executable 'choco')}}
 # Chocolatey profile
@@ -26,8 +26,8 @@ if (Test-Path($ChocolateyProfile)) {
 # ALIAS
 # lazygit alias
 Set-Alias -Name lg -Value lazygit
-# For graphicsmagick
-Remove-Alias gm -Force
+# graphicmagick alias as the gm conflicts with Get-Member
+Set-Alias -Name gmagick -Value gm.exe
 
 # yt-dlp mp3 download alias
 Function yt-mp3 {yt-dlp -f 'ba' -x --audio-format mp3 $args}
@@ -53,7 +53,7 @@ Function gig {
 
 ## COMPLETIONS ##
 # dotter completions
-Invoke-Expression (& dotter gen-completions --shell powershell | Out-String)
+. "$PSScriptRoot\Completions\dotter.ps1"
 
 {{#if (command_success "pwsh -c Import-Module DockerCompletion")}}
 # Docker completion
@@ -62,11 +62,15 @@ Import-Module DockerCompletion
 
 {{#if (is_executable "caddy")}}
 # caddy completion
-Invoke-Expression (&{(caddy completion powershell | Out-String)})
+. "$PSScriptRoot\Completions\caddy.ps1"
 {{/if}}
 
 # Starship prompt
-Invoke-Expression (& 'starship' init powershell --print-full-init | Out-String)
+. "$PSScriptRoot\Completions\starship.ps1"
+
+{{#if (is_executable "watchexec")}}
+. "$PSScriptRoot\Completions\watchexec.ps1"
+{{/if}}
 
 # Needs to be at the bottom
 # To initialize zoxide, add this to your configuration (find it by running
