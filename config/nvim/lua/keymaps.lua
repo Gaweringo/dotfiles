@@ -37,6 +37,13 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('n', '<leader>d', '<cmd>Explore<cr>', { desc = 'Open explorer/netrw' })
 
+-- buffers
+vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Previous Buffer' })
+vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous Buffer' })
+vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to other buffer' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
