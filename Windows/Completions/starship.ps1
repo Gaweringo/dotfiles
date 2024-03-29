@@ -154,7 +154,7 @@ $null = New-Module starship {
                 "$([char]0x1B)[1;32m❯$([char]0x1B)[0m "
             }
         } else {
-            Invoke-Native -Executable 'C:\Users\gawer\scoop\shims\starship.exe' -Arguments $arguments
+            Invoke-Native -Executable 'starship' -Arguments $arguments
         }
 
         # Set the number of extra lines in the prompt for PSReadLine prompt redraw.
@@ -204,7 +204,7 @@ $null = New-Module starship {
 
     # Invoke Starship and set continuation prompt
     Set-PSReadLineOption -ContinuationPrompt (
-        Invoke-Native -Executable 'C:\Users\gawer\scoop\shims\starship.exe' -Arguments @(
+        Invoke-Native -Executable 'starship' -Arguments @(
             "prompt",
             "--continuation"
         )
