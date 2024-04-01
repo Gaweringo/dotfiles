@@ -24,13 +24,6 @@ return {
             '$FILENAME',
             '--batch',
             '--eval',
-            -- '(vhdl-mode)',
-            -- '--eval',
-            -- '(vhdl-beautify-buffer)',
-            -- -- '-f',
-            -- -- 'save-buffer',
-            -- '--eval',
-            -- '(princ (buffer-string))',
             -- Taken from https://github.com/InES-HPMM/emacs-vhdl-formatter-vscode/blob/c811eccd75b95cff9d6fa5144e04c7a92f1de17a/src/extension.ts#L8
             '(let (vhdl-file-content next-line) (while (setq next-line (ignore-errors (read-from-minibuffer ""))) (setq vhdl-file-content (concat vhdl-file-content next-line "\\n"))) (with-temp-buffer (vhdl-mode) (setq vhdl-basic-offset 3) (insert vhdl-file-content) (vhdl-beautify-region (point-min) (point-max)) (princ (buffer-string))))',
           },
