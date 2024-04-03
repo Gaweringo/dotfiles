@@ -41,16 +41,6 @@ Function programming {$prog_dir = fd . '{{programming_folder}}' -t d -d 1 | fzf;
                           fd . -t d -d 1 $prog_dir | fzf | cd;}
 {{/if}}
 
-# gitignore
-Function gig {
-  param(
-    [Parameter(Mandatory=$true)]
-    [string[]]$list
-  )
-  $params = ($list | ForEach-Object { [uri]::EscapeDataString($_) }) -join ","
-  Invoke-WebRequest -Uri "https://www.toptal.com/developers/gitignore/api/$params" | select -ExpandProperty content | Out-File -FilePath $(Join-Path -path $pwd -ChildPath ".gitignore") -Encoding ascii
-}
-
 ## COMPLETIONS ##
 # dotter completions
 . "$PSScriptRoot\Completions\dotter.ps1"
