@@ -62,6 +62,10 @@ Import-Module DockerCompletion
 . "$PSScriptRoot\Completions\watchexec.ps1"
 {{/if}}
 
+{{#if (is_executable "Rcmd")}}
+rm alias:\r
+{{/if}}
+
 # Needs to be at the bottom
 # To initialize zoxide, add this to your configuration (find it by running
 # `echo $profile` in PowerShell):
