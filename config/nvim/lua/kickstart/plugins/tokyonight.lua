@@ -11,7 +11,7 @@ return {
       style = 'night',
       transparent = true,
       styles = {
-        sidebars = 'transparent',
+        -- sidebars = 'transparent',
         -- floats = 'transparent'
       }
     },
