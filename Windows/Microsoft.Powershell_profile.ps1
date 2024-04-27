@@ -41,6 +41,11 @@ Function programming {$prog_dir = fd . '{{programming_folder}}' -t d -d 1 | fzf;
                           fd . -t d -d 1 $prog_dir | fzf | cd;}
 {{/if}}
 
+Function devpwsh {
+  Import-Module "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\Microsoft.VisualStudio.DevShell.dll";
+  $env:Path += "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin;";
+}
+
 ## COMPLETIONS ##
 # dotter completions
 . "$PSScriptRoot\Completions\dotter.ps1"
