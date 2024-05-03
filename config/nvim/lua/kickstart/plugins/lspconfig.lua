@@ -6,11 +6,14 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'aznhe21/actions-preview.nvim',
+      'p00f/clangd_extensions.nvim',
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
     },
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       -- Brief Aside: **What is LSP?**
       --
@@ -96,6 +99,9 @@ return {
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           map('<leader>o', '<cmd>ClangdSwitchSourceHeader<cr>', 'Switch Source/Header (C/C++)')
+
+          require('clangd_extensions.inlay_hints').setup_autocmd()
+          require('clangd_extensions.inlay_hints').set_inlay_hints()
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -214,6 +220,38 @@ return {
         },
       }
     end,
+  },
+  {
+    -- https://github.com/aznhe21/actions-preview.nvim
+    'aznhe21/actions-preview.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = {
+      {
+        -- spec elsewhere
+        'nvim-telescope/telescope.nvim',
+      },
+    },
+    config = function()
+      require('actions-preview').setup {
+        telescope = require('telescope.themes').get_dropdown {
+          winblend = 20,
+        },
+      }
+    end,
+  },
+  {
+    -- https://github.com/p00f/clangd_extensions.nvim
+    'p00f/clangd_extensions.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    -- The `filetypes` come from the default `filetypes` specified for
+    -- `clangd` in `lspconfig` documentation
+    ft = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
+    opts = {
+      inlay_hints = {
+        only_current_line = true,
+        only_current_line_autocmd = { 'CursorHold' },
+      },
+    },
   },
 }
 -- vim: ts=2 sts=2 sw=2 et
