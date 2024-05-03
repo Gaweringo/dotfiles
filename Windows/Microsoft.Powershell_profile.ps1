@@ -71,6 +71,8 @@ Import-Module DockerCompletion
 rm alias:\r
 {{/if}}
 
+$env:EDITOR = "nvim"
+
 # Needs to be at the bottom
 # To initialize zoxide, add this to your configuration (find it by running
 # `echo $profile` in PowerShell):
