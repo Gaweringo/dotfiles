@@ -5,6 +5,7 @@ return {
     'nvim-telescope/telescope.nvim',
     'nvim-treesitter/nvim-treesitter',
   },
+  cmd = { 'DevdocsOpen', 'DevdocsOpenCurrent' },
   opts = {
     wrap = true,
     previewer_cmd = 'glow',
