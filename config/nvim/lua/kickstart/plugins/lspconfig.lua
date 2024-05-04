@@ -90,6 +90,10 @@ return {
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
+          map('<leader>la', function()
+            require('actions-preview').code_actions()
+          end, '[l]sp: code [a]ction')
+
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
