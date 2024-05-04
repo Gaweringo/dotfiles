@@ -10,21 +10,17 @@ return {
 
     dependencies = { 'rafamadriz/friendly-snippets' },
 
+    opts = { history = true },
+
     config = function()
       local ls = require 'luasnip'
       ls.filetype_extend('javascript', { 'jsdoc' })
 
-      --- TODO: What is expand?
-      vim.keymap.set({ 'i' }, '<C-s>e', function()
-        ls.expand()
-      end, { silent = true })
+      for _, ft_path in ipairs(vim.api.nvim_get_runtime_file('lua/kickstart/plugins/snippets/*.lua', true)) do
+        loadfile(ft_path)()
+      end
 
-      vim.keymap.set({ 'i', 's' }, '<C-s>;', function()
-        ls.jump(1)
-      end, { silent = true })
-      vim.keymap.set({ 'i', 's' }, '<C-s>,', function()
-        ls.jump(-1)
-      end, { silent = true })
+      ls.filetype_extend('cpp', { 'c' })
 
       vim.keymap.set({ 'i', 's' }, '<C-E>', function()
         if ls.choice_active() then
