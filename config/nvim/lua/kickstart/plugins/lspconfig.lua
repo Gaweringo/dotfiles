@@ -152,6 +152,7 @@ return {
         -- pyright = {},
         rust_analyzer = {},
         omnisharp = {},
+        zls = {},
         -- rust_hdl = {},
         -- vhdl_ls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
