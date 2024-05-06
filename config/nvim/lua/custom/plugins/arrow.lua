@@ -32,7 +32,7 @@ return {
     {
       '<A-l>',
       function()
-        require('arrow.persist').go_to(3)
+        require('arrow.persist').go_to(4)
       end,
       'Arrow first',
     },

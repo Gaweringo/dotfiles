@@ -13,7 +13,7 @@ return {
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
     },
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'VeryLazy', 'BufReadPre', 'BufNewFile' },
     config = function()
       -- Brief Aside: **What is LSP?**
       --

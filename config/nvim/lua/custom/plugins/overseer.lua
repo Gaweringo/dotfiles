@@ -3,6 +3,7 @@ return {
   keys = {
     { '<leader>po', '<cmd>OverseerRun<cr>', desc = '[o]verseer run' },
     { '<leader>pO', '<cmd>OverseerToggle<cr>', desc = '[O]verseer toggle' },
+    { '<leader>pa', '<cmd>OverseerQuickAction<cr>', desc = 'Overseer Quick [a]ction' },
   },
   opts = {},
 }
