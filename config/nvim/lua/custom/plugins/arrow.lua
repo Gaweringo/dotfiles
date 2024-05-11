@@ -5,7 +5,6 @@ return {
     show_icons = true,
     leader_key = 'ö', -- Recommended to be a single key
     buffer_leader_key = 'm', -- Per Buffer Mappings
-    relative_path = true,
   },
   keys = {
     {
