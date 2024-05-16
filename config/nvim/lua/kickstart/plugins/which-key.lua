@@ -31,7 +31,6 @@ return {
         ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
         ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore' },
         ['<leader>x'] = { name = 'Trouble', _ = 'which_key_ignore' },
-        -- ['<leader>b'] = { name = '[B]uffers', _ = 'which_key_ignore' },
       }
     end,
   },
