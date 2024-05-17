@@ -35,6 +35,30 @@ return {
       require('mini.starter').setup()
 
       require('mini.sessions').setup()
+      local trySave = function()
+        if not pcall(MiniSessions.write) then
+          local name = vim.fn.input 'New session name: '
+          if name ~= nil and name ~= '' then
+            MiniSessions.write(name)
+          end
+        end
+      end
+
+      vim.keymap.set('n', '<leader>Ss', function()
+        vim.cmd 'wa'
+        trySave()
+        MiniSessions.select()
+      end, { noremap = true, silent = true, desc = '[S]ession [s]witch' })
+
+      vim.keymap.set('n', '<leader>Sw', trySave, { noremap = true, silent = true, desc = '[S]ession [w]rite' })
+
+      vim.keymap.set('n', '<leader>Sl', function()
+        MiniSessions.select()
+      end, { noremap = true, silent = true, desc = '[S]ession [l]oad' })
+
+      vim.keymap.set('n', '<leader>Sd', function()
+        MiniSessions.select 'delete'
+      end, { noremap = true, silent = true, desc = '[S]ession [d]elete' })
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
