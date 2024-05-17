@@ -1,0 +1,7 @@
+# which packages should be used on this machine
+packages = ["default", "sway", "fish"]
+
+# variables to be substituted in the other toml files
+[variables]
+email = "40121865+Gaweringo@users.noreply.github.com"
+git_username = "Gaweringo"
