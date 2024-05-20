@@ -209,7 +209,6 @@ return {
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       -- Custom configs
-      require('lspconfig').dartls.setup {}
       require('lspconfig').vhdl_ls.setup {}
 
       require('mason-lspconfig').setup {
