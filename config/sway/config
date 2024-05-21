@@ -84,9 +84,6 @@ input type:keyboard {
     # Reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-#
 # Moving around:
 #
     # Move your focus around
@@ -221,3 +218,4 @@ include /etc/sway/config.d/*
 
 # custom things:
 include $HOME/.config/sway/config.d/*
+include $HOME/.config/sway/config.d/modes/*
