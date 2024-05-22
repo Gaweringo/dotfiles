@@ -2,10 +2,9 @@ return {
   'stevearc/oil.nvim',
   opts = {
     columns = {
+      { 'mtime', highlight = 'Comment' },
+      { 'size', highlight = 'Type' },
       'icon',
-      -- "permissions",
-      "size",
-      "mtime",
     },
   },
   -- Optional dependencies
