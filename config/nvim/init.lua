@@ -96,6 +96,10 @@ vim.g.have_nerd_font = true
 -- Make justfiles have filteype just
 vim.filetype.add { filename = { ['justfile'] = 'just', ['Justfile'] = 'just' } }
 
+if vim.g.neovide then
+  vim.g.neovide_scale_factor = 0.85
+end
+
 -- [[ Setting options ]]
 require 'options'
 

@@ -252,6 +252,7 @@ return {
     ft = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
     opts = {
       inlay_hints = {
+        inline = false,
         only_current_line = true,
         only_current_line_autocmd = { 'CursorHold' },
       },

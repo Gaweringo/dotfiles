@@ -65,4 +65,17 @@ ls.add_snippets('c', {
       }
     )
   ),
+  s(
+    '//section',
+    fmta(
+      [[
+    // ========== <section> ==========
+    <finish>
+    ]],
+      {
+        section = i(1),
+        finish = i(0),
+      }
+    )
+  ),
 })
