@@ -61,6 +61,21 @@ Import-Module DockerCompletion
 {{/if}}
 
 # Starship prompt
+
+function Invoke-Starship-PreCommand {
+  $loc = $executionContext.SessionState.Path.CurrentLocation;
+  $prompt = "$([char]27)]9;12$([char]7)"
+  if ($loc.Provider.Name -eq "FileSystem")
+  {
+    $provider_path = $loc.ProviderPath -replace "\\", "/"
+    # for wezterm
+    $prompt += "$([char]27)]7;file://${env:COMPUTERNAME}/${provider_path}$([char]27)\"
+    # for windows terminal
+    $prompt += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
+  }
+  $host.ui.Write($prompt)
+}
+
 . "$PSScriptRoot\Completions\starship.ps1"
 
 {{#if (is_executable "watchexec")}}
