@@ -4,6 +4,7 @@
 -- you do for a plugin at the top level, you can do for a dependency.
 --
 -- Use the `dependencies` key to specify the dependencies of a particular plugin
+local telescope_dir = nil
 
 return {
   { -- Fuzzy Finder (files, lsp, etc)
@@ -50,6 +51,85 @@ return {
       -- telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
 
+      pcall(require('telescope').load_extension, 'ui-select')
+
+      -- See `:help telescope.builtin`
+      local builtin = require 'telescope.builtin'
+
+      ---@param opts table: options to pass to the picker
+      ---@field hidden boolean: determines whether to show hidden and ignored files or not (default: false)
+      ---@field cwd boolean: The directory the finder should be opened in
+      ---@field default_text string: The text at the top of the picker
+      local find_files = function(opts)
+        opts = opts or {}
+        local hidden = opts.hidden or false
+        local default_text = opts.default_text or ''
+        local prompt_title = 'Find Files'
+
+        if hidden then
+          prompt_title = prompt_title .. ' (hidden)'
+        end
+
+        local success, oil_dir = pcall(require('oil').get_current_dir)
+        local cwd = opts.cwd or oil_dir or vim.uv.cwd()
+        telescope_dir = cwd
+
+        builtin.find_files { cwd = cwd, hidden = hidden, no_ignore = hidden, prompt_title = prompt_title, default_text = default_text }
+      end
+
+      ---@param opts table: options to pass to the picker
+      ---@field hidden boolean: determines whether to show hidden and ignored files or not (default: false)
+      ---@field cwd boolean: The directory the finder should be opened in
+      ---@field default_text string: The text at the top of the picker
+      local live_grep = function(opts)
+        opts = opts or {}
+        local hidden = opts.hidden or false
+        local default_text = opts.default_text or ''
+        local prompt_title = 'Live Grep'
+
+        if hidden then
+          prompt_title = prompt_title .. ' (hidden)'
+        end
+
+        local success, oil_dir = pcall(require('oil').get_current_dir)
+        local cwd = opts.cwd or oil_dir or vim.uv.cwd()
+        telescope_dir = cwd
+
+        local grep_opts = {
+          cwd = cwd,
+          default_text = default_text,
+          prompt_title = prompt_title,
+        }
+        if hidden then
+          grep_opts.additional_args = { '--hidden', '--no-ignore' }
+        end
+
+        builtin.live_grep(grep_opts)
+      end
+
+      -- Toggles hidden file inclusion for `live_grep` and `find_files`
+      local toggle_hidden = function(prompt_bufnr)
+        local action_state = require 'telescope.actions.state'
+        local line = action_state.get_current_line()
+
+        local title = action_state.get_current_picker(prompt_bufnr).prompt_title
+        if title:find 'Live Grep' then
+          if title:find 'hidden' then
+            live_grep { default_text = line, telescope_dir, cwd = telescope_dir }
+          else
+            live_grep { hidden = true, default_text = line, cwd = telescope_dir }
+          end
+        elseif title:find 'Find Files' then
+          if title:find 'hidden' then
+            find_files { default_text = line, telescope_dir, cwd = telescope_dir }
+          else
+            find_files { hidden = true, default_text = line, cwd = telescope_dir }
+          end
+        end
+      end
+
+      local actions = require 'telescope.actions'
+
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -64,6 +144,16 @@ return {
             local tail = require('telescope.utils').path_tail(path)
             return string.format('%s (%s)', tail, path)
           end,
+          mappings = {
+            i = {
+              ['<a-h>'] = toggle_hidden,
+              ['<C-Down>'] = actions.cycle_history_next,
+              ['<C-Up>'] = actions.cycle_history_prev,
+            },
+            n = {
+              ['q'] = actions.close,
+            },
+          },
         },
         -- pickers = {}
         extensions = {
@@ -75,26 +165,38 @@ return {
 
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
-
-      -- See `:help telescope.builtin`
-      local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>s:', builtin.command_history, { desc = '[S]earch [:]command history' })
+
+      vim.keymap.set('n', '<leader>sf', find_files, { desc = '[S]earch [F]iles' })
+
       vim.keymap.set('n', '<leader>sF', function()
-        builtin.find_files { hidden = true }
+        find_files { hidden = true }
       end, { desc = '[S]earch with hidden [F]iles' })
+
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+
+      vim.keymap.set('n', '<leader>sg', live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sG', function()
-        builtin.live_grep { additional_args = { '--hidden', '--no-ignore' } }
+        live_grep { hidden = true }
       end, { desc = '[S]earch by [G]rep hidden' })
+
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader><leader>', function()
+        builtin.buffers { sort_lastused = true, sort_mru = true }
+      end, { desc = '[ ] Find existing buffers' })
+
+      -- git finds
+      vim.keymap.set('n', '<leader>sgf', builtin.git_files, { desc = '[S]earch [g]it [f]iles' })
+      vim.keymap.set('n', '<leader>sgs', builtin.git_status, { desc = '[S]earch [g]it [s]tatus' })
+      vim.keymap.set('n', '<leader>sgS', builtin.git_stash, { desc = '[S]earch [g]it [S]tash' })
+      vim.keymap.set('n', '<leader>sgb', builtin.git_branches, { desc = '[S]earch [g]it [b]branches' })
+      vim.keymap.set('n', '<leader>sgB', builtin.git_bcommits, { desc = '[S]earch [g]it [B]uffer commits' })
+      vim.keymap.set('n', '<leader>sgc', builtin.git_commits, { desc = '[S]earch [g]it [c]ommits' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
