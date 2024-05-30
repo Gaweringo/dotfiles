@@ -55,8 +55,8 @@ return {
               -- https://www.josean.com/posts/nvim-treesitter-and-textobjects
               ['a='] = { query = '@assignment.outer', desc = 'Select outer part of an assignment' },
               ['i='] = { query = '@assignment.inner', desc = 'Select inner part of an assignment' },
-              ['l='] = { query = '@assignment.lhs', desc = 'Select left hand side of an assignment' },
-              ['r='] = { query = '@assignment.rhs', desc = 'Select right hand side of an assignment' },
+              ['=l'] = { query = '@assignment.lhs', desc = 'Select left hand side of an assignment' },
+              ['=r'] = { query = '@assignment.rhs', desc = 'Select right hand side of an assignment' },
 
               -- You can also use captures from other query groups like `locals.scm`
               ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
