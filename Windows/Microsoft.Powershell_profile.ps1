@@ -60,8 +60,19 @@ Import-Module DockerCompletion
 . "$PSScriptRoot\Completions\caddy.ps1"
 {{/if}}
 
-# Starship prompt
+# fzf completions
+if (Get-Module -ListAvailable -Name PSFzf) {
+  Import-Module PSFzf
 
+# Override PSReadLine's history search
+  Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' `
+                  -PSReadlineChordReverseHistory 'Ctrl+r'
+} 
+else {
+    Write-Host "PSFzf not installed: Install-Module -Name PSFzf"
+}
+
+# Starship prompt
 function Invoke-Starship-PreCommand {
   $loc = $executionContext.SessionState.Path.CurrentLocation;
   $prompt = "$([char]27)]9;12$([char]7)"
