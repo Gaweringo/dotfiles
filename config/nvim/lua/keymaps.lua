@@ -26,6 +26,11 @@ vim.keymap.set('i', 'kj', '<Esc>', { silent = true, noremap = true })
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
 
+-- Toggles
+vim.keymap.set('n', '<leader>ts', '<cmd>setlocal spell!<cr>', { desc = '[t]oggle [s]pell' })
+vim.keymap.set('n', '<leader>tth', '<cmd>TSBufToggle highlight<cr>', { desc = '[t]oggle [t]reesitter [h]ighlight' })
+
+
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
