@@ -106,7 +106,7 @@ return {
               [']F'] = '@function.outer',
               [']C'] = '@class.outer',
               [']A'] = '@parameter.inner',
-              [']A'] = '@return.inner',
+              [']r'] = '@return.inner',
               [']K'] = '@call.inner',
             },
             goto_previous_start = {
