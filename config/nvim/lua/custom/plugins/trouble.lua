@@ -17,6 +17,11 @@ return {
       desc = 'Symbols (Trouble)',
     },
     {
+      '<leader>do',
+      '<cmd>Trouble lsp_document_symbols toggle focus=false win.position=right<cr>',
+      desc = '[d]ocument [o]utline LSP (Trouble)',
+    },
+    {
       '<leader>cS',
       '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
       desc = 'LSP references/definitions/... (Trouble)',
@@ -49,6 +54,20 @@ return {
         end
       end,
       desc = 'Previous Trouble/Quickfix Item',
+    },
+    {
+      ']q',
+      function()
+        if require('trouble').is_open() then
+          require('trouble').next { skip_groups = true, jump = true }
+        else
+          local ok, err = pcall(vim.cmd.cnext)
+          if not ok then
+            vim.notify(err, vim.log.levels.ERROR)
+          end
+        end
+      end,
+      desc = 'Next Trouble/Quickfix Item',
     },
   },
   opts = {},

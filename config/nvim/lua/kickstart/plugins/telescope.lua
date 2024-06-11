@@ -191,12 +191,12 @@ return {
       end, { desc = '[ ] Find existing buffers' })
 
       -- git finds
-      vim.keymap.set('n', '<leader>sgf', builtin.git_files, { desc = '[S]earch [g]it [f]iles' })
-      vim.keymap.set('n', '<leader>sgs', builtin.git_status, { desc = '[S]earch [g]it [s]tatus' })
-      vim.keymap.set('n', '<leader>sgS', builtin.git_stash, { desc = '[S]earch [g]it [S]tash' })
-      vim.keymap.set('n', '<leader>sgb', builtin.git_branches, { desc = '[S]earch [g]it [b]branches' })
-      vim.keymap.set('n', '<leader>sgB', builtin.git_bcommits, { desc = '[S]earch [g]it [B]uffer commits' })
-      vim.keymap.set('n', '<leader>sgc', builtin.git_commits, { desc = '[S]earch [g]it [c]ommits' })
+      vim.keymap.set('n', '<leader>gsf', builtin.git_files, { desc = '[S]earch [g]it [f]iles' })
+      vim.keymap.set('n', '<leader>gss', builtin.git_status, { desc = '[S]earch [g]it [s]tatus' })
+      vim.keymap.set('n', '<leader>gsS', builtin.git_stash, { desc = '[S]earch [g]it [S]tash' })
+      vim.keymap.set('n', '<leader>gsb', builtin.git_branches, { desc = '[S]earch [g]it [b]branches' })
+      vim.keymap.set('n', '<leader>gsB', builtin.git_bcommits, { desc = '[S]earch [g]it [B]uffer commits' })
+      vim.keymap.set('n', '<leader>gsc', builtin.git_commits, { desc = '[S]earch [g]it [c]ommits' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

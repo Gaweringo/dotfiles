@@ -26,7 +26,7 @@ return {
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>sg'] = { name = '[g]it', _ = 'which_key_ignore' },
+        ['<leader>gs'] = { name = '[g]it [s]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>p'] = { name = '[P]lay / Compile', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
