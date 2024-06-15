@@ -22,6 +22,7 @@ if (Test-Path($ChocolateyProfile)) {
 }
 {{/if}}
 
+Import-Module posh-git
 
 # ALIAS
 # lazygit alias
