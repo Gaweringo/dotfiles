@@ -35,6 +35,7 @@ return {
         ['<leader>S'] = { name = '[S]ession', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = '[t]oggle', _ = 'which_key_ignore' },
         ['<leader>tt'] = { name = '[t]reesitter', _ = 'which_key_ignore' },
+        ['<leader>gd'] = { name = '[d]diffview', _ = 'which_key_ignore' },
       }
     end,
   },
