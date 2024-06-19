@@ -31,6 +31,21 @@ return {
       --    for various frameworks/libraries/etc. but you will have to
       --    set up the ones that are useful for you.
       'rafamadriz/friendly-snippets',
+
+      {
+        'folke/lazydev.nvim',
+        dependencies = {
+          { 'Bilal2453/luvit-meta', lazy = true },
+        },
+        ft = 'lua', -- only load on lua files
+        opts = {
+          library = {
+            -- See the configuration section for more details
+            -- Load luvit types when the `vim.uv` word is found
+            { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+          },
+        },
+      },
     },
     config = function()
       -- See `:help cmp`
@@ -93,6 +108,7 @@ return {
           { name = 'path' },
           { name = 'buffer' },
           { name = 'nvim_lsp_signature_help' },
+          { name = 'lazydev', group_index = 0 },
         },
       }
     end,
