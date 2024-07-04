@@ -32,6 +32,9 @@ programming_folder = 'P:\..\Programming'
 - [wezterm](https://wezfurlong.org/wezterm/index.html)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
 - [lazygit](https://github.com/jesseduffield/lazygit)
+- [fd](https://github.com/sharkdp/fd)
+- [fzf](https://github.com/junegunn/fzf)
+- [difftastic](https://github.com/Wilfred/difftastic)
 
 ### Windows
 - [pwsh](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows)
@@ -40,6 +43,8 @@ programming_folder = 'P:\..\Programming'
 - [scoop](https://scoop.sh)
 - [sfsu](https://github.com/jewlexx/sfsu) `scoop install sfsu`
 - [gsudo](https://github.com/gerardog/gsudo) `scoop install gsudo`
+- [posh-git](https://github.com/dahlbyk/posh-git) `scoop install posh-git`
+- [psfzf](https://github.com/kelleyma49/PSFzf) `scoop install psfzf`
 
 ### Linux
 - [fish](https://fishshell.com/)
@@ -51,3 +56,7 @@ programming_folder = 'P:\..\Programming'
 - [rust/rustup/cargo](https://rustup.rs/)
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
     - For `emmet_language_server`
+
+## Other niceties to install
+- [github-cli (gh)](https://github.com/cli/cli)
+- [bat](https://github.com/sharkdp/bat)
