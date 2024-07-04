@@ -17,7 +17,8 @@ if status is-interactive
     alias lg=lazygit
     {{/if}}
     {{#if (is_executable "nvim")}}
-    alias v=nvim
+    alias n=nvim
+    set -gx EDITOR nvim
     {{/if}}
 
     {{#if (is_executable "opam")}}
@@ -29,11 +30,22 @@ if status is-interactive
     fish_add_path ~/go/bin/
     {{/if}}
 
-    # appr
+    # abbr
     abbr --add 'refresh' 'source ~/.config/fish/config.fish'
     {{#if (is_executable "git")}}
     abbr --add 'gc' 'git commit -m'
     abbr --add 'ga' 'git add'
+    {{/if}}
+
+    {{#if (is_executable "yazi")}}
+    function yy
+        set tmp (mktemp -t "yazi-cwd.XXXXXX")
+        yazi $argv --cwd-file="$tmp"
+        if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+                cd -- "$cwd"
+        end
+        rm -f -- "$tmp"
+    end
     {{/if}}
 end
 
