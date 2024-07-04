@@ -25,6 +25,8 @@ if (Test-Path($ChocolateyProfile)) {
 Import-Module posh-git
 
 # ALIAS
+# neovim alias
+Set-Alias -Name n -Value nvim
 # lazygit alias
 Set-Alias -Name lg -Value lazygit
 # graphicmagick alias as the gm conflicts with Get-Member
