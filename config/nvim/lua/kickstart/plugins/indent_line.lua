@@ -6,12 +6,6 @@ return {
     main = 'ibl',
     event = { 'BufReadPre', 'BufNewFile' },
     opts = {
-      indent = { highlight = 'NotifyDEBUGBorder' },
-      -- highlight = highlight,
-      -- whitespace = {
-      --   highlight = highlight,
-      --   remove_blankline_trail = false,
-      -- },
       scope = { enabled = false },
     },
   },

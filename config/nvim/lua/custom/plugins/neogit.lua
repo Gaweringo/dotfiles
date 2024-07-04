@@ -11,6 +11,7 @@ return {
     { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'Neo[g]it [c]ommit' },
     { '<leader>gp', '<cmd>Neogit pull<cr>', desc = 'Neo[g]it [p]ull' },
     { '<leader>gP', '<cmd>Neogit push<cr>', desc = 'Neo[g]it [p]ush' },
+    { '<leader>gb', '<cmd>Neogit branch<cr>', desc = 'Neo[g]it [b]ranch' },
     { '<leader>sb', '<cmd>Telescope git_branches<cr>', desc = '[s]earch [b]ranches' },
     { '<leader>sc', '<cmd>Telescope git_commits<cr>', desc = '[s]earch [c]ommits' },
   },
