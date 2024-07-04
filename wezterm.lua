@@ -39,6 +39,7 @@ config.keys = {
 	{ mods = "LEADER", key = "-", action = act.SplitVertical({ domain = "CurrentPaneDomain" }), },
 	{ mods = "LEADER", key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
 	{ mods = "LEADER", key = "v", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
+	{ mods = "LEADER", key = "s", action = act.SplitVertical({ domain = "CurrentPaneDomain" }), },
 
 	{ mods = "LEADER", key = "c", action = act.SpawnTab("CurrentPaneDomain"), },
 
