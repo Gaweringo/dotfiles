@@ -59,7 +59,9 @@ output * bg ~/Pictures/Sonnenaufgang wide.jpg fill
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input type:keyboard {
-    xkb_layout de(neo_qwertz)
+    # us(intl) for corne split keyboard layout,
+    # which is based on the neo_qwertz layout for normal keyboards
+    xkb_layout "us(intl), de(neo_qwertz)"
 }
 
 ### Key bindings
