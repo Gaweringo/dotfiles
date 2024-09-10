@@ -35,12 +35,28 @@ end)
 
 -- Show which key table is active in the status area
 wezterm.on("update-right-status", function(window, pane)
-	window:set_right_status(window:active_workspace())
-	local name = window:active_key_table()
-	if name then
-		name = "TABLE: " .. name
-		window:set_right_status(name or "")
+	local ws = window:active_workspace()
+	local state = ""
+	local kt = window:active_key_table()
+	if window:leader_is_active() then state = "LDR" end
+	if kt then
+		state = "MODE: " .. kt
 	end
+
+	local basename = function (s)
+		return string.gsub(s, "(.*[/\\])(.*)", "%2")
+	end
+
+	local fp = basename(pane:get_foreground_process_name())
+
+	if state and state ~= '' then state = state .. " | " end
+
+	window:set_right_status(wezterm.format({
+		{ Text = state },
+		{ Text = fp },
+		{ Text = " | " },
+		{ Text = wezterm.nerdfonts.oct_table .. "  " .. ws .. " " },
+	}))
 end)
 
 config.inactive_pane_hsb = {
