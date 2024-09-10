@@ -24,27 +24,79 @@ config.colors = {
 config.use_fancy_tab_bar = false
 config.font_size = 10
 config.window_background_opacity = 0.95
-config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = false
 config.tab_and_split_indices_are_zero_based = true
 
 -- startup maximized
-wezterm.on('gui-startup', function(cmd)
-  local _, _, window = wezterm.mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
+wezterm.on("gui-startup", function(cmd)
+	local _, _, window = wezterm.mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
 end)
+
+-- Show which key table is active in the status area
+wezterm.on("update-right-status", function(window, pane)
+	window:set_right_status(window:active_workspace())
+	local name = window:active_key_table()
+	if name then
+		name = "TABLE: " .. name
+		window:set_right_status(name or "")
+	end
+end)
+
+config.inactive_pane_hsb = {
+	saturation = 0.90,
+	brightness = 0.75
+}
 
 local act = wezterm.action
 config.leader = { key = "z", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
-	{ mods = "LEADER", key = "-", action = act.SplitVertical({ domain = "CurrentPaneDomain" }), },
-	{ mods = "LEADER", key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
-	{ mods = "LEADER", key = "v", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
-	{ mods = "LEADER", key = "s", action = act.SplitVertical({ domain = "CurrentPaneDomain" }), },
+	-- Panes
+	{ mods = "LEADER", key = "-", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ mods = "LEADER", key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ mods = "LEADER", key = "v", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ mods = "LEADER", key = "s", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ mods = "LEADER", key = "z", action = act.TogglePaneZoomState },
+	{ key = "q", mods = "ALT", action = act.CloseCurrentPane({ confirm = false }) },
+	-- tmux style
+	{ mods = "LEADER", key = "%", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ mods = "LEADER", key = '"', action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ mods = "LEADER", key = "x", action = act.CloseCurrentPane({ confirm = true }) },
+	-- Move between panes
+	{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+	{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+	{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+	{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+	-- -- Windows terminal style
+	{ key = "LeftArrow", mods = "ALT", action = act.ActivatePaneDirection("Left") },
+	{ key = "RightArrow", mods = "ALT", action = act.ActivatePaneDirection("Right") },
+	{ key = "UpArrow", mods = "ALT", action = act.ActivatePaneDirection("Up") },
+	{ key = "DownArrow", mods = "ALT", action = act.ActivatePaneDirection("Down") },
+	-- -- -- Resize
+	{ key = "LeftArrow", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Left", 1 }) },
+	{ key = "RightArrow", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Right", 1 }) },
+	{ key = "UpArrow", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Up", 1 }) },
+	{ key = "DownArrow", mods = "ALT|SHIFT", action = act.AdjustPaneSize({ "Down", 1 }) },
+	-- Resize pane mode
+	{
+		key = "R",
+		mods = "LEADER",
+		action = act.ActivateKeyTable({
+			name = "resize_pane",
+			one_shot = false,
+		}),
+	},
 
-	{ mods = "LEADER", key = "c", action = act.SpawnTab("CurrentPaneDomain"), },
+	-- Activate Pane UI
+	-- { key = "a", mods = "LEADER", action = act.PaneSelect },
+	{ key = "t", mods = "LEADER", action = act.PaneSelect({ mode = "MoveToNewTab" }) },
+	{ key = "a", mods = "LEADER", action = act.PaneSelect({ mode = "SwapWithActiveKeepFocus" }) },
+	{ key = "r", mods = "LEADER", action = act.RotatePanes "Clockwise" },
 
-	{ key = "q", mods = "ALT", action = act.CloseCurrentPane({ confirm = false }), },
+	-- Tabs
+	{ mods = "LEADER", key = "c", action = act.SpawnTab("CurrentPaneDomain") },
 
+	-- Leader + number to switch to that numbered tab
 	{ key = "0", mods = "LEADER", action = act.ActivateTab(0) },
 	{ key = "1", mods = "LEADER", action = act.ActivateTab(1) },
 	{ key = "2", mods = "LEADER", action = act.ActivateTab(2) },
@@ -58,17 +110,103 @@ config.keys = {
 
 	{ key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
 	{ key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
-	{ key = "Enter", mods = "LEADER", action = wezterm.action.ActivateCopyMode, },
+	{ key = "Enter", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
+    {
+       key = ',',
+       mods = 'LEADER',
+       action = act.PromptInputLine {
+         description = 'Enter new name for tab',
+         action = wezterm.action_callback(function(window, pane, line)
+           -- line will be `nil` if they hit escape without entering anything
+           -- An empty string if they just hit enter
+           -- Or the actual line of text they wrote
+           if line then
+             window:active_tab():set_title(line)
+           end
+         end),
+       },
+    },
+	-- Workspaces
+	-- Show the launcher in fuzzy selection mode and have it list all workspaces
+	-- and allow activating one.
+	{
+		key = "$",
+		mods = "LEADER|SHIFT",
+		action = act.PromptInputLine({
+			description = wezterm.format({
+				{ Attribute = { Intensity = "Bold" } },
+				{ Foreground = { AnsiColor = "Fuchsia" } },
+				{ Text = "New name for current workspace" },
+			}),
+			action = wezterm.action_callback(function(window, pane, line)
+				-- line will be `nil` if they hit escape without entering anything
+				-- An empty string if they just hit enter
+				-- Or the actual line of text they wrote
+				if line then
+					wezterm.mux.rename_workspace(
+						wezterm.mux.get_active_workspace(),
+						line
+					)
+				end
+			end),
+		}),
+	},
+	{
+		key = "w",
+		mods = "LEADER",
+		action = act.ShowLauncherArgs({
+			flags = "FUZZY|WORKSPACES",
+		}),
+	},
+	{
+		key = "W",
+		mods = "LEADER",
+		action = act.PromptInputLine({
+			description = wezterm.format({
+				{ Attribute = { Intensity = "Bold" } },
+				{ Foreground = { AnsiColor = "Fuchsia" } },
+				{ Text = "Enter name for new workspace" },
+			}),
+			action = wezterm.action_callback(function(window, pane, line)
+				-- line will be `nil` if they hit escape without entering anything
+				-- An empty string if they just hit enter
+				-- Or the actual line of text they wrote
+				if line then
+					window:perform_action(
+						act.SwitchToWorkspace({
+							name = line,
+						}),
+						pane
+					)
+				end
+			end),
+		}),
+	},
+}
 
-	{ key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection 'Left', },
-	{ key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right', },
-	{ key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up', },
-	{ key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down', },
+config.key_tables = {
+	-- Defines the keys that are active in our resize-pane mode.
+	-- Since we're likely to want to make multiple adjustments,
+	-- we made the activation one_shot=false. We therefore need
+	-- to define a key assignment for getting out of this mode.
+	-- 'resize_pane' here corresponds to the name="resize_pane" in
+	-- the key assignments above.
+	resize_pane = {
+		{ key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 1 }) },
+		{ key = "h", action = act.AdjustPaneSize({ "Left", 1 }) },
 
-	-- tmux style
-	{ mods = "LEADER", key = "%", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
-	{ mods = "LEADER", key = '"', action = act.SplitVertical({ domain = "CurrentPaneDomain" }), },
-	{ mods = "LEADER", key = "x", action = act.CloseCurrentPane({ confirm = true }), },
+		{ key = "RightArrow", action = act.AdjustPaneSize({ "Right", 1 }) },
+		{ key = "l", action = act.AdjustPaneSize({ "Right", 1 }) },
+
+		{ key = "UpArrow", action = act.AdjustPaneSize({ "Up", 1 }) },
+		{ key = "k", action = act.AdjustPaneSize({ "Up", 1 }) },
+
+		{ key = "DownArrow", action = act.AdjustPaneSize({ "Down", 1 }) },
+		{ key = "j", action = act.AdjustPaneSize({ "Down", 1 }) },
+
+		-- Cancel the mode by pressing escape
+		{ key = "Escape", action = "PopKeyTable" },
+	},
 }
 
 return config
