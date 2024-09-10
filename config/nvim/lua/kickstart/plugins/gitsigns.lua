@@ -17,8 +17,9 @@ return {
       },
       -- From: https://github.com/omerxx/dotfiles/blob/adf1479447d2a70f882954657f0a0d32e2de8d22/nvim/lua/plugins/gitsigns.lua
       on_attach = function(bufnr)
-        require('which-key').register {
-          ['<leader>h'] = { name = '[H]unks (gitsigns)', _ = 'which_key_ignore' },
+        require('which-key').add {
+          { '<leader>h', group = '[H]unks (gitsigns)' },
+          { '<leader>h_', hidden = true },
         }
 
         local gs = package.loaded.gitsigns
