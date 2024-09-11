@@ -36,6 +36,7 @@
 
 	s = status
 	d = diff
+	sw = !git switch $(git branch | fzf --height=20% --reverse --info=inline)
 [pull]
 	rebase = false
 	ff = only
