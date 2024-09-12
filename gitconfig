@@ -42,6 +42,8 @@
 	ff = only
 [fetch]
 	prune = false
+[merge]
+	conflictStyle = diff3
 [rebase]
 	autoStash = false
 	autosquash = false
