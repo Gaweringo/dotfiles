@@ -34,12 +34,17 @@
 	lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
 	lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 
+	logd = log -p --ext-diff
+	showd = show --ext-diff
+
 	s = status
 	d = diff
 	sw = !git switch $(git branch | fzf --height=20% --reverse --info=inline)
 [pull]
 	rebase = false
 	ff = only
+[push]
+	autoSetupRemote = true
 [fetch]
 	prune = false
 [merge]
@@ -64,11 +69,33 @@
 	{{/if}}
 
 {{#if (is_executable "difft")}}
+# Difftastic setup
 [diff]
-    external = "difft"
+	external = difft
 {{/if}}
 
-[push]
-	autoSetupRemote = true
+{{#if (is_executable "delta")}}
+# delta for all diff operations and blame
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	hyperlinks = true
+	side-by-side = true
+	line-number = true
+	commit-decoration-style = none
+	file-decoration-style = none
+	hunk-header-decoration-style = none
+
+	line-numbers-left-format = {nm:^4}
+	line-numbers-right-format = {nm:^4}
+
+[diff]
+	colorMoved = default
+{{/if}}
 
 # vim:ft=gitconfig
