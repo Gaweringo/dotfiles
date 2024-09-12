@@ -5,3 +5,6 @@
 [nvim.files]
 "config/nvim" = { target = "~/AppData/Local/nvim", type = "symbolic", recurse = false }
 
+[lazygit.files]
+"config/lazygit/config.yml" = { target = "~/AppData/Roaming/lazygit/config.yml", type = "template", if = '(is_executable "lazygit")' }
+

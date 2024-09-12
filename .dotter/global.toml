@@ -3,7 +3,7 @@
 
 [default]
 # 'depends': packages that also ge tenabled when this one gets enabled
-depends = ["nvim", "starship", "foot", "tmux"]
+depends = ["nvim", "starship", "foot", "tmux", "lazygit"]
 
 # .files is the mapping between the path of the file relative to
 # the repository root and its location in the filesystem
@@ -35,6 +35,9 @@ ideavimrc = "~/.ideavimrc"
 
 [tmux.files]
 "tmux.conf" = { target = "~/.tmux.conf", type="symbolic", if = '(is_executable "tmux")'}
+
+[lazygit.files]
+"config/lazygit/config.yml" = { target = "~/.config/lazygit/config.yml", type = "template", if = '(is_executable "lazygit")' }
 
 # variables are constants for templated files
 [default.variables]

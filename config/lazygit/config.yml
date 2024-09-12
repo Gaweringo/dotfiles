@@ -1,0 +1,5 @@
+{{#if (is_executable "difft")}}
+git:
+  paging:
+    externalDiffCommand: difft --color=always --display=inline
+{{/if}}
