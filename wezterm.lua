@@ -67,6 +67,12 @@ config.inactive_pane_hsb = {
 local act = wezterm.action
 config.leader = { key = "z", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
+	-- Send "CTRL-Z" to the terminal when pressing CTRL-Z, CTRL-Z
+	{
+	  key = 'z',
+	  mods = 'LEADER|CTRL',
+	  action = wezterm.action.SendKey { key = 'z', mods = 'CTRL' },
+	},
 	-- Panes
 	{ mods = "LEADER", key = "-", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ mods = "LEADER", key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
