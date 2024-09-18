@@ -31,6 +31,9 @@ vim.keymap.set('n', '<leader>ts', '<cmd>setlocal spell!<cr>', { desc = '[t]oggle
 vim.keymap.set('n', '<leader>tG', '<cmd>setlocal spelllang=de<cr>', { desc = '[t]oggle [G]erman spelllang' })
 vim.keymap.set('n', '<leader>tth', '<cmd>TSBufToggle highlight<cr>', { desc = '[t]oggle [t]reesitter [h]ighlight' })
 
+-- Tabs
+vim.keymap.set('n', '<C-w><C-l>', ':tabnext<cr>', { desc = 'Next Tab' })
+vim.keymap.set('n', '<C-w><C-h>', ':tabprevious<cr>', { desc = 'Previous tab' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
