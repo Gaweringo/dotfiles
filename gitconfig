@@ -25,7 +25,7 @@
 	defaultBranch = main
 [alias]
 	# Better git logs from Slipp D. Thompson: https://stackoverflow.com/a/34467298
-	l = lg1 -n 10
+	l = lg1 -n 25
 	lg = lg1
 	lg1 = lg1-specific --all
 	lg2 = lg2-specific --all
@@ -51,8 +51,10 @@
 	conflictStyle = diff3
 [rebase]
 	autoStash = false
-	autosquash = false
+	autoSquash = true
 	updateRefs = true
+[rerere]
+	enabled = true
 [core]
 	{{#if (eq dotter.os "windows")}}
 	symlinks = true
