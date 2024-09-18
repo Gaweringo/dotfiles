@@ -27,6 +27,10 @@ Import-Module posh-git
 # ALIAS
 # neovim alias
 Set-Alias -Name n -Value nvim
+# neogit alias
+Function neg {
+  nvim . -c Neogit
+}
 # lazygit alias
 Set-Alias -Name lg -Value lazygit
 # graphicmagick alias as the gm conflicts with Get-Member

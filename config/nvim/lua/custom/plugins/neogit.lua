@@ -6,6 +6,7 @@ return {
 
     'nvim-telescope/telescope.nvim',
   },
+  cmd = 'Neogit',
   keys = {
     { '<leader>go', '<cmd>Neogit<cr>', desc = 'Neo[g]it [o]pen' },
     { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'Neo[g]it [c]ommit' },
