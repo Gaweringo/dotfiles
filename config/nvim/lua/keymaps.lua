@@ -29,6 +29,10 @@ vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
 -- Toggles (also in keymaps-which-key.lua)
 vim.keymap.set('n', '<leader>tth', '<cmd>TSBufToggle highlight<cr>', { desc = '[t]oggle [t]reesitter [h]ighlight' })
 
+-- Keep selection after indenting with '<' and '>'
+vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
+vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
+
 -- Tabs
 vim.keymap.set('n', '<C-w><C-l>', ':tabnext<cr>', { desc = 'Next Tab' })
 vim.keymap.set('n', '<C-w><C-h>', ':tabprevious<cr>', { desc = 'Previous tab' })
