@@ -133,21 +133,21 @@ config.keys = {
 	{ key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
 	{ key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
 	{ key = "Enter", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
-    {
-       key = ',',
-       mods = 'LEADER',
-       action = act.PromptInputLine {
-         description = 'Enter new name for tab',
-         action = wezterm.action_callback(function(window, pane, line)
-           -- line will be `nil` if they hit escape without entering anything
-           -- An empty string if they just hit enter
-           -- Or the actual line of text they wrote
-           if line then
-             window:active_tab():set_title(line)
-           end
-         end),
-       },
-    },
+	{
+	   key = ',',
+	   mods = 'LEADER',
+	   action = act.PromptInputLine {
+	     description = 'Enter new name for tab',
+	     action = wezterm.action_callback(function(window, pane, line)
+	       -- line will be `nil` if they hit escape without entering anything
+	       -- An empty string if they just hit enter
+	       -- Or the actual line of text they wrote
+	       if line then
+		 window:active_tab():set_title(line)
+	       end
+	     end),
+	   },
+	},
 	-- Workspaces
 	-- Show the launcher in fuzzy selection mode and have it list all workspaces
 	-- and allow activating one.
