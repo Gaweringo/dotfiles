@@ -24,6 +24,7 @@ local trouble_next_repeat, trouble_previous_repeat = ts_repeat_move.make_repeata
 
 return {
   'folke/trouble.nvim',
+  cmd = 'Trouble',
   keys = {
     {
       '<leader>xx',
