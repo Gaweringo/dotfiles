@@ -62,6 +62,7 @@ input type:keyboard {
     # us(intl) for corne split keyboard layout,
     # which is based on the neo_qwertz layout for normal keyboards
     xkb_layout "us(intl), de(neo_qwertz)"
+    xkb_options grp:win_space_toggle
 }
 
 ### Key bindings
@@ -205,10 +206,11 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
+    font pango:JetBrainsMono Nerd Font Mono Propo 15
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    status_command while $HOME/.config/sway/status.sh; do sleep 1; done
 
     colors {
         statusline #ffffff
