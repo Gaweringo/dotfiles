@@ -36,6 +36,16 @@ Set-Alias -Name lg -Value lazygit
 # graphicmagick alias as the gm conflicts with Get-Member
 Set-Alias -Name gmagick -Value gm.exe
 
+# Better cds
+# cd to first subfolder with this name
+Function cdf ($search_term) {
+  cd $(fd $search_term -1 -t directory -H -I)
+}
+# cd to first subfolder with this name interactively
+Function cdi {
+  cd $(fzf --walker dir)
+}
+
 # yt-dlp mp3 download alias
 Function yt-mp3 {yt-dlp -f 'ba' -x --audio-format mp3 $args}
 
