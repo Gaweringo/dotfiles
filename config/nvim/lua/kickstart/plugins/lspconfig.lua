@@ -152,6 +152,7 @@ return {
         -- pyright = {},
         rust_analyzer = {},
         omnisharp = {},
+        tinymist = {},
         zls = {},
         -- rust_hdl = {},
         -- vhdl_ls = {},

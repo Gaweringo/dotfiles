@@ -1,9 +1,8 @@
 return {
   'kaarmu/typst.vim',
   ft = 'typst',
-  lazy = false,
   config = function()
-    require('lspconfig').typst_lsp.setup {
+    require('lspconfig').tinymist.setup {
       settings = {
         exportPdf = 'onSave', -- Choose onType, onSave or never.
         -- serverPath = "" -- Normally, there is no need to uncomment it.
