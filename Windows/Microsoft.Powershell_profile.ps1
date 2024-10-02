@@ -46,6 +46,21 @@ Function cdi {
   cd $(fzf --walker dir)
 }
 
+{{#if (is_executable 'yazi')}}
+# yazi needs file to function / show images
+$env:YAZI_FILE_ONE = "C:\Users\Martin\scoop\apps\git\current\usr\bin\file.exe"
+# yazi cd
+function yy {
+    $tmp = [System.IO.Path]::GetTempFileName()
+    yazi $args --cwd-file="$tmp"
+    $cwd = Get-Content -Path $tmp
+    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
+        Set-Location -LiteralPath $cwd
+    }
+    Remove-Item -Path $tmp
+}
+{{/if}}
+
 # yt-dlp mp3 download alias
 Function yt-mp3 {yt-dlp -f 'ba' -x --audio-format mp3 $args}
 
