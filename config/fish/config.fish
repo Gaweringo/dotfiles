@@ -20,6 +20,9 @@ if status is-interactive
     alias n=nvim
     set -gx EDITOR nvim
     {{/if}}
+    {{#if (is_executable "fdfind")}}
+    alias fd=fdfind
+    {{/if}}
 
     {{#if (is_executable "opam")}}
     # opam configuration
@@ -47,5 +50,22 @@ if status is-interactive
         rm -f -- "$tmp"
     end
     {{/if}}
+
+    function cdf --description 'Change to first directory that matches'
+        set -l target_dir (fd -t directory -1 -H -I $argv)
+        if test $target_dir
+            cd $target_dir
+        else
+            echo "No directory found, that matches $argv"
+        end
+    end
+
+
+    function cdi --description 'Change to sub dir interactively'
+        set -l target_dir (fzf --walker dir,hidden)
+        if test $target_dir
+            cd $target_dir
+        end
+    end
 end
 
