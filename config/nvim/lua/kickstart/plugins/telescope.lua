@@ -222,5 +222,17 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
+  {
+    'albenisolmos/telescope-oil.nvim',
+    keys = { { '<leader>sD', '<cmd>Telescope oil<CR>', { noremap = true, silent = true }, desc = '[s]esarch [D]irectories' } },
+    config = function()
+      local settings = require 'telescope-oil.settings'
+      settings.set { hidden = false }
+
+      -- load extension
+      require('telescope').load_extension 'oil'
+    end,
+    dependencies = { 'stevearc/oil.nvim', 'nvim-telescope/telescope.nvim' },
+  },
 }
 -- vim: ts=2 sts=2 sw=2 et
