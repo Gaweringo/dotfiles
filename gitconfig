@@ -40,6 +40,10 @@
 	s = status
 	d = diff
 	sw = !git switch $(git branch | fzf --height=20% --reverse --info=inline)
+	in = log --oneline '@..@{u}'
+	out = log --oneline '@{u}..@'
+	fin = !git fetch && git in
+	fout = !git fetch && git out
 [pull]
 	rebase = false
 	ff = only
