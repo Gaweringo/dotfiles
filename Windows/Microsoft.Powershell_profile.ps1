@@ -39,11 +39,19 @@ Set-Alias -Name gmagick -Value gm.exe
 # Better cds
 # cd to first subfolder with this name
 Function cdf ($search_term) {
-  cd $(fd $search_term -1 -t directory -H -I)
+  $target_dir = fd $search_term -1 -t directory -H -I
+  if (-not [String]::IsNullOrEmpty($target_dir)) {
+    cd $target_dir
+  } else {
+    echo "Could not find directory with name: $search_term"
+  }
 }
 # cd to first subfolder with this name interactively
 Function cdi {
-  cd $(fzf --walker dir)
+  $target_dir = fzf --walker dir
+  if (-not [String]::IsNullOrEmpty($target_dir)) {
+    cd $target_dir
+  }
 }
 
 {{#if (is_executable 'yazi')}}
