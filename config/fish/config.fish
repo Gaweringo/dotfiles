@@ -67,6 +67,11 @@ if status is-interactive
             cd $target_dir
         end
     end
+
+    function neg
+        nvim . -c Neogit
+    end
+
     function dv
         nvim . -c DiffviewOpen
     end
