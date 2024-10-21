@@ -67,5 +67,8 @@ if status is-interactive
             cd $target_dir
         end
     end
+    function dv
+        nvim . -c DiffviewOpen
+    end
 end
 

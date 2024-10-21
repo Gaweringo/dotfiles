@@ -31,6 +31,10 @@ Set-Alias -Name n -Value nvim
 Function neg {
   nvim . -c Neogit
 }
+# diffview alias
+Function dv {
+  nvim . -c DiffviewOpen
+}
 # lazygit alias
 Set-Alias -Name lg -Value lazygit
 # graphicmagick alias as the gm conflicts with Get-Member

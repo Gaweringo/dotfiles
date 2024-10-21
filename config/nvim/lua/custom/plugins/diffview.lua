@@ -3,10 +3,11 @@ return {
   opts = {
     view = {
       merge_tool = {
-        layout = "diff3_mixed",
-      }
-    }
+        layout = 'diff1_plain',
+      },
+    },
   },
+  cmd = { 'DiffviewOpen' },
   keys = {
     { '<leader>gd%', '<cmd>DiffviewFileHistory %<cr>', desc = '[d]iffview current file' },
     { '<leader>gdh', '<cmd>DiffviewFileHistory<cr>', desc = '[d]iffview [h]istory' },
