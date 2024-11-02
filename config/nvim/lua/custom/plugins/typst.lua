@@ -3,6 +3,10 @@ return {
   ft = 'typst',
   config = function()
     require('lspconfig').tinymist.setup {
+      single_file_support = true,
+      root_dir = function ()
+        return vim.fn.getcwd()
+      end,
       settings = {
         exportPdf = 'onSave', -- Choose onType, onSave or never.
         -- serverPath = "" -- Normally, there is no need to uncomment it.
