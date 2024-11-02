@@ -13,7 +13,9 @@ return {
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
     },
-    event = { 'VeryLazy', 'BufReadPre', 'BufNewFile' },
+    -- event = { 'VeryLazy', 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPost', 'BufNewFile' },
+    cmd = { 'LspInfo', 'LspInstall', 'LspUninstall' },
     config = function()
       -- Brief Aside: **What is LSP?**
       --
@@ -152,6 +154,7 @@ return {
         -- pyright = {},
         rust_analyzer = {},
         omnisharp = {},
+        neocmake = {},
         tinymist = {},
         zls = {},
         -- rust_hdl = {},
@@ -217,7 +220,17 @@ return {
   {
     -- https://github.com/aznhe21/actions-preview.nvim
     'aznhe21/actions-preview.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
+    lazy = true,
+    keys = {
+      {
+        '<leader>la',
+        function()
+          require('actions-preview').code_actions()
+        end,
+        desc = '[l]sp [a]ction',
+      },
+    },
+    -- event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       {
         -- spec elsewhere
@@ -246,6 +259,11 @@ return {
         only_current_line_autocmd = { 'CursorHold' },
       },
     },
+  },
+  {
+    'williamboman/mason.nvim',
+    cmd = 'Mason',
+    opts = true,
   },
 }
 -- vim: ts=2 sts=2 sw=2 et
