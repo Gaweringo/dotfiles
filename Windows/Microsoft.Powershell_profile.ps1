@@ -71,6 +71,7 @@ function yy {
     }
     Remove-Item -Path $tmp
 }
+Set-Alias -Name y -Value yazi
 {{/if}}
 
 # yt-dlp mp3 download alias
