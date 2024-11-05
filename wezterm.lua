@@ -32,6 +32,11 @@ config.window_background_opacity = 0.95
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_and_split_indices_are_zero_based = true
 
+config.quick_select_patterns = {
+	-- Path with \ backslash
+	'(?:[.\\w\\-@~]+)?(?:[\\/\\\\]+[.\\w\\-@]+)+',
+}
+
 -- startup maximized
 wezterm.on("gui-startup", function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
