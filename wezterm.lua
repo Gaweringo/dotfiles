@@ -80,7 +80,6 @@ config.keys = {
 	{ mods = "LEADER", key = "v", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ mods = "LEADER", key = "s", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ mods = "LEADER", key = "z", action = act.TogglePaneZoomState },
-	{ key = "q", mods = "ALT", action = act.CloseCurrentPane({ confirm = false }) },
 	-- tmux style
 	{ mods = "LEADER", key = "%", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ mods = "LEADER", key = '"', action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
