@@ -18,9 +18,13 @@ config.default_prog = { "pwsh" }
 -- config.font = wezterm.font("JetBrains Mono")
 config.color_scheme = "Tokyo Night (Gogh)"
 config.color_scheme =  "iTerm2 Default"
--- Make cursor follow colors from nvim or other apps
--- so that in light theme the curosr is visible
-config.force_reverse_video_cursor = true
+-- Make the cursor be bg and fg reversed of thext it is on
+-- config.force_reverse_video_cursor = true
+-- Make cursor always black on white
+config.colors = {
+	cursor_fg = "black",
+	cursor_bg = "white",
+}
 
 config.use_fancy_tab_bar = false
 config.font_size = 10
