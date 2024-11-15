@@ -259,7 +259,17 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   do
     local year = vsvers:gsub('Microsoft Visual Studio/', '')
     table.insert(config.launch_menu, {
-      label = 'Dev PowerShell / x64 Native Tools VS ' .. year,
+      label = 'Developer Powershell for VS ' .. year,
+      args = {
+        'powershell.exe',
+        '-NoProfile',
+        '-noe',
+        '-c',
+        '&{Import-Module "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/Tools/Microsoft.VisualStudio.DevShell.dll"; Enter-VsDevShell 1753bb17}',
+      },
+    })
+    table.insert(config.launch_menu, {
+      label = 'Dev Cmd / x64 Native Tools VS ' .. year,
       args = {
         'cmd.exe',
         '/k',
