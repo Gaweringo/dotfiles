@@ -40,6 +40,7 @@
 	showd = show --ext-diff
 
 	fixup = !sha=$( git -c color.ui=always log --oneline -n 100 | fzf +s --ansi --no-multi --prompt 'Fixup> ' --preview 'git show --color=always {1}' ) && git commit --fixup "${sha%% *}"
+	rebasi = !sha=$( git -c color.ui=always log --oneline -n 100 | fzf +s --ansi --no-multi --prompt 'Rebase -i --autosquash > ' --preview 'git show --color=always {1}' ) && git rebase -i --autosquash "${sha%% *}"
 
 	s = status
 	d = diff
