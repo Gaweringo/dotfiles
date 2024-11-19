@@ -39,6 +39,8 @@
 	logd = log -p --ext-diff
 	showd = show --ext-diff
 
+	fixup = !sha=$( git -c color.ui=always log --oneline -n 100 | fzf +s --ansi --no-multi --prompt 'Fixup> ' --preview 'git show --color=always {1}' ) && git commit --fixup "${sha%% *}"
+
 	s = status
 	d = diff
 	sw = !git switch $(git branch | fzf --height=20% --reverse --info=inline)
