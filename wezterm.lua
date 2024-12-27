@@ -18,6 +18,11 @@ config.default_prog = { "pwsh" }
 -- config.font = wezterm.font("JetBrains Mono")
 config.color_scheme = "Tokyo Night (Gogh)"
 config.color_scheme =  "iTerm2 Default"
+config.color_scheme =  "Brogrammer"
+config.color_scheme =  "Dark Pastel"
+-- config.color_scheme =  "Nocturnal Winter"
+-- config.color_scheme =  "synthwave"
+
 -- Make the cursor be bg and fg reversed of thext it is on
 -- config.force_reverse_video_cursor = true
 -- Make cursor always black on white
