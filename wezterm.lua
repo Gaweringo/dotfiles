@@ -36,6 +36,7 @@ config.font_size = 10
 config.window_background_opacity = 0.95
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_and_split_indices_are_zero_based = true
+config.window_decorations = "INTEGRATED_BUTTONS"
 
 config.quick_select_patterns = {
 	-- Path with \ backslash
