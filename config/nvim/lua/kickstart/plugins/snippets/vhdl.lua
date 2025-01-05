@@ -61,4 +61,51 @@ ls.add_snippets('vhdl', {
       }
     )
   ),
+  s(
+    'vunit',
+    fmta(
+      [[
+library vunit_lib;
+context vunit_lib.vunit_context;
+
+entity <tb_name> is
+  generic (runner_cfg : string);
+end entity;
+
+architecture tb of <tb_name> is
+begin
+  main : process
+  begin
+    test_runner_setup(runner, runner_cfg);
+
+    while test_suite loop
+
+      if run("<test_case1>") then
+        report "This will pass";
+        <finish>
+
+      elsif run("<test_case2>") then
+        assert false report "It fails";
+
+      end if;
+    end loop;
+
+    test_runner_cleanup(runner);
+  end process;
+end architecture;
+    ]],
+      {
+        tb_name = d(1, function(args)
+          return sn(nil, i(1, string.match(vim.fn.expand '%:t:r', '^[^-]+')))
+        end),
+        test_case1 = i(2, 'test_case1'),
+        test_case2 = i(3, 'test_case2'),
+        finish = i(0),
+      },
+      {
+        repeat_duplicates = true,
+      }
+    )
+  ),
 })
+print(string.match(vim.fn.expand '%:t:r', '^[^-]+'))
