@@ -22,8 +22,12 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- CUSTOM
 vim.keymap.set('i', 'jj', '<Esc>', { silent = true, noremap = true })
 vim.keymap.set('i', 'jk', '<Esc>', { silent = true, noremap = true })
-vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz')
-vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz')
+vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { silent = true, noremap = true })
+vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { silent = true, noremap = true })
+
+-- Do not jump to next match with *
+-- https://stackoverflow.com/a/4257175
+vim.keymap.set('n', '*', ':keepjumps normal! mi*`i<CR>', { silent = true, noremap = true })
 
 -- Toggles (also in keymaps-which-key.lua)
 vim.keymap.set('n', '<leader>tth', '<cmd>TSBufToggle highlight<cr>', { desc = '[t]oggle [t]reesitter [h]ighlight' })
