@@ -106,9 +106,6 @@ return {
 
           map('<leader>o', '<cmd>ClangdSwitchSourceHeader<cr>', 'Switch Source/Header (C/C++)')
 
-          require('clangd_extensions.inlay_hints').setup_autocmd()
-          require('clangd_extensions.inlay_hints').set_inlay_hints()
-
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
           --    See `:help CursorHold` for information about when this is executed
