@@ -4,7 +4,11 @@ return {
   cmd = { 'TodoTrouble', 'TodoTelescope' },
   event = 'VeryLazy',
   dependencies = { 'nvim-lua/plenary.nvim' },
-  opts = { signs = false },
+  opts = {
+    signs = false,
+    search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
+    highlight = { pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]] },
+  },
   -- From LazyVim
   -- stylua: ignore
   keys = {
