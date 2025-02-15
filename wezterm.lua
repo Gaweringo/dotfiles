@@ -243,6 +243,7 @@ config.key_tables = {
 
 		-- Cancel the mode by pressing escape
 		{ key = "Escape", action = "PopKeyTable" },
+		{ key = "Enter", action = "PopKeyTable" },
 	},
 }
 
