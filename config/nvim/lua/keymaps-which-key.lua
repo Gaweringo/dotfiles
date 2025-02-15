@@ -62,4 +62,13 @@ wk.add {
       return '[t]oggle text[w]idth -> ' .. new_tw_fn()
     end,
   },
+  {
+    '<leader>ti',
+    function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end,
+    desc = function()
+      return '[t]oggle [i]nlay_hints -> ' .. (vim.lsp.inlay_hint.is_enabled() and 'OFF' or 'ON')
+    end,
+  },
 }

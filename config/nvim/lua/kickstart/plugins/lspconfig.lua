@@ -262,5 +262,12 @@ return {
     cmd = 'Mason',
     opts = true,
   },
+  {
+    'chrisgrieser/nvim-lsp-endhints',
+    event = 'LspAttach',
+    opts = {
+      autoEnableHints = false,
+    },
+  },
 }
 -- vim: ts=2 sts=2 sw=2 et
