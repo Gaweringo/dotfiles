@@ -165,38 +165,38 @@ return {
 
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>s:', builtin.command_history, { desc = '[S]earch [:]command history' })
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
+      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
+      vim.keymap.set('n', '<leader>s:', builtin.command_history, { desc = '[s]earch [:]command history' })
 
-      vim.keymap.set('n', '<leader>sf', find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sf', find_files, { desc = '[s]earch [f]iles' })
 
       vim.keymap.set('n', '<leader>sF', function()
         find_files { hidden = true }
-      end, { desc = '[S]earch with hidden [F]iles' })
+      end, { desc = '[s]earch with hidden [F]iles' })
 
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
+      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
 
-      vim.keymap.set('n', '<leader>sg', live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sg', live_grep, { desc = '[s]earch by [g]rep' })
       vim.keymap.set('n', '<leader>sG', function()
         live_grep { hidden = true }
-      end, { desc = '[S]earch by [G]rep hidden' })
+      end, { desc = '[s]earch by [G]rep hidden' })
 
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
+      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
+      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[s]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', function()
         builtin.buffers { sort_lastused = true, sort_mru = true }
       end, { desc = '[ ] Find existing buffers' })
 
       -- git finds
-      vim.keymap.set('n', '<leader>gsf', builtin.git_files, { desc = '[S]earch [g]it [f]iles' })
-      vim.keymap.set('n', '<leader>gss', builtin.git_status, { desc = '[S]earch [g]it [s]tatus' })
-      vim.keymap.set('n', '<leader>gsS', builtin.git_stash, { desc = '[S]earch [g]it [S]tash' })
-      vim.keymap.set('n', '<leader>gsb', builtin.git_branches, { desc = '[S]earch [g]it [b]branches' })
-      vim.keymap.set('n', '<leader>gsB', builtin.git_bcommits, { desc = '[S]earch [g]it [B]uffer commits' })
-      vim.keymap.set('n', '<leader>gsc', builtin.git_commits, { desc = '[S]earch [g]it [c]ommits' })
+      vim.keymap.set('n', '<leader>gsf', builtin.git_files, { desc = '[s]earch [g]it [f]iles' })
+      vim.keymap.set('n', '<leader>gss', builtin.git_status, { desc = '[s]earch [g]it [s]tatus' })
+      vim.keymap.set('n', '<leader>gsS', builtin.git_stash, { desc = '[s]earch [g]it [S]tash' })
+      vim.keymap.set('n', '<leader>gsb', builtin.git_branches, { desc = '[s]earch [g]it [b]branches' })
+      vim.keymap.set('n', '<leader>gsB', builtin.git_bcommits, { desc = '[s]earch [g]it [B]uffer commits' })
+      vim.keymap.set('n', '<leader>gsc', builtin.git_commits, { desc = '[s]earch [g]it [c]ommits' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

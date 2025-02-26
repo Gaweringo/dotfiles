@@ -38,7 +38,7 @@ return {
         { '<leader>l_', hidden = true },
         { '<leader>p', group = '[P]lay / Compile' },
         { '<leader>p_', hidden = true },
-        { '<leader>r', group = '[R]ename' },
+        { '<leader>r', group = '[r]efactor' },
         { '<leader>r_', hidden = true },
         { '<leader>s', group = '[S]earch' },
         { '<leader>s_', hidden = true },
