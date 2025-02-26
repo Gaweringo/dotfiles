@@ -8,6 +8,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [d]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [d]iagnostic message' })
+vim.keymap.set('n', '[D', function() vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR}) end, { desc = 'Go to previous Error [D]iagnostic message' })
+vim.keymap.set('n', ']D', function() vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR}) end, { desc = 'Go to next Error [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -68,5 +70,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Show man page
+vim.keymap.set('n', 'gm', function()
+  vim.api.nvim_feedkeys('K', 'n', false)
+end, { desc = 'Hover man' })
+
+-- Make keybind
+vim.keymap.set('n', '<leader>pm', ':make ', { desc = '[m]ake' })
+
+-- Clear quickfix list
+vim.keymap.set('n', '<leader>xc', '<cmd>call setqflist([])<CR>', { desc = '[c]lear quickfix list' })
 
 -- vim: ts=2 sts=2 sw=2 et
