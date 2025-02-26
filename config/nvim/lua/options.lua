@@ -51,6 +51,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Let block select select virtual space (beyond end of line)
+vim.opt.virtualedit = "block"
+
 -- Treesitter based folds:
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldmethod = 'expr'
