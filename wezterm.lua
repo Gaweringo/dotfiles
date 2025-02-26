@@ -16,6 +16,7 @@ config.default_prog = { "pwsh" }
 {{/if}}
 
 -- config.font = wezterm.font("JetBrains Mono")
+config.harfbuzz_features = { 'zero', 'cv18' }
 config.color_scheme = "Tokyo Night (Gogh)"
 config.color_scheme =  "iTerm2 Default"
 config.color_scheme =  "Brogrammer"
