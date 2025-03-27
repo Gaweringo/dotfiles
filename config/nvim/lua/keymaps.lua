@@ -8,8 +8,12 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [d]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [d]iagnostic message' })
-vim.keymap.set('n', '[D', function() vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR}) end, { desc = 'Go to previous Error [D]iagnostic message' })
-vim.keymap.set('n', ']D', function() vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR}) end, { desc = 'Go to next Error [D]iagnostic message' })
+vim.keymap.set('n', '[D', function()
+  vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.ERROR }
+end, { desc = 'Go to previous Error [D]iagnostic message' })
+vim.keymap.set('n', ']D', function()
+  vim.diagnostic.goto_next { severity = vim.diagnostic.severity.ERROR }
+end, { desc = 'Go to next Error [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -26,6 +30,9 @@ vim.keymap.set('i', 'jj', '<Esc>', { silent = true, noremap = true })
 vim.keymap.set('i', 'jk', '<Esc>', { silent = true, noremap = true })
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { silent = true, noremap = true })
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { silent = true, noremap = true })
+
+-- Ctrl-Backspace to delete whole word in insert mode
+vim.keymap.set('i', '<C-BS>', '<C-w>')
 
 -- Do not jump to next match with *
 -- https://stackoverflow.com/a/4257175
