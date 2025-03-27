@@ -61,7 +61,11 @@ wezterm.on("update-right-status", function(window, pane)
 	end
 
 	local basename = function (s)
-		return string.gsub(s, "(.*[/\\])(.*)", "%2")
+		if s ~= nil then
+			return string.gsub(s, "(.*[/\\])(.*)", "%2")
+		else
+			return "Debug overlay"
+		end
 	end
 
 	local fp = basename(pane:get_foreground_process_name())
@@ -232,15 +236,19 @@ config.key_tables = {
 	resize_pane = {
 		{ key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 1 }) },
 		{ key = "h", action = act.AdjustPaneSize({ "Left", 1 }) },
+		{ key = "h", mods = "SHIFT", action = act.AdjustPaneSize({ "Left", 5 }) },
 
 		{ key = "RightArrow", action = act.AdjustPaneSize({ "Right", 1 }) },
 		{ key = "l", action = act.AdjustPaneSize({ "Right", 1 }) },
+		{ key = "l", mods = "SHIFT", action = act.AdjustPaneSize({ "Right", 5 }) },
 
 		{ key = "UpArrow", action = act.AdjustPaneSize({ "Up", 1 }) },
 		{ key = "k", action = act.AdjustPaneSize({ "Up", 1 }) },
+		{ key = "k", mods = "SHIFT", action = act.AdjustPaneSize({ "Up", 5 }) },
 
 		{ key = "DownArrow", action = act.AdjustPaneSize({ "Down", 1 }) },
 		{ key = "j", action = act.AdjustPaneSize({ "Down", 1 }) },
+		{ key = "j", mods = "SHIFT", action = act.AdjustPaneSize({ "Down", 5 }) },
 
 		-- Cancel the mode by pressing escape
 		{ key = "Escape", action = "PopKeyTable" },
