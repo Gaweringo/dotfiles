@@ -145,7 +145,12 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers_mason = {
-        clangd = {},
+        clangd = {
+          cmd = {
+            'clangd',
+            '--header-insertion=never',
+          },
+        },
         gopls = {},
         html = {},
         emmet_language_server = {},
@@ -214,6 +219,14 @@ return {
           end,
         },
       }
+
+      vim.api.nvim_create_user_command('LspLogClear', function()
+        local lsplogpath = vim.fn.stdpath 'state' .. '/lsp.log'
+        print(lsplogpath)
+        if io.close(io.open(lsplogpath, 'w+b')) == false then
+          vim.notify('Clearning LSP Log failed.', vim.log.levels.WARN)
+        end
+      end, { nargs = 0 })
     end,
   },
   {
