@@ -32,4 +32,3 @@ qty("<num>", "<unit>")<finish>
     )
   ),
 })
-print(string.match(vim.fn.expand '%:t:r', '^[^-]+'))
