@@ -7,6 +7,7 @@ require('luasnip.session.snippet_collection').clear_snippets 'vhdl'
 
 local ls = require 'luasnip'
 
+local fmt = require('luasnip.extras.fmt').fmt
 local fmta = require('luasnip.extras.fmt').fmta
 local rep = require('luasnip.extras').rep
 
@@ -63,16 +64,18 @@ ls.add_snippets('vhdl', {
   ),
   s(
     'vunit',
-    fmta(
+    fmt(
       [[
 library vunit_lib;
 context vunit_lib.vunit_context;
 
-entity <tb_name> is
+entity {tb_name} is
   generic (runner_cfg : string);
 end entity;
 
-architecture tb of <tb_name> is
+architecture tb of {tb_name} is
+   signal clk    : std_ulogic := '0';
+   signal nReset : std_ulogic := '0';
 begin
   main : process
   begin
@@ -80,11 +83,11 @@ begin
 
     while test_suite loop
 
-      if run("<test_case1>") then
+      if run("{test_case1}") then
         report "This will pass";
-        <finish>
+        {finish}
 
-      elsif run("<test_case2>") then
+      elsif run("{test_case2}") then
         assert false report "It fails";
 
       end if;
@@ -92,6 +95,9 @@ begin
 
     test_runner_cleanup(runner);
   end process;
+
+  clk <= not clk after ((1 sec)/cClkFrequency)/2;
+
 end architecture;
     ]],
       {
@@ -107,5 +113,45 @@ end architecture;
       }
     )
   ),
+  s(
+    'fsmd',
+    fmt(
+      [[
+architecture Rtl of {entity_name} is
+
+   type aRegSet is record
+      {record_data}
+   end record;
+
+   signal R, NxR : aRegSet;
+
+   constant cInitValR : aRegSet := (
+      {finish}
+   );
+
+begin
+
+   process({clk_name}, {reset_name})
+   begin
+      if {reset_name} = not '1' then
+         R <= cInitValR;
+      elsif rising_edge({clk_name}) then
+         R <= NxR;
+      end if;
+   end process;
+
+end architecture Rtl;
+  ]],
+      {
+        entity_name = i(1),
+        clk_name = i(2, 'iClk'),
+        reset_name = i(3, 'inRstAsync'),
+        record_data = i(4),
+        finish = i(0),
+      },
+      {
+        repeat_duplicates = true,
+      }
+    )
+  ),
 })
-print(string.match(vim.fn.expand '%:t:r', '^[^-]+'))
