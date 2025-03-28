@@ -39,9 +39,10 @@ config.hide_tab_bar_if_only_one_tab = false
 config.tab_and_split_indices_are_zero_based = true
 config.window_decorations = "INTEGRATED_BUTTONS"
 
--- Better Keyboard protocol. Specifically to 
--- have <C-i> be different from <Tab> in nvim
+-- To fix <C-i> not being different from <Tab> in nvim
 config.enable_kitty_keyboard = true
+-- To fix <Esc> not working correctly with the above option enabled
+config.allow_win32_input_mode = false
 
 config.quick_select_patterns = {
 	-- Path with \ backslash
