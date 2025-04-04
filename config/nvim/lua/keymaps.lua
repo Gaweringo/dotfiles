@@ -6,13 +6,17 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', function() vim.diagnostic.jump({count=-1, flaot=true}) end, { desc = 'Go to previous [d]iagnostic message' })
-vim.keymap.set('n', ']d', function() vim.diagnostic.jump({count=1, flaot=true}) end, { desc = 'Go to next [d]iagnostic message' })
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.jump { count = -1, flaot = true }
+end, { desc = 'Go to previous [d]iagnostic message' })
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.jump { count = 1, flaot = true }
+end, { desc = 'Go to next [d]iagnostic message' })
 vim.keymap.set('n', '[D', function()
-  vim.diagnostic.jump({count=1, flaot=true, severity = vim.diagnostic.severity.ERROR})
+  vim.diagnostic.jump { count = 1, flaot = true, severity = vim.diagnostic.severity.ERROR }
 end, { desc = 'Go to previous Error [D]iagnostic message' })
 vim.keymap.set('n', ']D', function()
-  vim.diagnostic.jump({count=-1, flaot=true, severity = vim.diagnostic.severity.ERROR})
+  vim.diagnostic.jump { count = -1, flaot = true, severity = vim.diagnostic.severity.ERROR }
 end, { desc = 'Go to next Error [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -88,5 +92,8 @@ vim.keymap.set('n', '<leader>pm', ':make ', { desc = '[m]ake' })
 
 -- Clear quickfix list
 vim.keymap.set('n', '<leader>xc', '<cmd>call setqflist([])<CR>', { desc = '[c]lear quickfix list' })
+
+-- Alternate file
+vim.keymap.set('n', '<leader><CR>', '<C-^>', { desc = 'alternate file' })
 
 -- vim: ts=2 sts=2 sw=2 et
