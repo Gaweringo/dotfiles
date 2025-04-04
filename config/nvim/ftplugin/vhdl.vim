@@ -1,1 +1,1 @@
-setlocal shiftwidth=3 expandtab
+setlocal shiftwidth=3 expandtab comments=:--
