@@ -3,8 +3,6 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim', -- required
     'sindrets/diffview.nvim', -- Diff integration
-
-    'nvim-telescope/telescope.nvim',
   },
   cmd = 'Neogit',
   keys = {
@@ -15,8 +13,6 @@ return {
     { '<leader>gb', '<cmd>Neogit branch<cr>', desc = 'Neo[g]it [b]ranch' },
     { '<leader>gl', '<cmd>NeogitLogCurrent<cr>', desc = '[g]it [l]og current file' },
     { '<leader>gL', function() require('neogit').action('log', 'log_current', {'--graph', '--decorate'})() end, desc = '[g]it [L]og' },
-    { '<leader>sb', '<cmd>Telescope git_branches<cr>', desc = '[s]earch [b]ranches' },
-    { '<leader>sc', '<cmd>Telescope git_commits<cr>', desc = '[s]earch [c]ommits' },
   },
   opts = { graph_style = 'unicode' },
   config = true,

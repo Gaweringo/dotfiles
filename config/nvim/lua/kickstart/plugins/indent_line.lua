@@ -4,6 +4,7 @@ return {
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
+    enabled = false, -- using snacks
     event = { 'BufReadPre', 'BufNewFile' },
     opts = {
       scope = { enabled = false },

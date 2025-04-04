@@ -6,6 +6,7 @@ return {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'folke/snacks.nvim',
       'aznhe21/actions-preview.nvim',
       'p00f/clangd_extensions.nvim',
 
@@ -59,31 +60,6 @@ return {
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
-          --  To jump back, press <C-T>.
-          map('gd', require('telescope.builtin').lsp_definitions, '[g]oto [d]efinition')
-
-          -- Find references for the word under your cursor.
-          map('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
-
-          -- Jump to the implementation of the word under your cursor.
-          --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', require('telescope.builtin').lsp_implementations, '[g]oto [I]mplementation')
-
-          -- Jump to the type of the word under your cursor.
-          --  Useful when you're not sure what type a variable is and you want to see
-          --  the definition of its *type*, not where it was *defined*.
-          map('gT', require('telescope.builtin').lsp_type_definitions, '[g]oto [T]ype Definition')
-
-          -- Fuzzy find all the symbols in your current document.
-          --  Symbols are things like variables, functions, types, etc.
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
-
-          -- Fuzzy find all the symbols in your current workspace
-          --  Similar to document symbols, except searches over your whole project.
-          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[w]orkspace [s]ymbols')
-
           -- Rename the variable under your cursor
           --  Most Language Servers support renaming across files, etc.
           map('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
@@ -91,10 +67,6 @@ return {
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
-
-          map('<leader>la', function()
-            require('actions-preview').code_actions()
-          end, '[l]sp: code [a]ction')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap
@@ -232,30 +204,23 @@ return {
   {
     -- https://github.com/aznhe21/actions-preview.nvim
     'aznhe21/actions-preview.nvim',
+    dependencies = {
+      'folke/snacks.nvim',
+    },
     lazy = true,
     keys = {
       {
         '<leader>la',
-        function()
-          require('actions-preview').code_actions()
-        end,
+        function() require('actions-preview').code_actions() end,
         desc = '[l]sp [a]ction',
       },
     },
-    -- event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      {
-        -- spec elsewhere
-        'nvim-telescope/telescope.nvim',
+    opts = {
+      backend = { 'snacks' },
+      snacks = {
+        layout = { preset = 'dropdown' },
       },
     },
-    config = function()
-      require('actions-preview').setup {
-        telescope = require('telescope.themes').get_dropdown {
-          winblend = 20,
-        },
-      }
-    end,
   },
   {
     -- https://github.com/p00f/clangd_extensions.nvim
