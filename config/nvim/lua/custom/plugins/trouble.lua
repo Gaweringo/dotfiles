@@ -43,7 +43,7 @@ return {
     },
     {
       '<leader>do',
-      '<cmd>Trouble lsp_document_symbols toggle focus=false win.position=right<cr>',
+      '<cmd>Trouble lsp_document_symbols toggle focus=false win={size=80, position=right}<cr>',
       desc = '[d]ocument [o]utline LSP (Trouble)',
     },
     {
