@@ -95,9 +95,23 @@ Function programming {$prog_dir = fd . '{{programming_folder}}' -t d -d 1 | fzf;
                           fd . -t d -d 1 $prog_dir | fzf | cd;}
 {{/if}}
 
-Function devpwsh {
-  Import-Module "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\Microsoft.VisualStudio.DevShell.dll";
-  $env:Path += "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin;";
+# run "winget install vswhere" once as a prerequisite
+# https://gist.github.com/nefarius/b60a498b0229b5cf0e338b7a39460b80
+function Setup-VS {
+  param(
+    [Parameter(Mandatory = $false)][string]$Platform
+  )
+  if (!($Platform)) {
+    $Platform = 'x86_amd64'
+  }
+  $installationPath = vswhere.exe -prerelease -latest -property installationPath
+  if ($installationPath -and (test-path "$installationPath\VC\Auxiliary\Build\vcvarsall.bat")) {
+    & "${env:COMSPEC}" /s /c "`"$installationPath\VC\Auxiliary\Build\vcvarsall.bat`" $Platform && set > %temp%\vcvars.txt" 
+    Get-Content "$env:temp\vcvars.txt" | foreach-object {
+      $name, $value = $_ -split '=', 2
+      set-content env:\"$name" $value
+    }
+  }
 }
 
 
