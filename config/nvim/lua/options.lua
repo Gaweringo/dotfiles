@@ -53,6 +53,8 @@ vim.opt.scrolloff = 10
 
 -- Let block select select virtual space (beyond end of line)
 vim.opt.virtualedit = "block"
+-- Use vertical split as standard for :diffsplit
+vim.opt.diffopt:append 'vertical,linematch:60,algorithm:histogram'
 
 -- Treesitter based folds:
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
