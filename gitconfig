@@ -49,6 +49,9 @@
 	out = log --oneline '@{u}..@'
 	fin = !git fetch && git in
 	fout = !git fetch && git out
+	cm = commit -m
+	a = add .
+	aa = add -A
 [pull]
 	rebase = false
 	ff = only
