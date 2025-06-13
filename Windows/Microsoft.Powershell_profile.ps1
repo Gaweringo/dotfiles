@@ -129,6 +129,9 @@ function Setup-VS {
 # . "$PSScriptRoot\Completions\caddy.ps1"
 {{/if}}
 
+# jj
+. "$PSScriptRoot\Completions\jj.ps1"
+
 # fzf completions
 if (Get-Module -ListAvailable -Name PSFzf) {
   Import-Module PSFzf
