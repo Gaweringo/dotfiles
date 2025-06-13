@@ -51,6 +51,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- How many lines C-d and C-u jump
+vim.opt.scroll = 15
+
 -- Let block select select virtual space (beyond end of line)
 vim.opt.virtualedit = "block"
 -- Use vertical split as standard for :diffsplit
