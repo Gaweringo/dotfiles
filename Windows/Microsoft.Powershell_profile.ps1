@@ -5,8 +5,9 @@ Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 
+# FIXME: Long load times
 # Icons for folders and files (in ls)
-Import-Module -Name Terminal-Icons
+# Import-Module -Name Terminal-Icons
 
 # sudo
 Import-Module 'gsudoModule'
@@ -16,13 +17,14 @@ Import-Module 'gsudoModule'
 
 {{#if (is_executable 'choco')}}
 # Chocolatey profile
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
-}
+# $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+# if (Test-Path($ChocolateyProfile)) {
+#   Import-Module "$ChocolateyProfile"
+# }
 {{/if}}
 
-Import-Module posh-git
+# FIXME: Long load time
+# Import-Module posh-git
 
 # ALIAS
 # neovim alias
@@ -39,6 +41,13 @@ Function dv {
 Set-Alias -Name lg -Value lazygit
 # graphicmagick alias as the gm conflicts with Get-Member
 Set-Alias -Name gmagick -Value gm.exe
+{{#if (is_executable 'eza')}}
+# eza alias
+Set-Alias -Name x -Value eza
+Function lx {
+  eza -lah
+}
+{{/if}}
 
 # Better cds
 # cd to first subfolder with this name
@@ -91,18 +100,19 @@ Function devpwsh {
   $env:Path += "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin;";
 }
 
+
 ## COMPLETIONS ##
 # dotter completions
-. "$PSScriptRoot\Completions\dotter.ps1"
+# . "$PSScriptRoot\Completions\dotter.ps1"
 
 {{#if (command_success "pwsh -c Import-Module DockerCompletion")}}
 # Docker completion
-Import-Module DockerCompletion
+# Import-Module DockerCompletion
 {{/if}}
 
 {{#if (is_executable "caddy")}}
 # caddy completion
-. "$PSScriptRoot\Completions\caddy.ps1"
+# . "$PSScriptRoot\Completions\caddy.ps1"
 {{/if}}
 
 # fzf completions
@@ -135,7 +145,7 @@ function Invoke-Starship-PreCommand {
 . "$PSScriptRoot\Completions\starship.ps1"
 
 {{#if (is_executable "watchexec")}}
-. "$PSScriptRoot\Completions\watchexec.ps1"
+# . "$PSScriptRoot\Completions\watchexec.ps1"
 {{/if}}
 
 {{#if (is_executable "Rcmd")}}
