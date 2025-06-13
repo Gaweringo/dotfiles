@@ -16,6 +16,8 @@ config.default_prog = { "pwsh" }
 {{/if}}
 
 -- config.font = wezterm.font("JetBrains Mono")
+-- config.font = wezterm.font("JetBrainsMono NF")
+config.font = wezterm.font("IosevkaTerm NF")
 config.harfbuzz_features = { 'zero', 'cv18' }
 config.color_scheme = "Tokyo Night (Gogh)"
 config.color_scheme =  "iTerm2 Default"
@@ -33,16 +35,15 @@ config.colors = {
 }
 
 config.use_fancy_tab_bar = false
-config.font_size = 10
+if string.find(config.font.font[1].family, "JetBrains") then
+	config.font_size = 10
+else
+	config.font_size = 11
+end
 config.window_background_opacity = 0.95
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_and_split_indices_are_zero_based = true
 config.window_decorations = "INTEGRATED_BUTTONS"
-
--- To fix <C-i> not being different from <Tab> in nvim
-config.enable_kitty_keyboard = true
--- To fix <Esc> not working correctly with the above option enabled
-config.allow_win32_input_mode = false
 
 config.quick_select_patterns = {
 	-- Path with \ backslash
