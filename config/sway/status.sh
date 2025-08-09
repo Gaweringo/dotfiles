@@ -23,10 +23,13 @@ cpu_usage=$(top -bn1 | grep "Cpu(s)" | awk '{printf "%.1f", $2 + $4}')
 # current ram usage
 ram_usage=$(top -bn1 | grep "B Mem" | awk '{printf "%.1f", $8/$4 * 100.0}')
 
+# battery percentage
+battery_power=$(acpi -b | awk -F ',' '{print $2}')
+
 sep=" | "
 
 # Returns the battery status: "Full", "Discharging", or "Charging".
 # battery_status=$(cat /sys/class/power_supply/BAT0/status)
 
 # Emojis and characters for the status bar
-echo   '  ' $current_layout "$sep"   '  ' $ram_usage% "$sep"   ' ' $cpu_usage% "$sep"   ' ' $disk_usage "$sep" ↑ $uptime_formatted "$sep"  ' ' $linux_version "$sep" $date_formatted
+echo   '  ' $current_layout "$sep"   ' ' $battery_power ' ' $sep   '  ' $ram_usage% "$sep"   ' ' $cpu_usage% "$sep"   ' ' $disk_usage "$sep" ↑ $uptime_formatted "$sep"  ' ' $linux_version "$sep" $date_formatted

@@ -1,0 +1,18 @@
+# Locking before going into a sleep state
+
+[Unit]
+Description=User suspend actions
+# To run it on every sleep action (suspend, hibernate, hybrid-sleep, suspend-then-hibernate)
+Before=sleep.target
+
+[Service]
+User=%I
+Type=forking
+Environment=DISPLAY=:0
+# Stop media from playing
+ExecStartPre=/usr/bin/playerctl pause
+ExecStart=/usr/bin/swaylock
+ExecStartPost=/usr/bin/sleep 1
+
+[Install]
+WantedBy=sleep.target

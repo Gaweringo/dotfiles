@@ -1,0 +1,9 @@
+daemonize
+show-failed-attempts
+ignore-empty-password
+indicator-caps-lock
+show-keyboard-layout
+indicator-idle-visible
+color=1c1c2b
+layout-bg-color=45475a
+text-color=cdd6f4

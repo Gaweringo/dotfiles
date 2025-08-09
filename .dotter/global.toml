@@ -1,16 +1,22 @@
 # User-defined functions to be executed inside templates.
 [helpers]
+[linux]
 
 [default]
 # 'depends': packages that also ge tenabled when this one gets enabled
-depends = ["nvim", "starship", "foot", "tmux", "lazygit"]
+depends = ["git", "nvim", "starship", "foot", "tmux", "lazygit", "wezterm"]
 
 # .files is the mapping between the path of the file relative to
 # the repository root and its location in the filesystem
 # On Windows: '~' is 'C:\Users\<USERNAME>\'
 [default.files]
 "README.md" = ""
+"setup.sh" = ""
+
+[git.files]
 gitconfig = "~/.gitconfig"
+
+[wezterm.files]
 "wezterm.lua" = { target = "~/.wezterm.lua", type = "template", if = '(is_executable "wezterm")' }
 
 [nvim.files]
@@ -19,8 +25,30 @@ gitconfig = "~/.gitconfig"
 [idea.files]
 ideavimrc = "~/.ideavimrc"
 
+####### Sway
+[sway]
+depends = ["swayosd", "swaylock", "bin", "rofi"]
 [sway.files]
 "config/sway" = { target = "~/.config/sway", type = "symbolic", recurse = false }
+
+[swayosd.files]
+"config/swayosd" = { target = "~/.config/swayosd", type = "symbolic", recurse = false }
+
+[swaylock.files]
+"config/swaylock/config" = "~/.config/swaylock/config"
+
+[systemd]
+depends = ["bin"]
+
+[systemd.files]
+"config/systemd" = { target = "~/.config/systemd", type = "symbolic", if = '(is_executable "systemctl")' }
+
+[bin.files]
+"bin" = "~/.local/bin"
+
+[rofi.files]
+"config/rofi" = "~/.config/rofi"
+#######
 
 [fish.files]
 "config/fish/config.fish" = "~/.config/fish/config.fish"
@@ -38,6 +66,9 @@ ideavimrc = "~/.ideavimrc"
 
 [lazygit.files]
 "config/lazygit/config.yml" = { target = "~/.config/lazygit/config.yml", type = "template", if = '(is_executable "lazygit")' }
+
+[ghostty.files]
+"config/ghostty" = { target = "~/.config/ghostty", type = "symbolic", recurse = false }
 
 # variables are constants for templated files
 [default.variables]

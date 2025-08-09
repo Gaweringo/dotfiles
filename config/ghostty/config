@@ -1,0 +1,33 @@
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /home/gawer/.config/ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+
+font-family = IosevkaTerm NF
+
+# allow reading clipboard without asking
+clipboard-read = allow
+
+# default shell
+command = fish
+
+# look
+theme = gruber-darker
+background-opacity = 0.80
+background = black
+
+# Making tabs a bit smaller
+gtk-wide-tabs = false
+gtk-custom-css = ./tab-style.css
