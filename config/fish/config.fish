@@ -10,8 +10,12 @@ if status is-interactive
     {{/if}}
 
     # aliases
+    alias ..='cd ..'
+
     {{#if (is_executable "exa")}}
     alias x=exa
+    alias xt='eza -lah --icons=always --tree --level'
+    alias xl='eza -lah --icons=always'
     {{/if}}
     {{#if (is_executable "lazygit")}}
     alias lg=lazygit
@@ -19,10 +23,12 @@ if status is-interactive
     {{#if (is_executable "nvim")}}
     alias n=nvim
     set -gx EDITOR nvim
+    set -gx MANPAGER 'nvim +Man!'
     {{/if}}
     {{#if (is_executable "fdfind")}}
     alias fd=fdfind
     {{/if}}
+    alias ip='ip -c'
 
     {{#if (is_executable "opam")}}
     # opam configuration
@@ -41,6 +47,7 @@ if status is-interactive
     {{/if}}
 
     {{#if (is_executable "yazi")}}
+    alias y=yazi
     function yy
         set tmp (mktemp -t "yazi-cwd.XXXXXX")
         yazi $argv --cwd-file="$tmp"
@@ -49,6 +56,10 @@ if status is-interactive
         end
         rm -f -- "$tmp"
     end
+    {{/if}}
+
+    {{#if (is_executable "fzf")}}
+    fzf --fish | source
     {{/if}}
 
     function cdf --description 'Change to first directory that matches'
