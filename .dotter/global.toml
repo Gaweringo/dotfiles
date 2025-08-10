@@ -50,6 +50,9 @@ depends = ["bin"]
 "config/rofi" = "~/.config/rofi"
 #######
 
+[zathura.files]
+"zathurarc" = "~/.config/zathura/zathurarc"
+
 [fish.files]
 "config/fish/config.fish" = "~/.config/fish/config.fish"
 "config/fish/completions/render.fish" = { target = "~/.config/fish/completions/render.fish", type = "symbolic", if = '(is_executable "render")' }

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# https://sylvaindurand.org/dynamic-wallpapers-with-sway/
+
+WALLPAPER_FOLDER="$HOME/Pictures/Wallpapers"
+
+NEW_BG=$(find $WALLPAPER_FOLDER -type f | shuf -n1)
+
+OLD_SWAYBG=$(pidof swaybg)
+
+echo $OLD_SWAYBG
+echo $NEW_BG
+
+setsid swaybg -i "$NEW_BG" -m fill &
+# Wait for new background to show up
+sleep 5
+kill $OLD_SWAYBG
