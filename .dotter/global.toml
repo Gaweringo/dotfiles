@@ -27,7 +27,7 @@ ideavimrc = "~/.ideavimrc"
 
 ####### Sway
 [sway]
-depends = ["swayosd", "swaylock", "bin", "rofi"]
+depends = ["swayosd", "swaylock", "bin", "rofi", "chromium"]
 [sway.files]
 "config/sway" = { target = "~/.config/sway", type = "symbolic", recurse = false }
 
@@ -49,6 +49,9 @@ depends = ["bin"]
 [rofi.files]
 "config/rofi" = "~/.config/rofi"
 #######
+
+[chromium.files]
+"config/chromium-flags.conf" = "~/.config/chromium-flags.conf"
 
 [zathura.files]
 "zathurarc" = "~/.config/zathura/zathurarc"
