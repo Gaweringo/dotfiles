@@ -25,8 +25,12 @@ command = fish
 
 # look
 theme = gruber-darker
-background-opacity = 0.80
+background-opacity = 0.85
 background = black
+# Actually only one of them is needed
+cursor-text = 181818
+cursor-invert-fg-bg
+
 
 # Making tabs a bit smaller
 gtk-wide-tabs = false
