@@ -24,6 +24,9 @@ set $menu rofi -modes "drun,run" -show drun -show-icons
 # Mouse follows to the focused container
 mouse_warping container
 
+# Change focus to windows requiesting activation
+focus_on_window_activation focus
+
 ## Colours
 set $base00 #282828
 set $base01 #3c3836
@@ -43,12 +46,12 @@ set $base0E #689d6a
 set $base0F #a89984
 
 ## Window Colours
-client.focused   $base0D  $base00  $base06  $base08  $base09
-client.focused_inactive  $base02  $base00  $base06  $base08  $base02
-client.unfocused   $base01  $base00  $base06  $base08  $base02
-client.urgent   $base07  $base00  $base08  $base0B  $base02
-client.placeholder       $base02  $base00  $base06  $base03  $base04
-client.background        $base00
+client.focused          $base0D  $base00  $base06  $base08  $base09
+client.focused_inactive $base02  $base00  $base06  $base08  $base02
+client.unfocused        $base01  $base00  $base06  $base08  $base02
+client.urgent           $base07  $base00  $base08  $base0B  $base02
+client.placeholder      $base02  $base00  $base06  $base03  $base04
+client.background       $base00
 
 # Border
 default_border pixel 4
@@ -59,7 +62,7 @@ hide_edge_borders smart_no_gaps
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/Sonnenaufgang wide.jpg fill
+# output * bg ~/Pictures/Sonnenaufgang wide.jpg fill
 #
 # Example configuration:
 #
@@ -141,7 +144,7 @@ input type:touchpad {
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -151,7 +154,7 @@ input type:touchpad {
     # Despite the name, also works for non-floating windows.
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
-    floating_modifier $mod normal
+    floating_modifier Mod1 normal
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
@@ -237,8 +240,8 @@ input type:touchpad {
     bindsym $mod+ctrl+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
+    bindsym $mod+shift+s layout stacking
+    bindsym $mod+t layout tabbed
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
@@ -310,25 +313,31 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while $HOME/.config/sway/status.sh; do sleep 1; done
+    # status_command while $HOME/.config/sway/status.sh; do sleep 1; done
+    status_command i3status
 
     colors {
         statusline #ffffff
         background #323232
-        inactive_workspace #32323200 #32323200 #EEEEEE
-        focused_workspace #E5E5E5 #102010C0 #FFFFFF
+        inactive_workspace #32323200 #505050D0 #DDDDDD
+        focused_workspace $base0D #323232F1 #FFFFFF
     }
 }
 
-# Config
+# Automatic window behaviors for specific apps/windows
 for_window [window_role="dialog"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
 for_window [app_id="wiremix"] floating enable
 for_window [class="SpeedCrunch"] floating enable
+for_window [app_id="io.github.Qalculate.qalculate-qt"] floating enable
+for_window [class="Spotify"] move scratchpad, scratchpad show
 
 include /etc/sway/config.d/*
 
 # custom things:
 include $HOME/.config/sway/config.d/*
 include $HOME/.config/sway/config.d/modes/*
+
+# nwg-display output settings
+include $HOME/.config/sway/outputs
