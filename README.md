@@ -75,7 +75,7 @@ For more todos see the readme in config/neovim
 - [ ] Power profile switcher and display in swaybar (`powerprofilectl`)
 - [ ] i3status or i3blocks for the statusbar (tray-icons?)
 - [ ] dark theme for gtk apps (or in general)
-- [ ] [Ianny](https://github.com/zefr0x/ianny) for break reminders
+- [X] [Ianny](https://github.com/zefr0x/ianny) for break reminders
 - [ ] Maybe try gammastep instead of wlsunset
 - [ ] wayclip for `waycopy` and `waypaste` commands
 - [X] nwg-displays for display management
@@ -87,7 +87,7 @@ For more todos see the readme in config/neovim
 - [ ] [Screen record](https://github.com/natpen/awesome-wayland?tab=readme-ov-file#screencasting) and and [screen shot](https://github.com/natpen/awesome-wayland?tab=readme-ov-file#screenshots)
     - [ ] satty setup for screenshot annotations
     - https://github.com/jtheoof/swappy
-- [ ] automatic background switcher [wpaperd](https://github.com/danyspin97/wpaperd)?
+- [X] automatic background switcher [wpaperd](https://github.com/danyspin97/wpaperd)? (custom script and systemd-timer)
 - [ ] Set `MOZ_ENABLE_WAYLAND=1` environment variable somehow, somewhere (look into `environment.d`)
 - [ ] Floating for file pickers: https://github.com/basecamp/omarchy/blob/07d88a4b9aa1ecf38b869b2ab01dc416fc841a72/default/hypr/windows.conf#L15-L16
 - [ ] Fingerprint and maybe Face https://github.com/basecamp/omarchy/blob/07d88a4b9aa1ecf38b869b2ab01dc416fc841a72/bin/omarchy-setup-fingerprint

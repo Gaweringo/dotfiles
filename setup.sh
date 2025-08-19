@@ -206,4 +206,6 @@ systemctl --user daemon-reload
 systemctl --user enable --now user-suspend@.service || true
 # For battery low notification
 systemctl --user enable --now battery-monitor.timer || true
+# For daily background change
+systemctl --user enable --now bg-changer.timer
 

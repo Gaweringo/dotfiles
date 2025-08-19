@@ -1,0 +1,13 @@
+[Unit]
+Description=Wallpaper changer
+Requires=bg-changer.service
+
+[Timer]
+; OnBootSec=1min
+OnCalendar=daily
+AccuracySec=10min
+# To make sure timer events, which occured while powered off still are acted on
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,8 @@
+[Unit]
+Description=Wallpaper changer
+
+[Service]
+ExecStart=%h/.local/bin/bg-changer
+# To keep the spawned swaybg process active
+KillMode=process
+; Environment=DISPLAY=:0
