@@ -27,7 +27,7 @@ ideavimrc = "~/.ideavimrc"
 
 ####### Sway
 [sway]
-depends = ["swayosd", "swaylock", "bin", "rofi", "chromium"]
+depends = ["swayosd", "swaylock", "bin", "rofi", "i3status", "chromium"]
 [sway.files]
 "config/sway" = { target = "~/.config/sway", type = "symbolic", recurse = false }
 
@@ -48,6 +48,9 @@ depends = ["bin"]
 
 [rofi.files]
 "config/rofi" = "~/.config/rofi"
+
+[i3status.files]
+"config/sway/i3status.conf" = "~/.config/i3status/config"
 #######
 
 [chromium.files]
