@@ -68,14 +68,16 @@ For more todos see the readme in config/neovim
 
 ## Archlinux / sway
 - [X] Global Clipboard and history
-    - [ ] Better picker for it (wofi?)
+    - [X] Better picker for it (wofi?) -> rofi chosen
 - [X] Swayidle
 - [X] Swaylock for hibernation and sleep
 - [X] Battery low warning
 - [ ] Power profile switcher and display in swaybar (`powerprofilectl`)
+- [ ] Bottles for running windows apps
 - [ ] i3status or i3blocks for the statusbar (tray-icons?)
 - [ ] dark theme for gtk apps (or in general)
 - [X] [Ianny](https://github.com/zefr0x/ianny) for break reminders
+- [ ] Virtualization (qemu) [ChrisTitus linutil](https://github.com/ChrisTitusTech/linutil/blob/main/core/tabs/system-setup/arch/virtualization.sh)
 - [ ] Maybe try gammastep instead of wlsunset
 - [ ] wayclip for `waycopy` and `waypaste` commands
 - [X] nwg-displays for display management
@@ -83,15 +85,17 @@ For more todos see the readme in config/neovim
 - [ ] oculate image viewer
 - [ ] maybe a different [launcher](https://github.com/cyclopsian/wdisplays)
     Also see sway wiki for things: [sway wiki](https://github.com/swaywm/sway/wiki/Useful-add-ons-for-sway)
-- [ ] zathura setup
+- [X] zathura setup
 - [ ] [Screen record](https://github.com/natpen/awesome-wayland?tab=readme-ov-file#screencasting) and and [screen shot](https://github.com/natpen/awesome-wayland?tab=readme-ov-file#screenshots)
     - [ ] satty setup for screenshot annotations
     - https://github.com/jtheoof/swappy
 - [X] automatic background switcher [wpaperd](https://github.com/danyspin97/wpaperd)? (custom script and systemd-timer)
+- [ ] Power profile switcher using roif and powerprofilectl
 - [ ] Set `MOZ_ENABLE_WAYLAND=1` environment variable somehow, somewhere (look into `environment.d`)
 - [ ] Floating for file pickers: https://github.com/basecamp/omarchy/blob/07d88a4b9aa1ecf38b869b2ab01dc416fc841a72/default/hypr/windows.conf#L15-L16
 - [ ] Fingerprint and maybe Face https://github.com/basecamp/omarchy/blob/07d88a4b9aa1ecf38b869b2ab01dc416fc841a72/bin/omarchy-setup-fingerprint
 - [ ] Add ability to disable auto idle (like: https://github.com/basecamp/omarchy/blob/07d88a4b9aa1ecf38b869b2ab01dc416fc841a72/bin/omarchy-toggle-idle)
     - Make config file for swayidle or run sript, so it can be killed and restarted with the same setup
-- [ ] Add ability to disable `wlsunset`
+- [ ] Add ability to disable `wlsunset` (kill and relauch script)
 - [ ] look into uwsm
+-  [ ] Waydroid for running android apps
