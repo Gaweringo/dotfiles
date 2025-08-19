@@ -1,4 +1,4 @@
-function findVunitDir()
+local function findVunitDir()
   local vunit_dir = vim.fs.find({ 'vunit' }, { limit = math.huge, type = 'directory', upward = true })[1]
   if vunit_dir == nil then
     vunit_dir = vim.fs.find({ 'vunit' }, { limit = math.huge, type = 'directory' })[1]
@@ -6,6 +6,7 @@ function findVunitDir()
   return vunit_dir
 end
 
+---@type overseer.TemplateFileDefinition
 return {
   name = 'vunit test',
   builder = function()
