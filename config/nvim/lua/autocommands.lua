@@ -9,7 +9,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Auto close terminal when process exits
 local augroup = vim.api.nvim_create_augroup('startup_ag', {})
 
 -- Auto resize splits when window is resized

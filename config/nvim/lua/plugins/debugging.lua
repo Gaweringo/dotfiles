@@ -7,7 +7,13 @@ return {
       'theHamsta/nvim-dap-virtual-text',
       {
         'Joakker/lua-json5',
-        build = './install.sh',
+        build = function()
+          if vim.fn.has('win32') then
+            vim.system({ 'powershell', './install.ps1' }):wait()
+          else
+            vim.system({ './install.sh' }):wait()
+          end
+        end,
       }
     },
     init = function()

@@ -147,7 +147,7 @@ vim.keymap.set('n', ']D', function()
   jumpWithVirtLineDiags(-1, vim.diagnostic.severity.ERROR)
 end, { desc = 'Go to next Error [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>r', virt_line, { desc = '[r]eveal virtual line diagnostic' })
+vim.keymap.set('n', '<leader>w', virt_line, { desc = '[w]hat are the diagnostics (virtual line)' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- TODO: Autocommand to show virtual lines in insert mode and virtual text in normal mode

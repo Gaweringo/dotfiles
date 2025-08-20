@@ -1,6 +1,7 @@
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
 		vim.keymap.set('n', '<leader>la', function() vim.lsp.buf.code_action() end, { desc = "LSP code action" })
+		vim.keymap.set('n', '<leader>r', function() vim.lsp.buf.rename() end, { desc = "LSP Rename" })
 		-- Client / Language specific
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		local buf = ev.buf
@@ -19,13 +20,13 @@ vim.lsp.config('clangd', {
 		'-j=6', -- Number of async background workers
 		'--background-index',
 		-- "--header-insertion=never", -- Never insert #include with completion
-		'--all-scopes-completion',       -- Include completion items from namespaces, not visible in scope (automatic insertion)
-		'--clang-tidy',                  -- Run and show clang-tidy recommendations
+		'--all-scopes-completion',     -- Include completion items from namespaces, not visible in scope (automatic insertion)
+		'--clang-tidy',                -- Run and show clang-tidy recommendations
 		-- "--completion-style=detailed", -- Sementically distinct completion show (overloads are not grouped in one item)
-		'--fallback-style=Google',       -- Style to apply when no .clang-format is found (Maybe also LLVM)
+		'--fallback-style=Google',     -- Style to apply when no .clang-format is found (Maybe also LLVM)
 		'--header-insertion-decorators', -- Circular dot indicator shows that a header will be inserted with completion
-		'--rename-file-limit=0',         -- Limit the number of files to be affected by symbol renaming. 0 means no limit (default=50)
-		'--pch-storage=memory',          -- May improve performance as tradeoff for memory usage
+		'--rename-file-limit=0',       -- Limit the number of files to be affected by symbol renaming. 0 means no limit (default=50)
+		'--pch-storage=memory',        -- May improve performance as tradeoff for memory usage
 	}
 })
 

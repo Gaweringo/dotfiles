@@ -1,6 +1,7 @@
 return {
   'michaelb/sniprun',
   branch = 'master',
+  enabled = function() return vim.fn.has('win32') ~= 1 end,
   build = 'sh install.sh',
   cmd = { 'SnipRun', 'SnipInfo', 'SnipLive', },
   config = function()
@@ -9,7 +10,7 @@ return {
     })
   end,
   keys = {
-    { '<leader>r', '<Plug>SnipRun',         silent = true, mode = { 'v', 'n' }, desc = 'Snip[r]un' },
-    { '<leader>R', '<Plug>SnipRunOperator', silent = true, mode = { 'n' },      desc = 'Snip[R]unOperator' },
+    { '<leader>m', '<Plug>SnipRun',         silent = true, mode = { 'v', 'n' }, desc = 'Sniprun' },
+    { '<leader>M', '<Plug>SnipRunOperator', silent = true, mode = { 'n' },      desc = 'SnipRunOperator' },
   },
 }
