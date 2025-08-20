@@ -113,7 +113,7 @@ vim.filetype.add { extension = { ['do'] = 'tcl' } }
 
 if vim.g.neovide then
   vim.g.neovide_scale_factor = 0.85
-  vim.o.guifont = "Iosevka NF:h14" -- text below applies for VimScript
+  vim.o.guifont = "Iosevka NFM,IosevkaTerm NF,JetBrainsMono NF:h13"
   vim.g.neovide_opacity = 0.95
   vim.g.neovide_normal_opacity = 0.9
 end
