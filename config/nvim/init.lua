@@ -3,8 +3,9 @@
 -- - https://youtu.be/skW3clVG5Fo
 
 require 'options'
-require 'keymap'
 require 'autocommands'
+require 'commands'
+require 'keymap'
 
 -------------------- Lazy --------------------
 
