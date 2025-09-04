@@ -16,7 +16,7 @@ vim.api.nvim_create_user_command('Tabterm', function()
     openTabterm()
 end, {})
 
-vim.keymap.set({'n'}, '<A-Z>', function() openTabterm() end, { desc = 'Tabterm' })
+vim.keymap.set({'n', 'v'}, '<A-Z>', function() openTabterm() end, { desc = 'Tabterm' })
 
 -- TODO: Create window pick and place plugin, so that you can press a keybind to pick up a window and press it again on
 -- a different tabpage to drop it there (or maybe just use buffer search from Snacks picker)

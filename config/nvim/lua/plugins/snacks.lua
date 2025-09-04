@@ -385,8 +385,8 @@ return {
     { "<leader>s,", function() Snacks.scratch.select() end,                                    desc = "Scratch buffers" },
 
     -- Terminal
-    { "<A-t>",      function() Snacks.terminal.toggle() end,                                   desc = "Terminal",             mode = { 'n', 't' } },
-    { "<A-z>",      function() Snacks.terminal.toggle() end,                                   desc = "Terminal",             mode = { 'n', 't' } },
+    { "<A-t>",      function() Snacks.terminal.toggle() end,                                   desc = "Terminal",             mode = { 'n', 't', 'v' } },
+    { "<A-z>",      function() Snacks.terminal.toggle() end,                                   desc = "Terminal",             mode = { 'n', 't', 'v' } },
     { "<leader>tt", function() Snacks.terminal.toggle() end,                                   desc = "Terminal" },
     -- TODO: Picker for terminals using Snacks.terminal.list() and <leader>s/ or something
 

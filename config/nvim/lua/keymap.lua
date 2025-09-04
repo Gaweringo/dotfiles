@@ -53,6 +53,7 @@ map({ 'n', 'x' }, 'k', [[v:count == 0 ? 'gk' : 'k']], { expr = true })
 -- Copy/paste with system clipboard
 map({ 'n', 'x' }, 'gy', '"+y', { desc = 'Copy to system clipboard' })
 map('n', 'gp', '"+p', { desc = 'Paste from system clipboard' })
+map('n', 'gP', '"+P', { desc = 'Paste from system clipboard' })
 -- - Paste in Visual with `P` to not copy selected text (`:h v_P`)
 map('x', 'gp', '"+P', { desc = 'Paste from system clipboard' })
 
