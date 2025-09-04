@@ -53,7 +53,10 @@ return {
       map('n', '<leader>hd', gs.diffthis, { desc = '[d]iff this' })
       map('n', '<leader>hD', function()
         gs.diffthis '~'
-      end, { desc = '[D]iff this ~' })
+      end, { desc = '[D]iff this against last commit ~' })
+      map('n', '<leader>hw', gs.toggle_word_diff, { desc = 'toggle [w]ord diff' })
+      map('n', '<leader>hh', gs.toggle_linehl, { desc = 'toggle added [h]ighlighting' })
+      map('n', '<leader>hH', gs.toggle_deleted, { desc = 'toggle deleted [H]ighlighting' })
 
       -- Text object
       map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')

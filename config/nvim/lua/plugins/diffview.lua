@@ -1,3 +1,11 @@
+-- https://www.naseraleisa.com/posts/diff
+local function get_default_branch_name()
+  local res = vim
+      .system({ 'git', 'rev-parse', '--verify', 'main' }, { capture_output = true })
+      :wait()
+  return res.code == 0 and 'main' or 'master'
+end
+
 return {
   'sindrets/diffview.nvim',
   opts = {
@@ -15,9 +23,13 @@ return {
   end,
   cmd = { 'DiffviewOpen', 'DiffviewFileHistory', },
   keys = {
-    { '<leader>gd%', '<cmd>DiffviewFileHistory %<cr>', desc = '[d]iffview current file' },
-    { '<leader>gdh', '<cmd>DiffviewFileHistory<cr>',   desc = '[d]iffview [h]istory' },
-    { '<leader>gdd', '<cmd>DiffviewOpen<cr>',          desc = '[d]iffview [d]iff' },
-    { '<leader>gdq', '<cmd>DiffviewClose<cr>',         desc = '[d]iffview [q]uit' },
+    { '<leader>gd%', '<cmd>DiffviewFileHistory --follow %<cr>',                                        desc = '[d]iffview current file' },
+    { '<leader>gdh', '<cmd>DiffviewFileHistory<cr>',                                                   desc = '[d]iffview [h]istory' },
+    { '<leader>gdl', "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>",                                desc = '[d]iffview [l]ine history', mode = { 'v' } },
+    { '<leader>gdl', "<Cmd>.DiffviewFileHistory --follow<CR>",                                         desc = '[d]iffview [l]ine history', mode = { 'n' } },
+    { '<leader>gdd', '<cmd>DiffviewOpen<cr>',                                                          desc = '[d]iffview [d]iff' },
+    { '<leader>gdq', '<cmd>DiffviewClose<cr>',                                                         desc = '[d]iffview [q]uit' },
+    { '<leader>gdm', function() vim.cmd('DivviewOpen ' .. get_default_branch_name()) end,              desc = '[d]iffview [m]ain' },
+    { '<leader>gdM', function() vim.cmd('DivviewOpen HEAD..origin/' .. get_default_branch_name()) end, desc = '[d]iffview origin/[M]ain' },
   },
 }
