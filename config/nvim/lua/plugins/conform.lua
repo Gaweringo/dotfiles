@@ -1,17 +1,17 @@
 return {
   -- Formatting
-  "stevearc/conform.nvim",
-  event = { "BufWritePre" },
-  cmd = { "ConformInfo" },
+  'stevearc/conform.nvim',
+  event = { 'BufWritePre' },
+  cmd = { 'ConformInfo' },
   keys = {
     {
       -- Customize or remove this keymap to your liking
-      "<leader>F",
+      '<leader>F',
       function()
-        require("conform").format({ async = true })
+        require('conform').format { async = true }
       end,
-      mode = "",
-      desc = "[F]ormat",
+      mode = '',
+      desc = '[F]ormat',
     },
   },
   -- This will provide type hinting with LuaLS
@@ -21,12 +21,14 @@ return {
     -- Define your formatters
     -- TODO: Maybe use mason-tool-installer to make the installation of the formatting tools declerative
     formatters_by_ft = {
-      vhdl = { 'hdl_emacs' },
+      -- vhdl = { 'hdl_emacs' },
+      vhdl = { 'vsg' },
       json = { 'jq' },
+      lua = { 'stylua' },
     },
     -- Set default options
     default_format_opts = {
-      lsp_format = "fallback",
+      lsp_format = 'fallback',
     },
     notify_on_error = false,
     -- Set up format-on-save
@@ -60,6 +62,17 @@ return {
     },
   },
   init = function()
+    local ensure_installed = {
+      'stylua',
+      'vhdl-style-guide',
+    }
+    local registry = require 'mason-registry'
+    for _, package_name in ipairs(ensure_installed) do
+      if registry.has_package(package_name) and not registry.is_installed(package_name) then
+        vim.print('Installing: ' .. package_name)
+        registry.get_package(package_name):install()
+      end
+    end
     -- If you want the formatexpr (gq operator), here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
