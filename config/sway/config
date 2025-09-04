@@ -28,30 +28,31 @@ mouse_warping container
 focus_on_window_activation focus
 
 ## Colours
-set $base00 #282828
-set $base01 #3c3836
-set $base02 #504945
-set $base03 #665c54
-set $base04 #d5c4a1
-set $base05 #ebdbb2
-set $base06 #fbf1c7
-set $base07 #ebdbb2
-set $base08 #cc241d
-set $base09 #d65d0e
-set $base0A #d79921
-set $base0B #98971a
-set $base0C #458588
-set $base0D #b16286
-set $base0E #689d6a
-set $base0F #a89984
+set $dark_gray #282828
+set $dark_orange #3c3836
+set $dark_orange2 #504945
+set $gray_orange #665c54
+set $light_orange #d5c4a1
+set $light_orange2 #ebdbb2
+set $light_orange3 #fbf1c7
+set $light_orange4 #ebdbb2
+set $light_orange5 #a89984
+set $red #cc241d
+set $orange #d65d0e
+set $yellow #d79921
+set $lime #98971a
+set $blue #458588
+set $rose #b16286
+set $green #689d6a
 
-## Window Colours
-client.focused          $base0D  $base00  $base06  $base08  $base09
-client.focused_inactive $base02  $base00  $base06  $base08  $base02
-client.unfocused        $base01  $base00  $base06  $base08  $base02
-client.urgent           $base07  $base00  $base08  $base0B  $base02
-client.placeholder      $base02  $base00  $base06  $base03  $base04
-client.background       $base00
+## Window Colours             border          bg          text            indicat.      child_border
+client.focused                $rose                   $dark_orange  $light_orange3  $red          $orange
+client.focused_inactive       $dark_orange2           $dark_gray    $light_orange3  $red          $dark_orange2
+client.unfocused              $dark_orange            $dark_gray    $light_orange3  $red          $dark_orange2
+client.urgent                 $light_orange4          $dark_gray    $red            $lime         $dark_orange2
+client.placeholder            $dark_orange2           $dark_gray    $light_orange3  $gray_orange  $light_orange
+client.focused_tab_title      $gray_orange           $dark_orange    $light_orange3  $gray_orange  $light_orange
+client.background             $dark_gray
 
 # Border
 default_border pixel 4
@@ -320,7 +321,7 @@ bar {
         statusline #ffffff
         background #323232
         inactive_workspace #32323200 #505050D0 #DDDDDD
-        focused_workspace $base0D #323232F1 #FFFFFF
+        focused_workspace $rose #323232F1 #FFFFFF
     }
 }
 
