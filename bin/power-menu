@@ -1,0 +1,13 @@
+#!/bin/bash
+
+power_profiles=$(powerprofilesctl list |
+                  awk '/^\s*[* ]\s*[a-zA-Z0-9\-]+:$/ { gsub(/^[*[:space:]]+|:$/,""); print }' |
+                  tac)
+
+current_profile=$(powerprofilesctl get)
+
+result=$(echo -e "$power_profiles" | rofi -dmenu -p 'Power profile' -select $current_profile)
+
+if [[ $result ]]; then
+    powerprofilesctl set $result
+fi
