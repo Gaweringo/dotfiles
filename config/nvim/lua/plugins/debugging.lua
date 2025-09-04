@@ -8,10 +8,10 @@ return {
       {
         'Joakker/lua-json5',
         build = function()
-          if vim.fn.has('win32') then
+          if vim.fn.has('win32') == 1 and vim.fn.has('wsl') == 0 then
             vim.system({ 'powershell', './install.ps1' }):wait()
           else
-            vim.system({ './install.sh' }):wait()
+            vim.system({ 'bash', './install.sh' }):wait()
           end
         end,
       }
