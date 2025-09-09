@@ -224,7 +224,6 @@ return {
             return (vim.diagnostic.config().virtual_lines ~= false)
           end,
           set = function(state)
-            vim.print(state)
             vim.diagnostic.config({ virtual_lines = state })
           end,
         }):map '<leader>tv'
@@ -236,10 +235,25 @@ return {
             return (vim.diagnostic.config().update_in_insert ~= false)
           end,
           set = function(state)
-            vim.print(state)
             vim.diagnostic.config({ update_in_insert = state })
           end,
         }):map '<leader>tV'
+
+        Snacks.toggle.new({
+          id = 'dropbar_toggle',
+          name = 'Dropbar',
+          get = function()
+            return (vim.o.winbar ~= "")
+          end,
+          set = function(state)
+            vim.print(state)
+            if state then
+              vim.o.winbar = [[%{%v:lua.dropbar()%}]]
+            else
+              vim.o.winbar = nil
+            end
+          end,
+        }):map '<leader>tD'
 
         vim.api.nvim_create_user_command('GitBrowse', function() Snacks.gitbrowse() end, {})
       end,

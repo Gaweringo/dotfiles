@@ -81,7 +81,7 @@
 - [ ] [nvim-various-textobjs]
 - [ ] [csvview.nvim]
 - [ ] [Codebook lsp] for language aware spell checking
-- [ ] [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim) for breadcrumbs (scope list shown at top like VS C*de)
+- [X] [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim) for breadcrumbs (scope list shown at top like VS C*de)
 - [ ] [nvim-lint](https://github.com/mfussenegger/nvim-lint) for linting
 
 ## C/C++
