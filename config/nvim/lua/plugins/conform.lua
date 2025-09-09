@@ -25,6 +25,8 @@ return {
       vhdl = { 'vsg' },
       json = { 'jq' },
       lua = { 'stylua' },
+      c = { 'clang-format' },
+      cpp = { 'clang-format' },
     },
     -- Set default options
     default_format_opts = {
