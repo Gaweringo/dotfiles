@@ -62,6 +62,10 @@ if status is-interactive
     fzf --fish | source
     {{/if}}
 
+    {{#if (is_executable "wl-copy")}}
+    alias pwdc='pwd | wl-copy --trim-newline'
+    {{/if}}
+
     function cdf --description 'Change to first directory that matches'
         set -l target_dir (fd -t directory -1 -H -I $argv)
         if test $target_dir
