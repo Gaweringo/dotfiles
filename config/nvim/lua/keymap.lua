@@ -151,4 +151,11 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>w', virt_line, { desc = '[w]hat are the diagnostics (virtual line)' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Macros / quick edits
+vim.keymap.set('n', '<leader>m<Cr>', [[<Cmd>%s/\r//<Cr>]], { desc = 'Remove trailing ^M', silent = true })
+vim.keymap.set('n', '<leader>m\\', [[<Cmd>s/\\/\\\\/<Cr><Cmd>nohlsearch<Cr>]], { desc = 'Escape slashes (Change \\ to \\\\)', silent = true })
+vim.keymap.set('n', '<leader>mo', 'o<Esc>', { desc = 'Insert line below', silent = true })
+vim.keymap.set('n', '<leader>mO', 'O<Esc>', { desc = 'Insert line above', silent = true })
+
+
 -- TODO: Autocommand to show virtual lines in insert mode and virtual text in normal mode

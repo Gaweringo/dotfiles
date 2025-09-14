@@ -10,7 +10,7 @@ return {
     })
   end,
   keys = {
-    { '<leader>m', '<Plug>SnipRun',         silent = true, mode = { 'v', 'n' }, desc = 'Sniprun' },
-    { '<leader>M', '<Plug>SnipRunOperator', silent = true, mode = { 'n' },      desc = 'SnipRunOperator' },
+    { '<leader>c', '<Plug>SnipRun',         silent = true, mode = { 'v', 'n' }, desc = 'Sniprun' },
+    { '<leader>C', '<Plug>SnipRunOperator', silent = true, mode = { 'n' },      desc = 'SnipRunOperator' },
   },
 }

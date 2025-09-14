@@ -28,6 +28,8 @@ return {
             { '<leader>w_',  hidden = true },
             { '<leader>x',   group = 'Trouble' },
             { '<leader>x_',  hidden = true },
+            { '<leader>m',   group = '[m]acros' },
+            { '<leader>m_',  hidden = true },
         }
     },
 }
