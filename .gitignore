@@ -1,4 +1,5 @@
 .dotter/cache*
 .dotter/local.toml
+Session.vim
 # !.dotter/include/
 # !.dotter/global.toml
