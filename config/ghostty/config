@@ -24,7 +24,7 @@ clipboard-read = allow
 command = fish
 
 # look
-theme = gruber-darker
+theme = Gruber Darker
 background-opacity = 0.85
 background = black
 # Actually only one of them is needed
