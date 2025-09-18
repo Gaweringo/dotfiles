@@ -66,6 +66,10 @@ if status is-interactive
     alias pwdc='pwd | wl-copy --trim-newline'
     {{/if}}
 
+    {{#if (is_executable "pacman")}}
+    alias pacman-search="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
+    {{/if}}
+
     function cdf --description 'Change to first directory that matches'
         set -l target_dir (fd -t directory -1 -H -I $argv)
         if test $target_dir
