@@ -18,6 +18,7 @@ return {
       'user.xmake',
       'user.cpp_build',
       'user.vunit',
+      'user.uv',
     },
     task_list = {
       max_height = { 20, 0.3 },
