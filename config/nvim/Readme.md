@@ -27,6 +27,9 @@
 - [X] Debugging
 - [X] Figure out why the `oil:` folder shows up in every (cwd) directory when using oil
 - [X] Recreate Bmessages (or :B command to do like `:B compiler` or `:B messages` and send it to a new buffer)
+- [X] improver overseer template for vunit
+- [ ] try out nvim-autopairs
+- [ ] switch to toggleterm (overseer integration)
 
 # General todos
 - [X] Check if bmessages.nvim is needed, if Snacks has a Snacks.notifier.show_history() or so

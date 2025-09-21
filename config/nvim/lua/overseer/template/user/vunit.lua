@@ -1,38 +1,105 @@
+local TAG = require('overseer.constants').TAG
+local overseer = require('overseer')
+
 local function findVunitDir()
-  local vunit_dir = vim.fs.find({ 'vunit' }, { limit = math.huge, type = 'directory', upward = true })[1]
-  if vunit_dir == nil then
-    vunit_dir = vim.fs.find({ 'vunit' }, { limit = math.huge, type = 'directory' })[1]
-  end
-  return vunit_dir
+    local vunit_dir = vim.fs.find({ 'vunit' }, { type = 'directory', upward = true })[1]
+    if vunit_dir == nil then
+        vunit_dir = vim.fs.find({ 'vunit' }, { type = 'directory' })[1]
+    end
+    return vunit_dir
+end
+
+local function vunit_get_testcases(use_uv, cwd)
+    local command = { 'python' }
+    if use_uv then
+        command = { 'uv', 'run', '-q' }
+    end
+    vim.list_extend(command, { 'run.py', '--list' })
+    local obj = vim.system(command, { cwd = cwd }):wait()
+    vim.print(obj)
+    local testcases = vim.split(obj.stdout, '\n', { plain = true, trimempty = true })
+    table.remove(testcases) -- remove last line (not a testcase)
+    return testcases
 end
 
 ---@type overseer.TemplateFileDefinition
-return {
-  name = 'vunit test',
-  builder = function()
-    -- https://github.com/stevearc/overseer.nvim/blob/master/doc/guides.md#custom-tasks
-    local vunit_path = findVunitDir() or '.'
-    return {
-      cmd = 'python',
-      args = { 'run.py', '-p 4' },
-      cwd = vunit_path,
-      -- https://github.com/stevearc/overseer.nvim/blob/master/doc/components.md#on_output_quickfix
-      components = {
-        'on_complete_notify',
-        'on_exit_set_status',
-        'default',
-      },
-    }
-  end,
-  condition = {
-    filetype = { 'vhdl', 'python' },
-    callback = function(search)
-      -- Make sure the 'run.py' file exists in the cwd
-      return findVunitDir() ~= nil
+local vunit_test_tmpl = {
+    name = 'vunit test',
+    tags = { TAG.TEST },
+    params = {
+        testcase = { optional = true, type = 'string', desc = 'The testcase to run' },
+        gui = { optional = true, type = 'boolean', desc = 'Run test case in gui', default = false },
+        cwd = { optional = true, type = 'string', desc = 'Directory of vunit run.py file', default = findVunitDir() },
+        parallel = { optional = true, type = 'integer', desc = 'How many testcases to run in parallel', default = #vim.uv.cpu_info() }
+    },
+    builder = function(params)
+        -- https://github.com/stevearc/overseer.nvim/blob/master/doc/guides.md#custom-tasks
+        local uses_uv = vim.fs.find('pyproject.toml', { dir = params.cwd }) ~= nil
 
-      -- print(vim.inspect(search))
-      -- return true
+        local cmd = 'python'
+        if uses_uv then
+            cmd = 'uv'
+        end
+
+        local args = { 'run.py', params.testcase, '-p', tostring(params.parallel) }
+        if uses_uv then
+            -- prepend run -q
+            table.insert(args, 1, '-q')
+            table.insert(args, 1, 'run')
+        end
+
+        if params.gui then
+            table.insert(args, '--gui')
+        end
+
+        return {
+            cmd = cmd,
+            args = args,
+            cwd = params.cwd,
+            -- https://github.com/stevearc/overseer.nvim/blob/master/doc/components.md#on_output_quickfix
+            components = {
+                'on_complete_notify',
+                'on_exit_set_status',
+                'default',
+            },
+        }
     end,
-  },
+    condition = {
+        filetype = { 'vhdl', 'python' },
+        callback = function(search)
+            -- Make sure the 'run.py' file exists in the cwd
+            return findVunitDir() ~= nil
+        end,
+    },
 }
--- vim: ts=2 sts=2 sw=2 et
+
+---@type overseer.TemplateFileProvider
+return {
+    generator = function(opts, cb)
+        local vunit_dir = findVunitDir() or '.'
+        local ret = { overseer.wrap_template(vunit_test_tmpl, { name = 'vunit test' }, { cwd = vunit_dir }) }
+        local uses_uv = vim.fs.find('pyproject.toml', { dir = vunit_dir }) ~= nil
+        local testcases = vunit_get_testcases(uses_uv, vunit_dir)
+
+        for _, testcase in ipairs(testcases) do
+            table.insert(
+                ret,
+                overseer.wrap_template(
+                    vunit_test_tmpl,
+                    { name = string.format('vunit test %s', testcase) },
+                    { testcase = testcase }
+                )
+            )
+        end
+
+        cb(ret)
+    end,
+    condition = {
+        filetype = { 'vhdl', 'python' },
+        callback = function(search)
+            -- Make sure the 'run.py' file exists in the cwd
+            return findVunitDir() ~= nil
+        end,
+    },
+    --  TODO: Set up caching correctly
+}
