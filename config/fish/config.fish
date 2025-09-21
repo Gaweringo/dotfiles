@@ -1,3 +1,6 @@
+{{#if (is_executable "zvm")}}
+fish_add_path ~/.zvm/bin
+{{/if}}
 if status is-interactive
     # Commands to run in interactive sessions can go here
 
