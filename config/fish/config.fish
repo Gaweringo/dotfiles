@@ -19,6 +19,8 @@ if status is-interactive
     alias x=exa
     alias xt='eza -lah --icons=always --tree --level'
     alias xl='eza -lah --icons=always'
+    alias lx='xl'
+    alias tx='xt'
     {{/if}}
     {{#if (is_executable "lazygit")}}
     alias lg=lazygit
