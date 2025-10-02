@@ -47,8 +47,8 @@ return {
 
     completion = {
       documentation = { auto_show = true },
-      menu = { auto_show = false, max_height = 20 },
-      list = { selection = { preselect = false } },
+      menu = { auto_show = true, max_height = 20 },
+      list = { selection = { preselect = true } },
     },
 
     -- Preselect false, to not have tab skip the first option
