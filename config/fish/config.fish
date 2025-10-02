@@ -72,6 +72,9 @@ if status is-interactive
     {{#if (is_executable "pacman")}}
     alias pacman-search="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
     {{/if}}
+    {{#if (is_executable "paru")}}
+    alias paru-search="paru -Slq | fzf --preview 'paru -Si {}' --layout=reverse"
+    {{/if}}
 
     function cdf --description 'Change to first directory that matches'
         set -l target_dir (fd -t directory -1 -H -I "$argv")
