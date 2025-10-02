@@ -60,8 +60,8 @@ Function cdf ($search_term) {
   }
 }
 # cd to first subfolder with this name interactively
-Function cdi {
-  $target_dir = fzf --walker dir
+Function cdi ($search_term) {
+  $target_dir = fzf --walker dir,hidden --query="$search_term" --select-1
   if (-not [String]::IsNullOrEmpty($target_dir)) {
     cd $target_dir
   }

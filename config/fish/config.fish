@@ -74,7 +74,7 @@ if status is-interactive
     {{/if}}
 
     function cdf --description 'Change to first directory that matches'
-        set -l target_dir (fd -t directory -1 -H -I $argv)
+        set -l target_dir (fd -t directory -1 -H -I "$argv")
         if test $target_dir
             cd $target_dir
         else
@@ -84,7 +84,7 @@ if status is-interactive
 
 
     function cdi --description 'Change to sub dir interactively'
-        set -l target_dir (fzf --walker dir,hidden)
+        set -l target_dir (fzf --walker dir,hidden --query="$argv" --select-1)
         if test $target_dir
             cd $target_dir
         end
