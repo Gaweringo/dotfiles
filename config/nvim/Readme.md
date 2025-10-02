@@ -29,7 +29,10 @@
 - [X] Recreate Bmessages (or :B command to do like `:B compiler` or `:B messages` and send it to a new buffer)
 - [X] improver overseer template for vunit
 - [ ] try out nvim-autopairs
-- [ ] switch to toggleterm (overseer integration)
+- [X] switch to toggleterm
+    - [ ] Overseer integration
+    - [ ] Add commands for send selection to toggle term (so that ipyhton can be run in toggle term and then you can
+    send the selected python snippet to it)
 
 # General todos
 - [X] Check if bmessages.nvim is needed, if Snacks has a Snacks.notifier.show_history() or so

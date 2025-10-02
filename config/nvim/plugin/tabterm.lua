@@ -3,7 +3,7 @@ local M = {}
 local function openTabterm()
     vim.cmd.tabnew()
     vim.cmd.terminal()
-    vim.cmd.startinsert()
+    vim.cmd.startinsert({ bang = true })
 end
 
 -- TODO: Use TabEnter autocommand to track last tab page and make :Tabterm behave
@@ -17,12 +17,10 @@ vim.api.nvim_create_user_command('Tabterm', function()
 end, {})
 
 
-vim.keymap.set({'n', 'v'}, '<A-Z>', function() openTabterm() end, { desc = 'Tabterm' })
-
-vim.api.nvim_create_user_command('Term', function()
+vim.api.nvim_create_user_command('VTerm', function()
     vim.cmd.vnew()
     vim.cmd.terminal()
-    vim.cmd.startinsert()
+    vim.cmd.startinsert({ bang = true })
 end, { desc = 'Vertical split terminal' })
 
 -- TODO: Create window pick and place plugin, so that you can press a keybind to pick up a window and press it again on

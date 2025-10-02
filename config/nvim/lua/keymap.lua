@@ -23,6 +23,7 @@ vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<C-k>', function() vim.cmd.wincmd 'k' end, { desc = 'Move out of terminal' })
 
 -- Clear quickfix list
 vim.keymap.set('n', '<leader>xc', '<cmd>call setqflist([])<CR>', { desc = '[c]lear quickfix list' })

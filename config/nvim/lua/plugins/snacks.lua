@@ -123,8 +123,6 @@ return {
     -- TODO: Look into how to set up scope to be able to go to start/end of highlighted scope and use them as textobjects
     -- https://github.com/folke/snacks.nvim/discussions/1619
     scratch = { enabled = true }, -- Scratch buffer
-    -- Toggleable and persistent terminal. Setting term_normal to false, as we already remap <Esc><Esc> to do that
-    terminal = { enabled = true, win = { keys = { term_normal = false } } },
     -- Zen mode
     zen = { enabled = true, toggles = { dim = false }, win = { style = "zen", --[[ backdrop = { transparent = false, bg = "#101010" }, ]] width = 150 } },
   },
@@ -397,12 +395,6 @@ return {
     -- Scratch
     { "<leader>,",  function() Snacks.scratch() end,                                           desc = "Create scratch buffer" },
     { "<leader>s,", function() Snacks.scratch.select() end,                                    desc = "Scratch buffers" },
-
-    -- Terminal
-    { "<A-t>",      function() Snacks.terminal.toggle() end,                                   desc = "Terminal",             mode = { 'n', 't', 'v' } },
-    { "<A-z>",      function() Snacks.terminal.toggle() end,                                   desc = "Terminal",             mode = { 'n', 't', 'v' } },
-    { "<leader>tt", function() Snacks.terminal.toggle() end,                                   desc = "Terminal" },
-    -- TODO: Picker for terminals using Snacks.terminal.list() and <leader>s/ or something
 
     -- Zen
     { "<leader>tz", function() Snacks.zen() end,                                               desc = "[z]en" },
