@@ -258,7 +258,7 @@ input type:touchpad {
     bindsym $mod+a focus parent
 
     # Move focus to the child container
-    bindsym $mod+z focus child
+    bindsym $mod+shift+a focus child
 #
 # Scratchpad:
 #
