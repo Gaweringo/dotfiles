@@ -32,14 +32,16 @@ vim.keymap.set('n', '<leader>xc', '<cmd>call setqflist([])<CR>', { desc = '[c]le
 vim.keymap.set('n', '<leader><CR>', '<C-^>', { desc = 'alternate file' })
 
 -- Show man page
-vim.keymap.set('n', 'gM', "<Cmd>vert Man<Cr>", { desc = 'Hover man' })
+vim.keymap.set('n', 'gM', '<Cmd>vert Man<Cr>', { desc = 'Hover man' })
 
 -- Search and replace
 vim.keymap.set('n', 'c*', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left> <Bs>]], { desc = 'Replace word' })
 
 --- from mini.basics ---
 local map = function(mode, lhs, rhs, opts)
-  if lhs == '' then return end
+  if lhs == '' then
+    return
+  end
   opts = vim.tbl_deep_extend('force', { silent = true }, opts or {})
   vim.keymap.set(mode, lhs, rhs, opts)
 end
@@ -59,8 +61,7 @@ map('n', 'gP', '"+P', { desc = 'Paste from system clipboard' })
 map('x', 'gp', '"+P', { desc = 'Paste from system clipboard' })
 
 -- Reselect latest changed, put, or yanked text
-map('n', 'gV', '"`[" . strpart(getregtype(), 0, 1) . "`]"',
-  { expr = true, replace_keycodes = false, desc = 'Visually select changed text' })
+map('n', 'gV', '"`[" . strpart(getregtype(), 0, 1) . "`]"', { expr = true, replace_keycodes = false, desc = 'Visually select changed text' })
 
 -- Search inside visually highlighted text. Use `silent = false` for it to
 -- make effect immediately.
@@ -71,14 +72,10 @@ map('n', 'gO', "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
 map('n', 'go', "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
 
 -- Window resize (respecting `v:count`)
-map('n', '<C-Left>', '"<Cmd>vertical resize -" . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = 'Decrease window width' })
-map('n', '<C-Down>', '"<Cmd>resize -"          . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = 'Decrease window height' })
-map('n', '<C-Up>', '"<Cmd>resize +"          . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = 'Increase window height' })
-map('n', '<C-Right>', '"<Cmd>vertical resize +" . v:count1 . "<CR>"',
-  { expr = true, replace_keycodes = false, desc = 'Increase window width' })
+map('n', '<C-Left>', '"<Cmd>vertical resize -" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Decrease window width' })
+map('n', '<C-Down>', '"<Cmd>resize -"          . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Decrease window height' })
+map('n', '<C-Up>', '"<Cmd>resize +"          . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window height' })
+map('n', '<C-Right>', '"<Cmd>vertical resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window width' })
 
 ------ movement ------
 
@@ -99,26 +96,25 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-
 ----- diagnostic -------
 -- Show virtual lines for current line (and behave like float -> close when moving away)
 local prev_setting = vim.diagnostic.config()
 local virt_line = function()
-  local already_jumped = pcall(vim.api.nvim_del_augroup_by_name, "line-diagnostics") -- prevent autocmd for opens
+  local already_jumped = pcall(vim.api.nvim_del_augroup_by_name, 'line-diagnostics') -- prevent autocmd for opens
   if not already_jumped then
     prev_setting = vim.diagnostic.config()
   end
-  vim.diagnostic.config({ virtual_lines = { current_line = true }, virtual_text = false })
+  vim.diagnostic.config { virtual_lines = { current_line = true }, virtual_text = false }
 
   vim.defer_fn(function() -- deferred to not trigger by jump itself
     vim.api.nvim_create_autocmd('CursorMoved', {
-      desc     = "User(once): Reset diagnostics virtual lines",
-      group    = vim.api.nvim_create_augroup('line-diagnostics', {}),
-      once     = true,
+      desc = 'User(once): Reset diagnostics virtual lines',
+      group = vim.api.nvim_create_augroup('line-diagnostics', {}),
+      once = true,
       callback = function()
         vim.diagnostic.config(prev_setting)
         return true
-      end
+      end,
     })
   end, 1)
 end
@@ -153,11 +149,22 @@ vim.keymap.set('n', '<leader>w', virt_line, { desc = '[w]hat are the diagnostics
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Macros / quick edits
-vim.keymap.set('n', '<leader>m<Cr>', [[<Cmd>%s/\r//<Cr>]], { desc = 'Remove trailing ^M', silent = true })
+vim.keymap.set('n', '<leader>m<Cr>', [[<Cmd>%s/\r//|norm!``<Cr>]], { desc = 'Remove trailing ^M', silent = true })
 vim.keymap.set('n', '<leader>m\\', [[<Cmd>s/\\/\\\\/<Cr><Cmd>nohlsearch<Cr>]], { desc = 'Escape slashes (Change \\ to \\\\)', silent = true })
 vim.keymap.set('n', '<leader>mo', 'o<Esc>', { desc = 'Insert line below', silent = true })
 vim.keymap.set('n', '<leader>mO', 'O<Esc>', { desc = 'Insert line above', silent = true })
+vim.keymap.set('n', '<leader>md', function()
+  local diffing = vim.o.diff
+  if diffing then
+    vim.cmd 'windo diffoff'
+  else
+    vim.cmd 'windo diffthis'
+  end
+end, { desc = 'Diff open windows', silent = true })
 
+-- Count occurences of pattern in selection or file
+vim.keymap.set('n', '<leader>mc', [[:%s///gen|nohlsearch<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]], { desc = 'Count occurences' })
+vim.keymap.set('v', '<leader>mc', [[:s///gen|nohlsearch<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]], { desc = 'Count occurences' })
 
 -- TODO: Autocommand to show virtual lines in insert mode and virtual text in normal mode
 
@@ -170,3 +177,7 @@ if vim.g.neovide then
   vim.keymap.set({ 'n', 'v', 't', 'x', 'i' }, '<C-+>', function () vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1 end, { desc = 'Neovide zoom out', silent = true })
   vim.keymap.set({ 'n', 'v', 't', 'x', 'i' }, '<C-->', function () vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1 end, { desc = 'Neovide zoom out', silent = true })
 end
+
+-- Oh no! The mouse ~~~~
+vim.keymap.set({ 'n', 'v', 's', 'i' }, '<X1Mouse>', '<C-i>', { desc = 'Forward' })
+vim.keymap.set({ 'n', 'v', 's', 'i' }, '<X2Mouse>', '<C-o>', { desc = 'Backward' })
