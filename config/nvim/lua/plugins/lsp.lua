@@ -39,6 +39,11 @@ return {
 		'mason-org/mason-lspconfig.nvim',
 		event = { 'BufReadPre', 'BufNewFile' },
 		-- Some commands are actually from nvim-lspconfig, but it's a dependency so will be loaded by mason-lspconfig
+		init = function ()
+			vim.api.nvim_create_user_command('LspLogClear', function ()
+				vim.fs.rm(vim.lsp.get_log_path())
+			end, { desc = "Clear LSP log file" })
+		end,
 		cmd = { 'LspInfo', 'LspStart', 'LspInstall', 'LspUninstall' },
 		dependencies = { { 'mason-org/mason.nvim', opts = {}, cmd = 'Mason' }, 'neovim/nvim-lspconfig' },
 		opts = {
