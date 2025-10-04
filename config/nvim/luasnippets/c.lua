@@ -1,23 +1,4 @@
 return {
-  -- ls.parser.parse_snippet('#ifndefguard', '#ifndef $TM_FILENAME\n#define $TM_FILENAME\n$0\n#endif'),
-  s(
-    '#ifndefguard',
-    fmta(
-      [[
-#ifndef <file_name>
-#define <file_name_same>
-<finish>
-#endif
-]],
-      {
-        file_name = d(1, function()
-          return sn(nil, t(string.upper(vim.fn.expand '%:t:r' .. '_' .. vim.fn.expand '%:t:e')))
-        end),
-        file_name_same = rep(1),
-        finish = i(0),
-      }
-    )
-  ),
   s(
     'header',
     fmta(
@@ -46,8 +27,27 @@ return {
       }
     )
   ),
+}, {
   s(
-    '//section',
+    '#indg',
+    fmta(
+      [[
+#ifndef <file_name>
+#define <file_name_same>
+<finish>
+#endif
+]],
+      {
+        file_name = d(1, function()
+          return sn(nil, t(string.upper(vim.fn.expand '%:t:r' .. '_' .. vim.fn.expand '%:t:e')))
+        end),
+        file_name_same = rep(1),
+        finish = i(0),
+      }
+    )
+  ),
+  s(
+    '//===',
     fmta(
       [[
     // ========== <section> ==========<finish>
