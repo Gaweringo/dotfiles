@@ -23,7 +23,7 @@ return {
   end,
   cmd = { 'DiffviewOpen', 'DiffviewFileHistory', },
   keys = {
-    { '<leader>gd%', '<cmd>DiffviewFileHistory --follow %<cr>',                                        desc = '[d]iffview current file' },
+    { '<leader>gd%', '<cmd>DiffviewFileHistory --follow %<cr>',                                        desc = '[d]iffview current file history' },
     { '<leader>gdh', '<cmd>DiffviewFileHistory<cr>',                                                   desc = '[d]iffview [h]istory' },
     { '<leader>gdl', "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>",                                desc = '[d]iffview [l]ine history', mode = { 'v' } },
     { '<leader>gdl', "<Cmd>.DiffviewFileHistory --follow<CR>",                                         desc = '[d]iffview [l]ine history', mode = { 'n' } },
