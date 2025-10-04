@@ -31,6 +31,13 @@ vim.lsp.config('clangd', {
 	}
 })
 
+-- Typst
+vim.lsp.config('tinymist', {
+	settings = {
+		exportPdf = "onSave",
+	},
+})
+
 -- All the setup regarding lsps
 return {
 	{
