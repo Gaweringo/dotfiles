@@ -1,5 +1,8 @@
 # history setup
+try {
+# Does not work when using as neovim shell
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+} catch {}
 # set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
@@ -44,12 +47,25 @@ Set-Alias -Name gmagick -Value gm.exe
 {{#if (is_executable 'eza')}}
 # eza alias
 Set-Alias -Name x -Value eza
-Function lx {
-  eza -lah
+Function xl($arg) {
+  eza -lah $arg
 }
+Function xt($arg) {
+  eza -lah --tree $arg
+}
+Function xtl($arg) {
+  eza -lah --tree --level $arg
+}
+Set-Alias -Name lx -Value xl
+Set-Alias -Name tx -Value xt
 {{/if}}
 
+# Copy current directory
+Function pwdc { (pwd).path | clip }
+
 # Better cds
+Function .. { cd .. }
+
 # cd to first subfolder with this name
 Function cdf ($search_term) {
   $target_dir = fd $search_term -1 -t directory -H -I
@@ -106,7 +122,7 @@ function Setup-VS {
   }
   $installationPath = vswhere.exe -prerelease -latest -property installationPath
   if ($installationPath -and (test-path "$installationPath\VC\Auxiliary\Build\vcvarsall.bat")) {
-    & "${env:COMSPEC}" /s /c "`"$installationPath\VC\Auxiliary\Build\vcvarsall.bat`" $Platform && set > %temp%\vcvars.txt" 
+    & "${env:COMSPEC}" /s /c "`"$installationPath\VC\Auxiliary\Build\vcvarsall.bat`" $Platform && set > %temp%\vcvars.txt"
     Get-Content "$env:temp\vcvars.txt" | foreach-object {
       $name, $value = $_ -split '=', 2
       set-content env:\"$name" $value
@@ -139,7 +155,7 @@ if (Get-Module -ListAvailable -Name PSFzf) {
 # Override PSReadLine's history search
   Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' `
                   -PSReadlineChordReverseHistory 'Ctrl+r'
-} 
+}
 else {
     Write-Host "PSFzf not installed: Install-Module -Name PSFzf"
 }
