@@ -5,4 +5,5 @@ After=graphical-session.target
 [Service]
 Type=oneshot
 ExecStart=%h/.local/bin/battery-monitor
+KillMode=process
 Environment=DISPLAY=:0

@@ -17,12 +17,12 @@ get_battery_state() {
 
 send_notification() {
   setsid swaynag -m "Battery Low: Time to recharge! (battery is at ${1}%)" -t warning
-  notify-send -u critical "Battery Low" "Time to recharge! (battery is at ${1}%)" -i battery-caution
+  setsid notify-send -u critical "Battery Low" "Time to recharge! (battery is at ${1}%)" -i battery-caution
 }
 
 send_notification_critical() {
   setsid swaynag -m "Battery Critical: It's really time to recharge! (battery is at ${1}%)" -t error
-  notify-send -u critical "Battery Low" "Time to recharge! (battery is at ${1}%)" -i battery-caution
+  setsid notify-send -u critical "Battery Low" "Time to recharge! (battery is at ${1}%)" -i battery-caution
 }
 
 BATTERY_LEVEL=$(get_battery_percentage)
