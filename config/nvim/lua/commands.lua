@@ -60,3 +60,8 @@ end, {
     end,
     desc = 'Open command output in buffer',
 })
+
+-- Copy current working dir to system clipboard
+vim.api.nvim_create_user_command('Pwdc', function()
+  vim.cmd [[let @+ = trim(execute('pwd'))]]
+end, { desc = 'Copy pwd to system clipboard' })
