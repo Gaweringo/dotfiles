@@ -21,6 +21,7 @@ return {
       local ensure_installed = {
         'cpptools',
         'cortex-debug',
+        'codelldb',
       }
       local registry = require('mason-registry')
       for _, package_name in ipairs(ensure_installed) do
@@ -96,9 +97,18 @@ return {
         -- }
       }
 
+      -- codelldb
+      dap.adapters.codelldb = {
+        type = "executable",
+        command = "codelldb",
+
+        -- On windows you may have to uncomment this:
+        -- detached = false,
+      }
+
       dap.configurations.cpp = {
         {
-          name = 'Launch filee',
+          name = 'Launch file (cppdbg)',
           type = 'cppdbg',
           request = 'launch',
           program = '${command:pickFile}',
@@ -113,7 +123,7 @@ return {
           },
         },
         {
-          name = 'Attach to gdbserver :1234',
+          name = 'Attach to gdbserver :1234 (cppdbg)',
           type = 'cppdbg',
           request = 'launch',
           MIMode = 'gdb',
@@ -128,6 +138,24 @@ return {
               ignoreFailures = false
             },
           },
+        },
+        {
+          name = 'Launch (codelldb)',
+          type = 'codelldb',
+          request = 'launch',
+          program = '${command:pickFile}',
+          cwd = '${workspaceFolder}',
+          stopOnEntry = false,
+          args = {},
+        },
+        {
+          -- If you get an "Operation not permitted" error using this, try disabling YAMA:
+          --  echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+          name = "Attach to process (codelldb)",
+          type = 'codelldb',
+          request = 'attach',
+          pid = require('dap.utils').pick_process,
+          args = {},
         },
       }
 
