@@ -15,7 +15,7 @@
     - [ ] git-conflict maybe
 - [X] blink.cmp `slect_next` skips the first item
 - [X] blink.cmp make cmdline tab not skip over first item
-- [ ] Figure out how to disable/toggle snacks.image
+- [-] Figure out how to disable/toggle snacks.image
     - [x] Or / and disable math support either in render-markdown or snacks.image
 - [X] LuaSnip snippets
 - [X] Overseer / code runner (sniprun?) / compiler
@@ -30,18 +30,19 @@
 - [X] improver overseer template for vunit
 - [ ] try out nvim-autopairs
 - [X] switch to toggleterm
-    - [ ] Overseer integration
+    - [X] Overseer integration (nope, not worth it)
     - [ ] Add commands for send selection to toggle term (so that ipyhton can be run in toggle term and then you can
     send the selected python snippet to it)
+- [ ] Write 'errorformat' for nvc output. Or a overseer parser for it
 
 # General todos
 - [X] Check if bmessages.nvim is needed, if Snacks has a Snacks.notifier.show_history() or so
     (note bmessages shows more messages than snacks notifier. Check if that's needed)
     Bmessages is nice
-    - [ ] Save bmessages from the linux install and recreate it as a plugin in plugin/
+    - [X] Save bmessages from the linux install and recreate it as a plugin in plugin/ (:B command)
 - [X] Look into `vim.snippet` [blink.cmp section about snipptes](https://cmp.saghen.dev/configuration/snippets)
 - [X] Look into how to close some windows automatically if they are the last ones. e.g. DapView and DapWidgets, .. (edgy.nvim can do this)
-- [ ] Tab term (terminal in new tab) and set up some chansend() actions for it
+- [X] Tab term (terminal in new tab) ~and set up some chansend() actions for it~
 
 # Enhancements for already installed plugins
 - [ ] [Snacks picker for snippets](https://github.com/folke/snacks.nvim/discussions/1804)
