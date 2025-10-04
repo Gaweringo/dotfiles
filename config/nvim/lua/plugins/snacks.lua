@@ -318,7 +318,7 @@ return {
       end,
       desc = "Grep"
     },
-    { "<leader>sw", function() Snacks.picker.grep_word() end,                         desc = "Visual selection or word", mode = { "n", "x" } },
+    { "<leader>sw", function() Snacks.picker.grep_word({hidden = true, ignored = true}) end,                         desc = "Visual selection or word", mode = { "n", "x" } },
 
     -- search
     { '<leader>s"', function() Snacks.picker.registers() end,                         desc = "Registers" },
