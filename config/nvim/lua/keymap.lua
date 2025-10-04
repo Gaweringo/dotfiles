@@ -160,3 +160,13 @@ vim.keymap.set('n', '<leader>mO', 'O<Esc>', { desc = 'Insert line above', silent
 
 
 -- TODO: Autocommand to show virtual lines in insert mode and virtual text in normal mode
+
+--------- Neovide ------------
+
+if vim.g.neovide then
+  -- Standard zooming keybinds for neovide
+  local starting_scale_factor = vim.g.neovide_scale_factor
+  vim.keymap.set({ 'n', 'v', 't', 'x', 'i' }, '<C-0>', function () vim.g.neovide_scale_factor = starting_scale_factor end, { desc = 'Neovide reset zoom', silent = true })
+  vim.keymap.set({ 'n', 'v', 't', 'x', 'i' }, '<C-+>', function () vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1 end, { desc = 'Neovide zoom out', silent = true })
+  vim.keymap.set({ 'n', 'v', 't', 'x', 'i' }, '<C-->', function () vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1 end, { desc = 'Neovide zoom out', silent = true })
+end
