@@ -1,8 +1,8 @@
 return {
-    s(
-        'header',
-        fmta(
-            [[
+  s(
+    'header',
+    fmta(
+      [[
 -------------------------------------------------------------------------------
 -- Title      : <title>
 -- Project    : <project>
@@ -15,24 +15,24 @@ return {
 -------------------------------------------------------------------------------
 <finish>
 ]],
-            {
-                title = d(4, function()
-                    return sn(nil, t(vim.fn.expand('%:t:r')))
-                end),
-                project = i(3),
-                date = d(2, function(_, _)
-                    local birthdate = os.date('%Y-%m-%d', vim.loop.fs_stat(vim.fn.expand('%')).birthtime.sec)
-                    return sn(nil, t(birthdate))
-                end),
-                abstract = i(1),
-                finish = i(0),
-            }
-        )
-    ),
-    s(
-        'vunit',
-        fmt(
-            [[
+      {
+        title = d(4, function()
+          return sn(nil, t(vim.fn.expand '%:t:r'))
+        end),
+        project = i(3),
+        date = d(2, function(_, _)
+          local birthdate = os.date('%Y-%m-%d', vim.loop.fs_stat(vim.fn.expand '%').birthtime.sec)
+          return sn(nil, t(birthdate))
+        end),
+        abstract = i(1),
+        finish = i(0),
+      }
+    )
+  ),
+  s(
+    'vunit',
+    fmt(
+      [[
 library vunit_lib;
 context vunit_lib.vunit_context;
 
@@ -67,23 +67,23 @@ begin
 
 end architecture;
     ]],
-            {
-                tb_name = d(1, function(args)
-                    return sn(nil, i(1, string.match(vim.fn.expand('%:t:r'), '^[^-]+')))
-                end),
-                test_case1 = i(2, 'test_case1'),
-                test_case2 = i(3, 'test_case2'),
-                finish = i(0),
-            },
-            {
-                repeat_duplicates = true,
-            }
-        )
-    ),
-    s(
-        'fsmd',
-        fmt(
-            [[
+      {
+        tb_name = d(1, function(args)
+          return sn(nil, i(1, string.match(vim.fn.expand '%:t:r', '^[^-]+')))
+        end),
+        test_case1 = i(2, 'test_case1'),
+        test_case2 = i(3, 'test_case2'),
+        finish = i(0),
+      },
+      {
+        repeat_duplicates = true,
+      }
+    )
+  ),
+  s(
+    'fsmd',
+    fmt(
+      [[
 architecture Rtl of {entity_name} is
 
    type aRegSet is record
@@ -109,30 +109,59 @@ begin
 
 end architecture Rtl;
   ]],
-            {
-                entity_name = i(1),
-                clk_name = i(2, 'iClk'),
-                reset_name = i(3, 'inRstAsync'),
-                record_data = i(4),
-                finish = i(0),
-            },
-            {
-                repeat_duplicates = true,
-            }
-        )
-    ),
+      {
+        entity_name = i(1),
+        clk_name = i(2, 'iClk'),
+        reset_name = i(3, 'inRstAsync'),
+        record_data = i(4),
+        finish = i(0),
+      },
+      {
+        repeat_duplicates = true,
+      }
+    )
+  ),
+  s(
+    'ram',
+    fmt(
+      [[
+RAM : process({clk_name})
+begin
+  if rising_edge({clk_name}) then
+    if {write_name} = '1' then
+      {ram_name}(to_integer(unsigned({address_name}))) <= {data_name};
+    end if;
+    q <= {ram_name}({out_addr});
+  end if;
+end process RAM;
+{finish}
+    ]],
+      {
+        clk_name = i(1, 'iClk'),
+        write_name = i(2, 'iWrite'),
+        ram_name = i(3, 'Ram'),
+        address_name = i(4, 'iAddress'),
+        data_name = i(5, 'iWriteData'),
+        out_addr = i(6, 'iAddress'),
+        finish = i(0),
+      },
+      {
+        repeat_duplicates = true,
+      }
+    )
+  ),
 }, {
-    s(
-        '----',
-        fmta(
-            [[
+  s(
+    '----',
+    fmta(
+      [[
     -- ----------------------------------------
     -- <finish>
     -- ----------------------------------------
     ]],
-            {
-                finish = i(0),
-            }
-        )
-    ),
+      {
+        finish = i(0),
+      }
+    )
+  ),
 }
