@@ -27,6 +27,7 @@ return {
       lua = { 'stylua' },
       c = { 'clang-format' },
       cpp = { 'clang-format' },
+      python = { 'YAPF' },
     },
     -- Set default options
     default_format_opts = {
@@ -67,6 +68,8 @@ return {
     local ensure_installed = {
       'stylua',
       'vhdl-style-guide',
+      'clang-format',
+      'yapf',
     }
     local registry = require 'mason-registry'
     for _, package_name in ipairs(ensure_installed) do
