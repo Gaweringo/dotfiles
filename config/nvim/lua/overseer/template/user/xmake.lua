@@ -38,7 +38,7 @@ local tmpl_build = {
   builder = function(params)
     -- https://github.com/stevearc/overseer.nvim/blob/master/doc/guides.md#custom-tasks
     local args = {}
-    vim.list_extend(args, params.args)
+    vim.list_extend(args, params.args or {})
     return {
       cmd = 'xmake',
       args = args,
