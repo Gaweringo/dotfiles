@@ -35,7 +35,7 @@ return {
       vim.g.mkdp_browser = 'chromium'
       vim.cmd [[
         function OpenMarkdownPreview (url)
-          execute "silent ! chromium --app=" . a:url . " &"
+          execute "silent !chromium --app=" . a:url . " &"
         endfunction
         let g:mkdp_browserfunc = 'OpenMarkdownPreview'
       ]]
