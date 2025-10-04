@@ -6,6 +6,7 @@ return {
     { '<leader>oa', '<cmd>OverseerQuickAction<cr>',                         desc = 'Quick [a]ction' },
     { '<leader>or', '<cmd>OverseerQuickAction restart<cr>',                 desc = '[r]estart' },
     { '<leader>ow', '<cmd>OverseerQuickAction watch<cr>',                   desc = '[w]atch' },
+    { '<leader>oe', '<cmd>OverseerQuickAction edit<cr>',                    desc = '[e]dit' },
     { '<leader>oq', '<cmd>OverseerQuickAction set quickfix diagnostic<cr>', desc = 'set [q]uickfix diagnostics' },
     { '<leader>oQ', '<cmd>OverseerQuickAction open output in quickfix<cr>', desc = 'open output in [Q]uickfix' },
     { '<leader>ol', '<cmd>OverseerLoadBundle<cr>',                          desc = '[l]oad bundle' },
