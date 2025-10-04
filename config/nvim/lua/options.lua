@@ -29,7 +29,6 @@ opt.virtualedit = "block"
 
 -- Saving undo history to file, so it persits between neovim sessions
 opt.undofile = true
-opt.swapfile = false -- don't create swapfiles
 opt.autoread = true  -- automatically reload files that changed outside of nvim
 
 -------- indentation ---------
