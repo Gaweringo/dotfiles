@@ -120,3 +120,21 @@ if vim.g.neovide then
   vim.g.neovide_opacity = 0.95
   vim.g.neovide_normal_opacity = 0.9
 end
+
+if vim.fn.has('win32') == 1 and vim.fn.has('wsl') == 0 then
+  -- Using powershell as the shell
+  local powershell_options = {
+    shell = vim.fn.executable 'pwsh' == 1 and 'pwsh' or 'powershell', -- Using pwsh if available
+    -- shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;',
+    shellcmdflag = "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering='plaintext';Remove-Alias -Force -ErrorAction SilentlyContinue tee;",
+    shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode',
+    shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode',
+    shellquote = '',
+    shellxquote = '',
+  }
+
+  for option, value in pairs(powershell_options) do
+    vim.opt[option] = value
+  end
+end
+
