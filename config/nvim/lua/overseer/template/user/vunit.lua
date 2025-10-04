@@ -17,7 +17,7 @@ local function vunit_get_testcases(use_uv, cwd)
     vim.list_extend(command, { 'run.py', '--list' })
     local obj = vim.system(command, { cwd = cwd }):wait()
     vim.print(obj)
-    local testcases = vim.split(obj.stdout, '\n', { plain = true, trimempty = true })
+    local testcases = vim.split(obj.stdout, '\r?\n', { trimempty = true })
     table.remove(testcases) -- remove last line (not a testcase)
     return testcases
 end
@@ -39,6 +39,10 @@ local vunit_test_tmpl = {
         local cmd = 'python'
         if uses_uv then
             cmd = 'uv'
+        end
+
+        if params.testcase ~= nil then
+            params.testcase =  "'" .. params.testcase .. "'"
         end
 
         local args = { 'run.py', params.testcase, '-p', tostring(params.parallel) }
@@ -86,7 +90,7 @@ return {
                 ret,
                 overseer.wrap_template(
                     vunit_test_tmpl,
-                    { name = string.format('vunit test %s', testcase) },
+                    { name = string.format('vunit test \'%s\'', testcase) },
                     { testcase = testcase }
                 )
             )
