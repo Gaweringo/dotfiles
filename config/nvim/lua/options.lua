@@ -90,6 +90,9 @@ vim.diagnostic.config({
   virtual_text = true,
   virtual_lines = false,
   update_in_insert = true,
+  float = {
+    border = 'rounded',
+  },
 })
 
 ------ splits and windows -------

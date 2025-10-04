@@ -1,5 +1,6 @@
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
+		vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, { desc = "LSP Hover", buffer = true })
 		vim.keymap.set('n', '<leader>la', function() vim.lsp.buf.code_action() end, { desc = "LSP code action" })
 		vim.keymap.set('n', '<leader>r', function() vim.lsp.buf.rename() end, { desc = "LSP Rename" })
 		-- Client / Language specific

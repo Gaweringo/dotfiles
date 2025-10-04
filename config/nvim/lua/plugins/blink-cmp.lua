@@ -46,7 +46,7 @@ return {
     },
 
     completion = {
-      documentation = { auto_show = true },
+      documentation = { auto_show = true, window = { border = 'rounded' } },
       menu = { auto_show = true, max_height = 20 },
       list = { selection = { preselect = true } },
     },
@@ -54,7 +54,7 @@ return {
     -- Preselect false, to not have tab skip the first option
     cmdline = { completion = { list = { selection = { preselect = false } } } },
 
-    signature = { enabled = true },
+    signature = { enabled = true, window = { border  = 'rounded' } },
 
     snippets = { preset = 'luasnip' },
 
