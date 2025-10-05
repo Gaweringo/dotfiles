@@ -1,5 +1,6 @@
 -- Some examples and stuff: https://github.com/folke/snacks.nvim/discussions/1768
 return {
+  {
   'gaweringo/snacks.nvim',
   branch = 'main',
   lazy = false,
@@ -406,5 +407,21 @@ return {
 
     -- Gitbrowse
     { "<leader>gB", function() Snacks.gitbrowse() end,                                         desc = "GitBrowse" },
+  },
+  },
+  {
+    "aaronhallaert/advanced-git-search.nvim",
+    cmd = { "AdvancedGitSearch" },
+    config = function()
+        require("advanced_git_search.snacks").setup{
+          diff_plugin = 'diffview',
+        }
+    end,
+    dependencies = {
+      "gaweringo/snacks.nvim"
+    },
+    keys = {
+      { '<leader>gsG', '<Cmd>AdvancedGitSearch search_log_content<Cr>', desc = '[G]rep log content' }
+    }
   },
 }
