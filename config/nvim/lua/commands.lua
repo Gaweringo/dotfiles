@@ -65,3 +65,13 @@ end, {
 vim.api.nvim_create_user_command('Pwdc', function()
   vim.cmd [[let @+ = trim(execute('pwd'))]]
 end, { desc = 'Copy pwd to system clipboard' })
+
+-- Clear the temp shada files (mostly for windows)
+vim.api.nvim_create_user_command('ClearTempShada', function()
+    local path = vim.fn.stdpath('data') .. '/shada/'
+    local files = vim.fn.globpath(path, "*.tmp.[A-z]", true, true)
+    vim.print(files)
+    for _, file in ipairs(files) do
+      vim.fs.rm(file)
+    end
+end, { desc = 'Delete *.tmp.[A-z] shada files' })
