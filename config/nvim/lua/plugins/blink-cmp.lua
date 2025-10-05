@@ -1,6 +1,6 @@
 return {
   'saghen/blink.cmp',
-  dependencies = { 'rafamadriz/friendly-snippets', 'L3MON4D3/LuaSnip', 'echasnovski/mini.nvim' },
+  dependencies = { 'rafamadriz/friendly-snippets', 'L3MON4D3/LuaSnip', 'echasnovski/mini.nvim', 'Kaiser-Yang/blink-cmp-git' },
   event = "InsertEnter",
   -- use a release tag to download pre-built binaries
   version = '1.*',
@@ -61,10 +61,17 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'git' },
       -- TODO: Look for some providers which might be nice: https://cmp.saghen.dev/configuration/sources.html#community-sources
-      -- TODO: Luasnip setup
       providers = {
+        git = {
+          module = 'blink-cmp-git',
+          name = 'Git',
+          enabled = function ()
+            return vim.tbl_contains({'gitcommit', 'markdown'}, vim.bo.filetype)
+          end,
+          opts = {},
+        },
         lazydev = {
           name = 'LazyDev',
           module = 'lazydev.integrations.blink',
