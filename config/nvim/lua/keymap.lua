@@ -28,6 +28,24 @@ vim.keymap.set('t', '<C-k>', function() vim.cmd.wincmd 'k' end, { desc = 'Move o
 -- Clear quickfix list
 vim.keymap.set('n', '<leader>xc', '<cmd>call setqflist([])<CR>', { desc = '[c]lear quickfix list' })
 
+-- Open quickfix list
+vim.keymap.set('n', '<leader>q', function()
+  local qf_exists = false
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win["quickfix"] == 1 then
+      qf_exists = true
+    end
+  end
+  if qf_exists == true then
+    vim.cmd "cclose"
+    return
+  end
+  if not vim.tbl_isempty(vim.fn.getqflist()) then
+    -- botright to open it full width at bottom every time
+    vim.cmd "botright copen"
+  end
+end, { desc = 'toggle [q]uickfix list' })
+
 -- Alternate file
 vim.keymap.set('n', '<leader><CR>', '<C-^>', { desc = 'alternate file' })
 
@@ -146,7 +164,7 @@ vim.keymap.set('n', ']D', function()
 end, { desc = 'Go to next Error [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>w', virt_line, { desc = '[w]hat are the diagnostics (virtual line)' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>L', vim.diagnostic.setloclist, { desc = 'Open diagnostics in [L]oclist' })
 
 -- Macros / quick edits
 vim.keymap.set('n', '<leader>m<Cr>', [[<Cmd>%s/\r//|norm!``<Cr>]], { desc = 'Remove trailing ^M', silent = true })
