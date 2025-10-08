@@ -1,7 +1,8 @@
 local TAG = require('overseer.constants').TAG
 local overseer = require('overseer')
 
-local nvc_errorformat = [[%E** Error: %m,]] -- Error message (multiline)
+local nvc_errorformat = [[%E** Fatal: %m,]]
+        .. [[%E** Error: %m,]] -- Error message (multiline)
         .. [[%W** Warning: %m,]]            -- Warning message (multiline)
         .. [[%C%*[\ ]> %f:%l,]]             -- A line, with space before > and then filename and column
         -- NOTE: This matches on the first line with the ^^^^, but some errors have multiple ^^^ lines, with the later
