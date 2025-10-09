@@ -123,8 +123,7 @@ sudo pacman -S --noconfirm --needed \
     ianny \
     xdg-desktop-portal xdg-desktop-portal-wlr \
     nwg-displays \
-    i3status \
-    i3blocks \
+    i3status-rust \
     dmenu
 
 # wifi / network
