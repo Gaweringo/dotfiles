@@ -112,7 +112,7 @@ paru -S --noconfirm --needed \
 
 # Sway stuff
 sudo pacman -S --noconfirm --needed \
-    mako \
+    swaync \
     sway \
     swaybg \
     swayidle \
