@@ -287,7 +287,8 @@ return {
     { "<leader>snf", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config"), title = 'Config Files' }) end,       desc = "Config File" },
     { "<leader>sng", function() Snacks.picker.grep({ cwd = vim.fn.stdpath("config"), title = 'Config Grep' }) end,         desc = "Config Grep" },
     { "<leader>snp", function() Snacks.picker.lazy() end,                                                                  desc = "Config search Packages" },
-    { "<leader>sns", function() Snacks.picker.files({ cwd = vim.fn.stdpath('data'), title = 'nvim data files' }) end,      desc = "Search nvim [d]ata directory" },
+    { "<leader>sns", function() Snacks.picker.files({ cwd = vim.fn.stdpath('data'), title = 'nvim data files' }) end,      desc = "Search nvim data/[s]hare directory" },
+    { "<leader>snG", function() Snacks.picker.grep({ cwd = vim.fn.stdpath('data'), title = 'nvim data grep' }) end,        desc = "Grep nvim data/[s]hare directory" },
     { "<leader>s%",  function() Snacks.picker.recent() end,                                                                desc = "Recent" },
 
     -- Root and other premade directory searches
