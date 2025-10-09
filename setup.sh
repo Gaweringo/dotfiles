@@ -69,6 +69,7 @@ sudo pacman -S --noconfirm --needed \
     strace \
     openocd \
     arm-none-eabi-gdb arm-none-eabi-gcc \
+    uv \
     xmake
 
 # Desktop utilities
