@@ -20,7 +20,7 @@ vim.lsp.config('clangd', {
 		'clangd',
 		'-j=6', -- Number of async background workers
 		'--background-index',
-		-- "--header-insertion=never", -- Never insert #include with completion
+		"--header-insertion=never",    -- Never insert #include with completion
 		'--all-scopes-completion',     -- Include completion items from namespaces, not visible in scope (automatic insertion)
 		'--clang-tidy',                -- Run and show clang-tidy recommendations
 		-- "--completion-style=detailed", -- Sementically distinct completion show (overloads are not grouped in one item)
