@@ -127,8 +127,8 @@ sudo pacman -S --noconfirm --needed \
     dmenu
 
 # wifi / network
-sudo pacman -S --noconfirm --needed iwd impala
-sudo systemctl enable --now iwd.service
+sudo pacman -S --noconfirm --needed networkmanager network-manager-applet
+sudo systemctl enable --now NetworkManager.service
 
 # Bluetooth
 sudo pacman -S --noconfirm bluetui blueberry bluez
