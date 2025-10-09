@@ -24,8 +24,8 @@ set $menu rofi -modes "drun,run" -show drun -show-icons
 # Mouse follows to the focused container
 mouse_warping container
 
-# Change focus to windows requiesting activation
-focus_on_window_activation focus
+# Set urgent state for window requesting focus / activation
+focus_on_window_activation urgent
 
 ## Colours
 set $dark_gray #282828
