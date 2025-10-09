@@ -10,6 +10,9 @@ local modelsim_errorformat = [[** %tRROR: %f(%l): %m,]]
         .. [[%tRROR: %m,]]
         .. '%tARNING[%*[0-9]]: %m'
 
+local quartus_errorformat = [[%trror (%n): %m File: %f Line: %l,]]
+        .. [[%tarning (%n): %m File: %f Line: %l,]]
+
 local function find_fhlow_dirs()
     local dirname =  'flw'
     local flw_dir = vim.fs.find({ dirname }, { type = 'directory', upward = true, limit = math.huge})
@@ -50,8 +53,6 @@ local fhlow_tmpl = {
     builder = function(params)
         local cmd = 'make'
 
-        vim.print(params.action)
-
         local args = { }
         if params.gui then
             table.insert(args, params.action .. 'Gui')
@@ -59,9 +60,11 @@ local fhlow_tmpl = {
             table.insert(args, params.action .. 'Sh')
         end
 
+        local efm = modelsim_errorformat
         local cwd = params.flw_dir .. '/simQuestasim'
         if string.gmatch(params.action, "Quartus")() ~= nil then
             cwd = params.flw_dir .. '/synlayQuartus'
+            efm = quartus_errorformat
         end
 
         cwd = vim.fn.resolve(cwd)
@@ -73,7 +76,7 @@ local fhlow_tmpl = {
             -- https://github.com/stevearc/overseer.nvim/blob/master/doc/components.md#on_output_quickfix
             components = {
                 'default',
-                { 'on_output_quickfix', errorformat = modelsim_errorformat, open_on_match = true, set_diagnostics = true },
+                { 'on_output_quickfix', errorformat = efm, open_on_match = true, set_diagnostics = true },
                 'on_result_diagnostics',
             },
         }
