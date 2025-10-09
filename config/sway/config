@@ -103,8 +103,8 @@ exec swayidle -w \
 input type:keyboard {
     # neoqwertz as standard, and normal de as backup
     xkb_layout "de(neo_qwertz), de"
-    # win+space to toggle layout
-    xkb_options "grp:win_space_toggle"
+    # both ctrls together to toggle layout (left + right control)
+    xkb_options "grp:ctrls_toggle"
     repeat_rate 50
 }
 
