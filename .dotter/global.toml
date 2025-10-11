@@ -77,6 +77,9 @@ depends = ["bin"]
 [lazygit.files]
 "config/lazygit/config.yml" = { target = "~/.config/lazygit/config.yml", type = "template", if = '(is_executable "lazygit")' }
 
+[kitty.files]
+"kitty.conf" = { target = "~/.config/kitty/kitty.conf", type = "symbolic", recurse = false }
+
 [ghostty.files]
 "config/ghostty" = { target = "~/.config/ghostty", type = "symbolic", recurse = false }
 

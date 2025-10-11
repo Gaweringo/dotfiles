@@ -36,7 +36,7 @@ sudo pacman -S --noconfirm --needed \
 # Development / terminal things
 sudo pacman -S --noconfirm --needed \
     github-cli\
-    wezterm ghostty alacritty \
+    wezterm ghostty alacritty kitty \
     neovim \
     neovide \
     tree-sitter-cli \
