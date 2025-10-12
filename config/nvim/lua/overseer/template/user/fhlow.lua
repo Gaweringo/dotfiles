@@ -13,14 +13,7 @@ local modelsim_errorformat = [[** %tRROR: %f(%l): %m,]]
 local quartus_errorformat = [[%trror (%n): %m File: %f Line: %l,]]
         .. [[%tarning (%n): %m File: %f Line: %l,]]
 
-local function find_fhlow_dirs()
-    local dirname =  'flw'
-    local flw_dir = vim.fs.find({ dirname }, { type = 'directory', upward = true, limit = math.huge})
-    vim.list_extend(flw_dir, vim.fs.find({ dirname }, { type = 'directory', limit = math.huge }))
-    return flw_dir
-end
-
-local function is_fhlow_project()
+local function find_fhlow_dir()
     local dirname =  'fhlow'
     local fhlow_dir = vim.fs.find({ dirname }, { type = 'directory', upward = true })[1]
     if fhlow_dir == nil then
@@ -28,13 +21,36 @@ local function is_fhlow_project()
     end
 
     if fhlow_dir == nil then
-        return false
+        return nil
     end
 
     -- Checking if it's really a fhlow directory
     local is_fhlow = vim.fs.find({ 'Banner.tcl' }, { type = 'file', upward = false, path = fhlow_dir })[1] ~= nil
 
-    return is_fhlow
+    if is_fhlow then
+        return fhlow_dir
+    else
+        return nil
+    end
+end
+
+local function is_fhlow_project()
+    return find_fhlow_dir() ~= nil
+end
+
+local function find_fhlow_root_dir()
+    local fhlow_dir = find_fhlow_dir()
+    if fhlow_dir == nil then
+        return nil
+    end
+    return vim.fn.fnamemodify(fhlow_dir, ":h")
+end
+
+local function find_flw_dirs()
+    local fhlow_root = find_fhlow_root_dir()
+    local dirname =  'flw'
+    local flw_dirs = vim.fs.find({ dirname }, { type = 'directory', limit = math.huge, path = fhlow_root })
+    return flw_dirs
 end
 
 ---@type overseer.TemplateFileDefinition
@@ -82,7 +98,6 @@ local fhlow_tmpl = {
         }
     end,
     condition = {
-        filetype = { 'vhdl', 'makefile', 'OverseerList' },
         callback = function(search)
             return is_fhlow_project()
         end,
@@ -92,10 +107,10 @@ local fhlow_tmpl = {
 ---@type overseer.TemplateFileProvider
 return {
     generator = function(opts, cb)
-        local ret = { overseer.wrap_template(fhlow_tmpl, { name = 'fhlow compsim' }) }
-        local fhlow_dirs = find_fhlow_dirs()
+        local ret = { overseer.wrap_template(fhlow_tmpl, { name = 'fhlow compsim' } ) }
+        local flw_dirs = find_flw_dirs()
 
-        for _, dir in ipairs(fhlow_dirs) do
+        for _, dir in ipairs(flw_dirs) do
             local unitName = vim.fn.fnamemodify(dir, ":h:t")
 
             table.insert(
@@ -103,7 +118,7 @@ return {
                 overseer.wrap_template(
                     fhlow_tmpl,
                     { name = string.format('fhlow \'%s\'', unitName) },
-                    { gui = true, flw_dir = dir }
+                    { gui = true, flw_dir = vim.fn.fnamemodify(dir, ":.") }
                 )
             )
         end
@@ -111,7 +126,6 @@ return {
         cb(ret)
     end,
     condition = {
-        filetype = { 'vhdl', 'makefile', 'OverseerList' },
         callback = function(search)
             return is_fhlow_project()
         end,
