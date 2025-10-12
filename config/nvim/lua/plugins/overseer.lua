@@ -3,6 +3,7 @@ return {
   keys = {
     { '<leader>oo', '<cmd>OverseerRun<cr>',                                 desc = '[o]verseer run' },
     { '<leader>oO', '<cmd>OverseerToggle<cr>',                              desc = '[O]pen (toggle)' },
+    { '<A-o>',      '<cmd>OverseerToggle<cr>',                              desc = '[O]verseer (toggle)' },
     { '<leader>oa', '<cmd>OverseerQuickAction<cr>',                         desc = 'Quick [a]ction' },
     { '<leader>or', '<cmd>OverseerQuickAction restart<cr>',                 desc = '[r]estart' },
     { '<leader>ow', '<cmd>OverseerQuickAction watch<cr>',                   desc = '[w]atch' },
