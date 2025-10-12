@@ -33,12 +33,21 @@ return {
     end,
     init = function()
       vim.g.mkdp_browser = 'chromium'
-      vim.cmd [[
-        function OpenMarkdownPreview (url)
-          execute "silent !chromium --app=" . a:url . " &"
-        endfunction
-        let g:mkdp_browserfunc = 'OpenMarkdownPreview'
-      ]]
+      if vim.fn.has('win32') == 1 and vim.fn.has('wsl') == 0 then
+        vim.cmd [[
+          function! OpenMarkdownPreview (url)
+            execute "silent !start chromium --app=" . a:url
+          endfunction
+          let g:mkdp_browserfunc = 'OpenMarkdownPreview'
+        ]]
+      else
+        vim.cmd [[
+          function! OpenMarkdownPreview (url)
+            execute "silent !chromium --app=" . a:url . " &"
+          endfunction
+          let g:mkdp_browserfunc = 'OpenMarkdownPreview'
+        ]]
+      end
     end,
   },
 }
