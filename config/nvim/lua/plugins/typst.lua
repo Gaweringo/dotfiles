@@ -100,9 +100,9 @@ return {
       open_cmd = [[chromium --app=%s 2>&1]],
       -- Use tinymist from mason
       dependencies_bin = { ['tinymist'] = 'tinymist' },
-      -- get_root = function(path_of_main_file)
-      --   return vim.fn.getcwd()
-      -- end,
+      get_root = function(path_of_main_file)
+        return vim.fn.getcwd()
+      end,
     },
     cmd = { 'TypstPreview' },
   },
