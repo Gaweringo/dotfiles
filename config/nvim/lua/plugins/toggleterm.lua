@@ -1,8 +1,6 @@
 return {
     'akinsho/toggleterm.nvim',
-    opts = {
-        autochdir = true, -- Follow nvim dir change on next open
-    },
+    opts = {},
     cmd = { 'ToggleTerm', 'ToggleTermToggleAll' },
     keys = {
         -- Terminal
@@ -16,8 +14,15 @@ return {
         { '<A-C-u>', '<Cmd>2ToggleTerm direction=horizontal size=20<Cr>', desc = 'Terminal', silent = true, mode = { 'n', 't', 'v' }, },
         { '<leader>tt', '<Cmd>exe v:count1 . "ToggleTerm direction=float"<Cr>', desc = 'Terminal', silent = true },
         { '<leader>s\\', '<Cmd>TermSelect<Cr>', desc = 'Terminal', silent = true },
+        { '<leader>T%', function ()
+            local current_file = vim.api.nvim_buf_get_name(0);
+            local parent_dir = vim.fn.fnamemodify(current_file, ":h:p")
+            if vim.fn.isdirectory(parent_dir) == 1 then
+                vim.cmd ('TermNew dir=' .. parent_dir)
+            end
+        end, desc = 'Terminal at current files directory', silent = true },
         {
-            '<leader>T',
+            '<leader>Tx',
             function()
                 require('toggleterm').send_lines_to_terminal('single_line', false, { args = vim.v.count })
                 vim.cmd.stopinsert()
@@ -27,7 +32,7 @@ return {
             noremap = true,
         },
         {
-            '<leader>T',
+            '<leader>Tx',
             function()
                 require('toggleterm').send_lines_to_terminal('visual_selection', false, { args = vim.v.count })
                 vim.cmd.stopinsert()
