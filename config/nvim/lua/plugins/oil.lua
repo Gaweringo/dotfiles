@@ -32,6 +32,7 @@ return {
       },
     })
 
+    vim.keymap.set('n', '-', oil.open, { desc = 'Up one in Oil' })
     vim.keymap.set('n', '<leader>f', oil.open, { desc = 'Open (f)older in Oil' })
   end,
 }
