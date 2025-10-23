@@ -56,7 +56,7 @@ format = " $icon  $brightness "
 
 [[block]]
 block = "battery"
-format = " $icon  $percentage ($time_remaining.dur(hms:true, min_unit:m)) "
+format = " $icon  $percentage ($time_remaining.dur(hms:true, min_unit:m) $power) "
 
 [[block]]
 block = "hueshift"
