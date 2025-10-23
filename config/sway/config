@@ -225,10 +225,10 @@ input type:touchpad {
 # Layout stuff:
 #
     # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
+    # $mod+b or $mod+shift+b, for horizontal and vertical splits
     # respectively.
     bindsym $mod+b splith
-    bindsym $mod+ctrl+v splitv
+    bindsym $mod+shift+b splitv
 
     # Switch the current container between different layout styles
     bindsym $mod+shift+s layout stacking
