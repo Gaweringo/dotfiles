@@ -61,7 +61,7 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'git' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'git', 'omni' },
       -- TODO: Look for some providers which might be nice: https://cmp.saghen.dev/configuration/sources.html#community-sources
       providers = {
         git = {
