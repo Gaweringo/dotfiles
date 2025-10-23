@@ -118,6 +118,7 @@ if vim.g.neovide then
   vim.o.guifont = "Iosevka NFM,IosevkaTerm NF,JetBrainsMono NF:h13"
   vim.g.neovide_opacity = 0.95
   vim.g.neovide_normal_opacity = 0.9
+  vim.g.neovide_hide_mouse_when_typing = 1
 end
 
 if vim.fn.has('win32') == 1 and vim.fn.has('wsl') == 0 then
