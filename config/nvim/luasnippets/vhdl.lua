@@ -164,4 +164,7 @@ end process RAM;
       }
     )
   ),
+  s( 'sulv', { t 'std_ulogic_vector' }),
+  s( 'slv', { t 'std_logic_vector' }),
+  s( 'stdu', { t 'std_ulogic' }),
 }
