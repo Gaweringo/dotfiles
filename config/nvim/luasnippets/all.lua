@@ -6,7 +6,7 @@ end
 return {
   s('todo',
     fmta([[
-      <comment> <todo>(<name>): <finish>
+      <comment><todo>(<name>): <finish>
     ]],
       {
         comment = f(get_comment_string),
