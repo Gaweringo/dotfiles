@@ -1,5 +1,5 @@
 return {
-  { 'tpope/vim-sleuth' }, -- automatic tabstop and shiftwidth detection
+  { 'tpope/vim-sleuth', lazy = false, keys = { { '<leader>ms', '<Cmd>Sleuth<Cr>', desc = 'Sleuth', silent = true } } },
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {}, event = { 'VeryLazy', 'BufReadPre', 'BufNewFile' } },
