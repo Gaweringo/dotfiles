@@ -9,6 +9,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		if client ~= nil and client.name == 'clangd' then
 			vim.keymap.set({ 'n' }, '<localleader>o', '<cmd>LspClangdSwitchSourceHeader<CR>',
 				{ desc = 'Clangd switch source/header', buffer = buf })
+			vim.keymap.set({ 'n' }, '<localleader>O', '<cmd>vsplit<Cr><cmd>LspClangdSwitchSourceHeader<CR>',
+				{ desc = 'Clangd switch source/header in split', buffer = buf })
 		end
 	end,
 })
