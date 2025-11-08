@@ -1,2 +1,0 @@
-[linux]
-depends = ["git", "wezterm", "sway", "fish", "starship", "lazygit", "ghostty", "systemd"]

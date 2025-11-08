@@ -28,6 +28,7 @@ fi
 sudo pacman -S --noconfirm --needed ttf-font-awesome noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra
 sudo pacman -S --noconfirm --needed \
     ttf-iosevkaterm-nerd \
+    ttf-iosevka-nerd \
     ttf-jetbrains-mono \
     ttf-jetbrains-mono-nerd \
     otf-monaspace \
@@ -81,7 +82,7 @@ sudo pacman -S --noconfirm --needed \
     satty \
     wlsunset \
     wl-clip-persist cliphist \
-    hyprpickr \
+    hyprpicker \
     slurp
 
 paru -S --noconfirm --needed wl-screenrec
@@ -100,6 +101,7 @@ sudo pacman -S --noconfirm --needed \
     speedcrunch \
     libreoffice \
     nautilus \
+    qalculate-qt \
     obs-studio
 
 # TODO: Look into localsend (firewall things)
@@ -121,7 +123,6 @@ sudo pacman -S --noconfirm --needed \
     swayosd \
     rofi rofi-calc \
     autotiling-rs \
-    ianny \
     xdg-desktop-portal xdg-desktop-portal-wlr \
     nwg-displays \
     i3status-rust \
@@ -186,17 +187,19 @@ if [ ! -d ~/.dotfiles ]; then
 git clone https://github.com/gaweringo/dotfiles ~/.dotfiles
 fi
 pushd ~/.dotfiles
+
 # TODO: Check if local.toml already exits and ask before overriding
+if [ ! -f ./.dotter/local.toml ]; then
+    echo "# which packages should be used on this machine
+    packages = [\"default\", \"tmux\", \"fish\", \"sway\", \"wezterm\", \"ghostty\", \"zathura\"]
 
-echo "# which packages should be used on this machine
-packages = [\"git\", \"wezterm\", \"sway\", \"fish\", \"starship\", \"lazygit\", \"ghostty\"]
-
-# variables to be substituted in the other toml files
-[variables]
-email = \"40121865+Gaweringo@users.noreply.github.com\"
-git_username = \"Gaweringo\"
-" > ./.dotter/local.toml
-./dotter -f
+    # variables to be substituted in the other toml files
+    [variables]
+    email = \"40121865+Gaweringo@users.noreply.github.com\"
+    git_username = \"Gaweringo\"
+    " > ./.dotter/local.toml
+    ./dotter -f
+fi
 popd
 
 # Systemd config
@@ -204,8 +207,15 @@ systemctl --user daemon-reload
 # || true, to make it not fail, since systemd says something about sleep.target being a non-template unit
 # For locking on suspend
 systemctl --user enable --now user-suspend@.service || true
-# For battery low notification
-systemctl --user enable --now battery-monitor.timer || true
+
+# check if this device has a battery
+BAT_STATUS=$(upower -e | grep 'BAT' &> /dev/null; echo $?)
+
+if [ $BAT_STATUS -eq 0 ]; then
+    # For battery low notification
+    systemctl --user enable --now battery-monitor.timer || true
+fi
+
 # For daily background change
 systemctl --user enable --now bg-changer.timer
 
