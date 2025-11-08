@@ -12,6 +12,8 @@ depends = ["git", "nvim", "starship", "foot", "tmux", "lazygit", "wezterm"]
 [default.files]
 "README.md" = ""
 "setup.sh" = ""
+# Firefox folder seems to have a random name in it (maybe we can make it work, but it's manual for now)
+"Firefox_userChrome.css" = ""
 
 [git.files]
 gitconfig = "~/.gitconfig"
