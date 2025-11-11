@@ -118,6 +118,7 @@ sudo pacman -S --noconfirm --needed \
     swaync \
     sway \
     swaybg \
+    swww \
     swayidle \
     swaylock \
     swayosd \
