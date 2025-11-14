@@ -169,6 +169,7 @@ vim.keymap.set('n', '<leader>L', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Macros / quick edits
 vim.keymap.set('n', '<leader>m<Cr>', [[<Cmd>%s/\r//|norm!``<Cr>]], { desc = 'Remove trailing ^M', silent = true })
 vim.keymap.set('n', '<leader>m\\', [[<Cmd>s/\\/\\\\/<Cr><Cmd>nohlsearch<Cr>]], { desc = 'Escape slashes (Change \\ to \\\\)', silent = true })
+vim.keymap.set('n', '<leader>m/', [[<Cmd>s/\\/\//g<Cr><Cmd>nohlsearch<Cr>]], { desc = 'Change \\ to /', silent = true })
 vim.keymap.set('n', '<leader>mo', 'o<Esc>', { desc = 'Insert line below', silent = true })
 vim.keymap.set('n', '<leader>mO', 'O<Esc>', { desc = 'Insert line above', silent = true })
 vim.keymap.set('n', '<leader>md', function()
