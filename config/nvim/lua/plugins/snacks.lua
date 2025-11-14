@@ -288,6 +288,7 @@ return {
     { "<leader>sng", function() Snacks.picker.grep({ cwd = vim.fn.stdpath("config"), title = 'Config Grep' }) end,         desc = "Config Grep" },
     { "<leader>snp", function() Snacks.picker.lazy() end,                                                                  desc = "Config search Packages" },
     { "<leader>sns", function() Snacks.picker.files({ cwd = vim.fn.stdpath('data'), title = 'nvim data files' }) end,      desc = "Search nvim data/[s]hare directory" },
+    { "<leader>snF", function() Snacks.picker.files({ cwd = vim.fn.stdpath('data'), title = 'nvim data files' }) end,      desc = "Search [F]iles in data directory" },
     { "<leader>snG", function() Snacks.picker.grep({ cwd = vim.fn.stdpath('data'), title = 'nvim data grep' }) end,        desc = "Grep nvim data/[s]hare directory" },
     { "<leader>s%",  function() Snacks.picker.recent() end,                                                                desc = "Recent" },
 
@@ -386,13 +387,15 @@ return {
     },
 
     -- LSP
-    { "gd",         function() Snacks.picker.lsp_definitions() end,                            desc = "Goto Definition" },
-    { "gD",         function() Snacks.picker.lsp_declarations() end,                           desc = "Goto Declarations" },
-    { "gr",         function() Snacks.picker.lsp_references() end,                             nowait = true,                 desc = "References" },
-    { "gi",         function() Snacks.picker.lsp_implementations() end,                        desc = "Goto Implementation" },
-    { "gt",         function() Snacks.picker.lsp_type_definitions() end,                       desc = "Goto Type Definition" },
-    { "<leader>ls", function() Snacks.picker.lsp_symbols({ filter = { default = true } }) end, desc = "LSP Symbols" },
-    { "<leader>lS", function() Snacks.picker.lsp_workspace_symbols() end,                      desc = "LSP Workspace Symbols" },
+    { "gd",         function() Snacks.picker.lsp_definitions() end,                                                 desc = "Goto Definition" },
+    { "gD",         function() Snacks.picker.lsp_declarations() end,                                                desc = "Goto Declarations" },
+    { "gr",         function() Snacks.picker.lsp_references() end, nowait = true,                                   desc = "References" },
+    { "gi",         function() Snacks.picker.lsp_implementations() end,                                             desc = "Goto Implementation" },
+    { "gt",         function() Snacks.picker.lsp_type_definitions() end,                                            desc = "Goto Type Definition" },
+    { "<leader>ls", function() Snacks.picker.lsp_symbols({ filter = { default = true }, keep_parents = true }) end, desc = "LSP Symbols" },
+    { "<leader>lS", function() Snacks.picker.lsp_workspace_symbols({ keep_parents = true }) end,                    desc = "LSP Workspace Symbols" },
+    { "gai",        function() Snacks.picker.lsp_incoming_calls() end,                                              desc = "C[a]lls Incoming" },
+    { "gao",        function() Snacks.picker.lsp_outgoing_calls() end,                                              desc = "C[a]lls Outgoing" },
 
     -- Scratch
     { "<leader>,",  function() Snacks.scratch() end,                                           desc = "Create scratch buffer" },
