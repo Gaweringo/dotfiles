@@ -368,6 +368,7 @@ return {
             local proc_opts = {
               cmd = "fd",
               args = args,
+              cwd = opts.cwd,
               ---@param item snacks.picker.finder.Item
               transform = function(item)
                 item.cwd = cwd
@@ -375,7 +376,7 @@ return {
                 item.dir = true
               end,
             }
-            return require("snacks.picker.source.proc").proc({ opts, proc_opts }, ctx)
+            return require("snacks.picker.source.proc").proc(proc_opts, ctx)
           end,
           confirm = function(picker, item)
             picker:close()
