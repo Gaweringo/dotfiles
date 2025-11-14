@@ -325,6 +325,7 @@ for_window [class="Spotify"] move scratchpad, scratchpad show
 for_window [app_id="com.gabm.satty"] floating enable
 for_window [title="Picture-in-Picture"] floating enable, resize set 30ppt 30ppt, move position 70ppt 70ppt, focus parent
 for_window [title="New Text Note — Okular"] floating enable
+for_window [title="Problem Occurred " class="STM32CubeIDE"] floating enable
 
 include /etc/sway/config.d/*
 
