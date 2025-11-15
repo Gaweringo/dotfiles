@@ -60,6 +60,11 @@ Set-Alias -Name lx -Value xl
 Set-Alias -Name tx -Value xt
 {{/if}}
 
+{{#if (is_executable 'svn')}}
+# neovim alias
+Set-Alias -Name snv -Value svn
+{{/if}}
+
 # Copy current directory
 Function pwdc { (pwd).path | clip }
 
