@@ -5,22 +5,22 @@ end
 
 return {
   s('todo',
-    fmta([[
-      <comment><todo>(<name>): <finish>
-    ]],
-      {
-        comment = f(get_comment_string),
-        todo = c(1, {
-          t 'TODO',
-          t 'NOTE',
-          t 'INFO',
-          t 'WARN',
-          i(nil)
-        }),
-        name = i(2),
-        finish = i(0)
-      }
-    )
+    {
+      f(get_comment_string), -- comment
+      c(1, {
+        t 'TODO',
+        t 'NOTE',
+        t 'INFO',
+        t 'WARN',
+        i(nil)
+      }), -- Todo type
+      c(2, { -- Optional name
+          sn(nil, { t"(", i(1, "MaHa"), t ")", }),
+          t "",
+      }),
+      t ": ",
+      i(0),
+    }
   ),
 }
 
