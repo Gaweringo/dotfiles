@@ -254,6 +254,21 @@ return {
           end,
         }):map '<leader>tD'
 
+        Snacks.toggle.new({
+          id = 'bind',
+          name = 'Bind scroll and cursor',
+          get = function()
+            return (vim.o.scrollbind or vim.o.cursorbind)
+          end,
+          set = function(turn_on)
+            vim.o.scrollbind = turn_on
+            vim.o.cursorbind = turn_on
+          end,
+        }):map '<leader>tBB'
+
+        Snacks.toggle.option('cursorbind', { off = false, on = true, name = 'cursorbind' }):map '<leader>tBc'
+        Snacks.toggle.option('scrollbind', { off = false, on = true, name = 'scrollbind' }):map '<leader>tBs'
+
         vim.api.nvim_create_user_command('GitBrowse', function() Snacks.gitbrowse() end, {})
       end,
     })
