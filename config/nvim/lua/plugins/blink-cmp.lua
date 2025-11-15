@@ -24,10 +24,6 @@ return {
       ['<C-p>'] = { 'show', 'select_prev', 'fallback_to_mappings' },
       ['<C-n>'] = { 'show', 'select_next', 'fallback_to_mappings' },
 
-      -- Insert next completion without showing menu (cycling through like emacs)
-      ["<C-j>"] = { "insert_next", "fallback" },
-      ["<C-k>"] = { "insert_prev", "fallback" },
-
       -- Docs
       ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
       ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
