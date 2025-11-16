@@ -5,8 +5,10 @@ return {
     priority = 1000,
     opts = {
       compile = true,
-      transparent = true, -- do not set background color
-      colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
+      -- transparent = true, -- do not set background color
+      colors = { theme = {
+        wave = { ui = { bg = "none", bg_gutter = "none" } },
+      } },
     },
     build = ':KanagawaCompile',
     config = function(_, opts)
