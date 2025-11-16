@@ -50,8 +50,12 @@
 	fin = !git fetch && git in
 	fout = !git fetch && git out
 	cm = commit -m
+	cam = commit -am
 	a = add .
 	aa = add -A
+
+	prs = pull --rebase --autostash
+	pr = pull --rebase
 [pull]
 	rebase = false
 	ff = only
