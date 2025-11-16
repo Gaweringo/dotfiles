@@ -40,7 +40,8 @@ if string.find(config.font.font[1].family, "JetBrains") then
 else
 	config.font_size = 11
 end
-config.window_background_opacity = 0.95
+config.colors = { background = '#16161d' }
+config.window_background_opacity = 0.96
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_and_split_indices_are_zero_based = true
 config.window_decorations = "INTEGRATED_BUTTONS"
