@@ -51,7 +51,20 @@ There is a setup.sh script for setting up from a clean arch instll.
 
 - [fish](https://fishshell.com/)
 - [exa](https://the.exa.website/)
+- [imv](https://sr.ht/~exec64/imv/)
+- [nomacs](https://nomacs.org/)
+- [mpv](https://mpv.io)
+- [paru](https://github.com/Morganamilo/paru) (Arch AUR helper (rust using rustup))
 
+#### Sway on Arch
+For the [Sway](https://swaywm.org) config:
+ - Install a Nerd-Font (`pacman -S ttf-jetbrains-mono-nerd ttf-iosevkaterm-nerd ttf-iosevka-nerd`)
+    - Or/And install the symbols only font `ttf-nerd-fonts-symbols` (use normal/non-patched font and symbols font as fallback)
+    - Also install `noto-fonts-emoji` to have emojis (starship uses them for example)
+ - Install:
+    - [dmenu](https://tools.suckless.org/dmenu/)
+    - swayosd (for media keys and osd)
+    - mako (for simple notifications)
 
 ### Things to install for nvim (to install LSPs)
 - [go](https://go.dev/)
@@ -62,6 +75,14 @@ There is a setup.sh script for setting up from a clean arch instll.
 ## Other niceties to install
 - [github-cli (gh)](https://github.com/cli/cli)
 - [bat](https://github.com/sharkdp/bat)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+    - [ripgrep-all (rga)](https://github.com/phiresky/ripgrep-all)
+    - [ripgrep_replace (rgr)](https://github.com/ElectricRCAircraftGuy/ripgrep_replace)
+- [tealdeer](https://https://github.com/tealdeer-rs/tealdeer)
+- [neovide](https://github.com/neovide/neovide)
+- [just](https://github.com/casey/just)
+- [typst](https://github.com/typst/typst)
+- [xmake](https://xmake.io)
 
 # Todo
 For more todos see the readme in config/neovim
