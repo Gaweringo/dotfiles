@@ -34,6 +34,9 @@ if status is-interactive
     alias fd=fdfind
     {{/if}}
     alias ip='ip -c'
+    {{#if (is_executable "exa")}}
+    alias snv=svn
+    {{/if}}
 
     {{#if (is_executable "opam")}}
     # opam configuration
