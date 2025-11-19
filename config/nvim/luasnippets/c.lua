@@ -63,4 +63,5 @@ return {
       t {"", ""}, -- newline
     }
   ),
+  s('cosnt', { t "const" }), -- Misspelling of const
 }
