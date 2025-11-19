@@ -4,13 +4,11 @@
 {{/if}}
 {{#if (is_executable  "gh")}}
 [credential "https://github.com"]
-	helper = 
 	helper = !gh auth git-credential
 {{#if git_username}}
 	username = {{git_username}}
 {{/if}}
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !gh auth git-credential
 {{#if git_username}}
 	username = {{git_username}}
@@ -36,26 +34,48 @@
 	lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
 	lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 
+	# log and show external diff (difftastic)
 	logd = log -p --ext-diff
 	showd = show --ext-diff
 
+	# select commit to fixup or rebase onto
 	fixup = !sha=$( git -c color.ui=always log --oneline -n 100 | fzf +s --ansi --no-multi --prompt 'Fixup> ' --preview 'git show --color=always {1}' ) && git commit --fixup "${sha%% *}"
 	rebasi = !sha=$( git -c color.ui=always log --oneline -n 100 | fzf +s --ansi --no-multi --prompt 'Rebase -i --autosquash > ' --preview 'git show --color=always {1}' ) && git rebase -i --autosquash "${sha%% *}"
 
+	# main use shortcuts
 	s = status
 	d = diff
-	sw = !git switch $(git branch | fzf --height=20% --reverse --info=inline)
+	ds = diff --staged
+
+	# fzf based branch switching
+	sw = !git switch $(git branch -a --format='%(if)%(HEAD)%(then)%(color:magenta)%(refname:short)%(color:reset)%(else)%(if)%(worktreepath)%(then)%(color:cyan)%(else)%(color:yellow)%(end)%(refname:short)%(color:reset)%(end) %(if)%(worktreepath)%(then)(%(worktreepath))%(end) -- %(contents:subject) (%(color:blue)%(committerdate:relative)%(color:reset))' --color=always | fzf --height=40% --ansi --reverse --info=inline --query="$1" --delimiter=' ' --accept-nth=1 --select-1 --preview='git log -n5 {1}')
+
+	# show incoming and outgoing commits
 	in = log --oneline '@..@{u}'
 	out = log --oneline '@{u}..@'
 	fin = !git fetch && git in
 	fout = !git fetch && git out
+
+	# commit
+	c = commit
 	cm = commit -m
 	cam = commit -am
+
+	# add
 	a = add .
 	aa = add -A
 
+	# pull
 	prs = pull --rebase --autostash
+	pra = pull --rebase --autostash
 	pr = pull --rebase
+
+	# rebase
+	rc = rebase --continue
+	ra = rebase --abort
+
+	# restore
+	rss = restore --staged
 [pull]
 	rebase = false
 	ff = only
