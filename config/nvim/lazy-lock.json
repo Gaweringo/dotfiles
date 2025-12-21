@@ -30,6 +30,7 @@
   "nvim-lsp-endhints": { "branch": "main", "commit": "d4ea1bf2dcbe1c4d522e2c06953988993a9acdf1" },
   "nvim-lspconfig": { "branch": "master", "commit": "95fe3c170753238d3ca4f760e79a991400677abc" },
   "nvim-nio": { "branch": "master", "commit": "21f5324bfac14e22ba26553caf69ec76ae8a7662" },
+  "nvim-origami": { "branch": "main", "commit": "d42d11008a32f5f8c92bca6fd63f6782f197d114" },
   "nvim-pqf": { "branch": "main", "commit": "7a6730636eb693f31892fbe2bab8f33d82ab78f4" },
   "nvim-treesitter": { "branch": "master", "commit": "42fc28ba918343ebfd5565147a42a26580579482" },
   "nvim-treesitter-context": { "branch": "master", "commit": "660861b1849256398f70450afdf93908d28dc945" },
