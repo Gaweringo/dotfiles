@@ -64,6 +64,7 @@ return {
 				'vhdl_ls',
 				'tinymist',
 				'jsonls',
+				'zls',
 			}
 		}
 	},
