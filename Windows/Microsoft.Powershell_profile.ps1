@@ -29,7 +29,9 @@ Import-Module 'gsudoModule'
 # FIXME: Long load time
 # Import-Module posh-git
 
-# ALIAS
+$env:EDITOR = "nvim"
+
+##### ALIASes ##################################################################
 # neovim alias
 Set-Alias -Name n -Value nvim
 # neogit alias
@@ -65,10 +67,7 @@ Set-Alias -Name tx -Value xt
 Set-Alias -Name snv -Value svn
 {{/if}}
 
-# Copy current directory
-Function pwdc { (pwd).path | clip }
-
-# Better cds
+##### Better cds ###############################################################
 Function .. { cd .. }
 
 # cd to first subfolder with this name
@@ -104,12 +103,13 @@ function yy {
 Set-Alias -Name y -Value yazi
 {{/if}}
 
+# Copy current directory
+Function pwdc { (pwd).path | clip }
+
+##### Usefull commands #########################################################
+
 # yt-dlp mp3 download alias
 Function yt-mp3 {yt-dlp -f 'ba' -x --audio-format mp3 $args}
-
-{{#if sen_folder}}
-Function sen {fd . '{{sen_folder}}' -t d -d 1 | fzf | cd}
-{{/if}}
 
 {{#if programming_folder}}
 Function programming {$prog_dir = fd . '{{programming_folder}}' -t d -d 1 | fzf;
@@ -135,8 +135,39 @@ function Setup-VS {
   }
 }
 
+# Get new changes made to path env-variable
+function RefreshPath {
+  # Source - https://stackoverflow.com/a/31845512
+  # Posted by mpen, modified by community. See post 'Timeline' for change history
+  # Retrieved 2025-12-30, License - CC BY-SA 3.0
+  $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+}
 
-## COMPLETIONS ##
+# Update a environment variable from the system.
+# Meaning that environment variables changed while this shell was active can be read in and made available.
+function RefreshVar($varname) {
+  if ($varname -ieq "path") {
+    Write-Host "Refreshing `$env:PATH"
+    RefreshPath
+    return
+  }
+
+  $variable = [System.Environment]::GetEnvironmentVariable("$varname","User")
+  if ($variable -eq $null) {
+    $variable = [System.Environment]::GetEnvironmentVariable("$varname","Machine")
+  }
+  if ($variable -eq $null) {
+    Write-Host "No EnvironmentVariable with name '${varname}' found"
+  } else {
+    $oldvalue = Get-Item -Path Env:"$varname" -ErrorAction Ignore
+    if ($oldvalue -ne $null) {
+      Write-Host "Overriding `$env:`"${varname}`" which was '$($oldvalue.Value)'"
+    }
+    New-Item -Path Env: -Name $varname -Value $variable -Force
+  }
+}
+
+##### COMPLETIONS ##############################################################
 # dotter completions
 # . "$PSScriptRoot\Completions\dotter.ps1"
 
@@ -150,22 +181,28 @@ function Setup-VS {
 # . "$PSScriptRoot\Completions\caddy.ps1"
 {{/if}}
 
+{{#if (is_executable "jj")}}
 # jj
 . "$PSScriptRoot\Completions\jj.ps1"
+{{/if}}
+
+{{#if (is_executable "watchexec")}}
+# . "$PSScriptRoot\Completions\watchexec.ps1"
+{{/if}}
 
 # fzf completions
 if (Get-Module -ListAvailable -Name PSFzf) {
   Import-Module PSFzf
 
-# Override PSReadLine's history search
+  # Override PSReadLine's history search
   Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' `
                   -PSReadlineChordReverseHistory 'Ctrl+r'
 }
 else {
-    Write-Host "PSFzf not installed: Install-Module -Name PSFzf"
+    Write-Host "PSFzf not installed. Please run: Install-Module -Name PSFzf"
 }
 
-# Starship prompt
+##### Starship prompt ##########################################################
 function Invoke-Starship-PreCommand {
   $loc = $executionContext.SessionState.Path.CurrentLocation;
   $prompt = "$([char]27)]9;12$([char]7)"
@@ -182,18 +219,15 @@ function Invoke-Starship-PreCommand {
 
 . "$PSScriptRoot\Completions\starship.ps1"
 
-{{#if (is_executable "watchexec")}}
-# . "$PSScriptRoot\Completions\watchexec.ps1"
-{{/if}}
 
 {{#if (is_executable "Rcmd")}}
-rm alias:\r
+if (Test-Path alias:r) {
+  Remove-Alias -Name r
+}
 {{/if}}
 
-$env:EDITOR = "nvim"
 
+##### Zoxide integration #######################################################
 # Needs to be at the bottom
-# To initialize zoxide, add this to your configuration (find it by running
-# `echo $profile` in PowerShell):
-#
+# To initialize zoxide, add this to your configuration (find it by running # `echo $profile` in PowerShell):
 Invoke-Expression (& { $hook = if ($PSVersionTable.PSVersion.Major -ge 6) { 'pwd' } else { 'prompt' } (zoxide init powershell --hook $hook | Out-String) })
