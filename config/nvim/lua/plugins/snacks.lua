@@ -1,4 +1,15 @@
 -- Some examples and stuff: https://github.com/folke/snacks.nvim/discussions/1768
+
+-- https://github.com/folke/snacks.nvim/discussions/2091#discussioncomment-13933704
+local function full_path(picker, item)
+  -- Show the full (possibly relative) path to the item.
+  if item then
+    vim.schedule(function()
+      picker.preview.win:set_title(vim.fn.fnamemodify(item.file, ":~:."))
+    end)
+  end
+end
+
 return {
   {
   'gaweringo/snacks.nvim',
@@ -113,6 +124,10 @@ return {
             },
           },
         },
+        files = { on_change = full_path },
+        smart = { on_change = full_path },
+        grep = { on_change = full_path },
+        grep_word = { on_change = full_path },
       },
     },
     image = { enabled = true, doc = { enabled = false, conceal = true }, convert = { notify = false } }, -- Image, pdf and previews of them in typst, latex and markdown in neovim
