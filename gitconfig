@@ -67,6 +67,7 @@
 	# rebase
 	rc = rebase --continue
 	ra = rebase --abort
+	ras = rebase --autostash
 
 	# restore
 	rss = restore --staged
