@@ -1,5 +1,3 @@
-local ts_utils = require('nvim-treesitter.ts_utils')
-
 return { -- Normal snippets
   s({ trig = 'rfive', desc = 'Implement rule of five' },
     fmta([[
@@ -13,7 +11,7 @@ virtual ~<class_name>()<action>;
       {
         class_name = d(1, function()
           -- Find name of current class or struct
-          local status, node = pcall(ts_utils.get_node_at_cursor)
+          local status, node = pcall(vim.treesitter.get_node)
           while status and node ~= nil do
             if node:type() == "struct_specifier" or node:type() == "class_specifier" then
               local name = node:field('name')

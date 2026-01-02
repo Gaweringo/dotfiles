@@ -19,8 +19,9 @@ local trouble_previous = function()
   end
 end
 
-local ts_repeat_move = require 'nvim-treesitter.textobjects.repeatable_move'
-local trouble_next_repeat, trouble_previous_repeat = ts_repeat_move.make_repeatable_move_pair(trouble_next, trouble_previous)
+-- TODO: Integrate this somehow
+-- local ts_repeat_move = require 'nvim-treesitter-textobjects.repeatable_move'
+-- local trouble_next_repeat, trouble_previous_repeat = ts_repeat_move.make_repeatable_move_pair(trouble_next, trouble_previous)
 
 return {
   'folke/trouble.nvim',
