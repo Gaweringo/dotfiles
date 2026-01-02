@@ -11,6 +11,12 @@ vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { silent = true, noremap = true
 -- Ctrl-Backspace to delete whole word in insert mode
 vim.keymap.set('i', '<C-BS>', '<C-w>')
 
+-- Alt+d/c to delete into the black hole register (yanked from helix)
+vim.keymap.set({ 'n', 'v', 'x' }, '<A-d>', '"_d')
+vim.keymap.set({ 'n', 'v', 'x' }, '<A-D>', '"_D')
+vim.keymap.set({ 'n', 'v', 'x' }, '<A-c>', '"_c')
+vim.keymap.set({ 'n', 'v', 'x' }, '<A-C>', '"_C')
+
 -- Do not jump to next match with *
 -- https://stackoverflow.com/a/4257175
 vim.keymap.set('n', '*', ':keepjumps normal! mi*`i<CR>', { silent = true, noremap = true })
@@ -24,6 +30,11 @@ vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('t', '<C-k>', function() vim.cmd.wincmd 'k' end, { desc = 'Move out of terminal' })
+
+-- Keep search directions the same, no matter if ? or / is used. n always goes forward and N always backwards.
+-- https://superuser.com/a/1454131
+vim.keymap.set({ 'n', 'v' }, 'n', '/<CR>', { silent = true, noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'N', '?<CR>', { silent = true, noremap = true })
 
 -- Clear quickfix list
 vim.keymap.set('n', '<leader>xc', '<cmd>call setqflist([])<CR>', { desc = '[c]lear quickfix list' })

@@ -1,17 +1,26 @@
 local opt = vim.opt
 
+-- The global leader for most of the custom keymappings.
 vim.g.mapleader = ' '
+
+-- Local leader is used for file-type specific mappings.
+-- For example the preview commands for markdown and typst both use <localleader>p
 vim.g.localleader = '\\'
--- Set to true if you have a Nerd Font installed
+
+-- Set to true if you have a Nerd Font installed, so that
+-- we get nice looking icons.
 vim.g.have_nerd_font = true
 
----------- basic options --------
--- Show numbers and make them relative
+----- basic options ------------------------------------------------------------
+-- Show line numbers and make them relative to the cursor position
 opt.number = true
 opt.relativenumber = true
 
+-- Disable visual wrapping of lines, as that is disorienting for code.
+-- But because it can sometimes be useful, there is a keymap to
+-- toggle the wrapping with <leader>tW
 opt.wrap = false
--- Enable break indent, to continue wrapped lines with current indentation
+-- If wrap is enabled, wrapped lines should continue with the current indentation
 opt.breakindent = true
 -- Number of lines to keep above and below cursor and left / right
 opt.scrolloff = 8
@@ -25,32 +34,36 @@ vim.opt.jumpoptions = "stack"
 -- Let block select select virtual space (beyond end of line)
 opt.virtualedit = "block"
 
-------- file handling -------
+-- Only read modeline strings in first and last two lines of a file
+vim.opt.modelines = 2
 
--- Saving undo history to file, so it persits between neovim sessions
+----- file handling ------------------------------------------------------------
+
+-- Saving undo history to file, so it persists between neovim sessions
 opt.undofile = true
-opt.autoread = true  -- automatically reload files that changed outside of nvim
+ -- automatically reload files that changed outside of neovim
+opt.autoread = true
 
--------- indentation ---------
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.softtabstop = 4
-opt.expandtab = true   -- spaces instead of tabs
-opt.smartindent = true -- smarter auto indentation for c-like files
-opt.autoindent = true  -- keep indent from current line
+----- indentation --------------------------------------------------------------
+opt.tabstop = 8        -- Display width of an actual \t (tab character)
+opt.shiftwidth = 4     -- Indentation used for (auto)indent and >> and << movements
+opt.softtabstop = -1   -- Width of <Tab> when editing (inserting/deleting) (negative to use value of shiftwidth)
+opt.expandtab = true   -- Insert spaces instead of tabs
+opt.smartindent = true -- Smarter auto indentation for c-like files
+opt.autoindent = true  -- Keep indent from current line
 
--------- search / substitution ---------
+----- search / substitution ----------------------------------------------------
 -- Case-insensitive searching UNLESS \C or capital in search
 opt.ignorecase = true
 opt.smartcase = true
 opt.incsearch = true
 opt.hlsearch = true
 
--- Preview substitions live
+-- Preview substitutions live
 opt.inccommand = 'split'
 
----------- visual things --------------
--- Showing whitespace characters
+----- visual things ------------------------------------------------------------
+-- Showing white space characters
 opt.list = true
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
@@ -61,7 +74,7 @@ opt.timeoutlen = 500
 -- Don't show the mode, since it's already in status line
 opt.showmode = false
 
--- Keep signcolumn on by default, so that it doesn't jump around when stuff gets displayd / not displayed there
+-- Keep signcolumn on by default, so that it doesn't jump around when stuff gets displayed / not displayed there
 opt.signcolumn = 'yes'
 
 opt.termguicolors = true  -- 24-bit color
@@ -74,9 +87,7 @@ opt.concealcursor = ""    -- don't conceal where the cursor is
 opt.lazyredraw = true     -- don't redraw during macros
 opt.cursorline = true     -- Highlight the line the cursor is on
 
-------- diagnostics ----------
--- Highlight entire line for errors
--- Highlight the line number for warnings
+----- diagnostics --------------------------------------------------------------
 vim.diagnostic.config({
   signs = {
     text = {
@@ -94,24 +105,32 @@ vim.diagnostic.config({
   },
 })
 
------- splits and windows -------
+----- splits and windows -------------------------------------------------------
 
 -- Configure how new windows (:win :vwin) should be opened
-opt.splitright = true
-opt.splitbelow = true
+opt.splitright = true -- :vwin puts new windows to the right
+opt.splitbelow = true -- :win puts new windows at the bottom
 
 -- Use vertical split as standard for :diffsplit
 opt.diffopt:append 'vertical,linematch:60,algorithm:histogram'
 
------- behaviour --------
+----- behaviour ----------------------------------------------------------------
 opt.hidden = true -- allow hidden buffers (to keep undo history and other things)
 
--------------------- Filetypes -------------------
+----- Filetypes ----------------------------------------------------------------
 
--- Do files for VHDL simulators are tcl files
-vim.filetype.add { extension = { ['do'] = 'tcl' } }
+vim.filetype.add {
+  filename = {
+    -- Because tree-sitter has a parser specifically for kitty
+    ['kitty.conf'] = 'kitty',
+  },
+  extension = {
+    -- Do files for VHDL simulators are tcl files
+    ['do'] = 'tcl'
+  }
+}
 
--------------------- Neovide ---------------------
+----- Neovide ------------------------------------------------------------------
 
 if vim.g.neovide then
   vim.g.neovide_scale_factor = 0.85
@@ -120,6 +139,8 @@ if vim.g.neovide then
   vim.g.neovide_normal_opacity = 0.9
   vim.g.neovide_hide_mouse_when_typing = 1
 end
+
+----- Windows ------------------------------------------------------------------
 
 if vim.fn.has('win32') == 1 and vim.fn.has('wsl') == 0 then
   -- Using powershell as the shell
