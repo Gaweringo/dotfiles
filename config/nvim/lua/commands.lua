@@ -66,6 +66,26 @@ vim.api.nvim_create_user_command('Pwdc', function()
   vim.cmd [[let @+ = trim(execute('pwd'))]]
 end, { desc = 'Copy pwd to system clipboard' })
 
+-- Copy path to folder of current file relative to the current working directory if possible
+vim.api.nvim_create_user_command('CopyFolderPathOfCurrentFile', function()
+    vim.cmd [[let @+ = trim(expand('%:.:h'))]]
+end, { desc = 'Copy path to current files folder (relative to pwd) to system clipboard' })
+
+-- Copy path to folder of current file
+vim.api.nvim_create_user_command('CopyFolderPathOfCurrentFileFull', function()
+    vim.cmd [[let @+ = trim(expand('%:p:h'))]]
+end, { desc = 'Copy path to current files folder to system clipboard' })
+
+-- Copy path to the current file relative to the current working directory if possible
+vim.api.nvim_create_user_command('CopyCurrentFilePath', function()
+    vim.cmd [[let @+ = trim(expand('%:.'))]]
+end, { desc = 'Copy path to current file (relative to pwd) to system clipboard' })
+
+-- Copy full path to the current file
+vim.api.nvim_create_user_command('CopyCurrentFilePathFull', function()
+    vim.cmd [[let @+ = trim(expand('%:p'))]]
+end, { desc = 'Copy full path to current files folder to system clipboard' })
+
 -- Clear the temp shada files (mostly for windows)
 vim.api.nvim_create_user_command('ClearTempShada', function()
     local path = vim.fn.stdpath('data') .. '/shada/'
@@ -75,3 +95,4 @@ vim.api.nvim_create_user_command('ClearTempShada', function()
       vim.fs.rm(file)
     end
 end, { desc = 'Delete *.tmp.[A-z] shada files' })
+
