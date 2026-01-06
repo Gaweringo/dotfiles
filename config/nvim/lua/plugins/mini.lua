@@ -1,7 +1,7 @@
 return {
   {
     -- Collection of various small independent plugins/modules
-    'echasnovski/mini.nvim',
+    'nvim-mini/mini.nvim',
     version = '*', -- stable (use false for main branch)
     config = function()
       --------- Text Editing ---------

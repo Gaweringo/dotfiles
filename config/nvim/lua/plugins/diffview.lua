@@ -16,7 +16,7 @@ return {
     },
   },
   -- For icons
-  dependencies = { 'echasnovki/mini.nvim' },
+  dependencies = { 'nvim-mini/mini.nvim' },
   init = function()
     -- Diffview only supports nvim-web-devicons, so we let mini.icons mock it
     require('mini.icons').mock_nvim_web_devicons()

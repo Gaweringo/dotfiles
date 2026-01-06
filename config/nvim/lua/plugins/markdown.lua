@@ -19,7 +19,7 @@ return {
       completions = { lsp = { enabled = true }, blink = { enabled = true } },
       code = { border = 'thick' },
     },
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim', 'saghen/blink.cmp' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim', 'saghen/blink.cmp' },
   },
 
   -- install without yarn or npm

@@ -2,7 +2,7 @@
 return {
   'stevearc/oil.nvim',
   lazy = false,
-  dependencies = { 'echasnovski/mini.nvim' },
+  dependencies = { 'nvim-mini/mini.nvim' },
   config = function()
     -- Enable icons
     require('mini.icons').setup()

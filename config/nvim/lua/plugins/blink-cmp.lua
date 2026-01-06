@@ -1,6 +1,6 @@
 return {
   'saghen/blink.cmp',
-  dependencies = { 'rafamadriz/friendly-snippets', 'L3MON4D3/LuaSnip', 'echasnovski/mini.nvim', 'Kaiser-Yang/blink-cmp-git' },
+  dependencies = { 'rafamadriz/friendly-snippets', 'L3MON4D3/LuaSnip', 'nvim-mini/mini.nvim', 'Kaiser-Yang/blink-cmp-git' },
   event = "InsertEnter",
   -- use a release tag to download pre-built binaries
   version = '1.*',
