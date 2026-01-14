@@ -160,7 +160,7 @@ if vim.fn.has('win32') == 1 and vim.fn.has('wsl') == 0 then
 end
 
 -- System clipboard for wsl
-if vim.fn.has('wsl') then
+if vim.fn.has('wsl') == 1 then
   vim.g.clipboard = {
     name = 'WslClipboard',
     copy = {
