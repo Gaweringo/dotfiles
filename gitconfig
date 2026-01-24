@@ -42,7 +42,22 @@
 	ds = diff --staged
 
 	# fzf based branch switching
-	sw = !git switch $(git branch -a --format='%(if)%(HEAD)%(then)%(color:magenta)%(refname:short)%(color:reset)%(else)%(if)%(worktreepath)%(then)%(color:cyan)%(else)%(color:yellow)%(end)%(refname:short)%(color:reset)%(end) %(if)%(worktreepath)%(then)(%(worktreepath))%(end) -- %(contents:subject) (%(color:blue)%(committerdate:relative)%(color:reset))' --color=always | fzf --height=40% --ansi --reverse --info=inline --query="$1" --delimiter=' ' --accept-nth=1 --select-1 --preview='git log -n5 {1}')
+	sw = !git switch $(git branch -a --format='\
+%(if:equals=refs/remotes)%(refname:rstrip=2)%(then)\
+%(color:red)%(refname:lstrip=-1)%(color:reset)\
+%(else)%(if)%(HEAD)%(then)\
+%(color:green)%(refname:short)%(color:reset)\
+%(else)%(if)%(worktreepath)%(then)\
+%(color:cyan)%(else)%(color:yellow)\
+%(end)\
+%(refname:short)%(color:reset)\
+%(end)\
+%(end)\
+%(if)%(worktreepath)%(then) \
+-- %1B[37m(%(worktreepath))%1B[m\
+%(end) \
+-- %(contents:subject) (%(color:blue)%(committerdate:relative)%(color:reset)) \
+%1B[90m -- %(refname:short)%1B[m' --color=always | fzf --height=40% --ansi --reverse --info=inline --query="$1" --delimiter='--' --accept-nth=1 --select-1 --preview='git log -n5 {-1} --color=always')
 
 	# show incoming and outgoing commits
 	in = log --oneline '@..@{u}'
