@@ -59,7 +59,12 @@ return {
     )
   ),
   postfix({ trig = ".nret", match_pattern = "[%w%.%_%->]+$", desc = 'Null check return' }, {
-      l("if (" .. l.POSTFIX_MATCH .. " == NULL) { return; }"),
+      l("if (" .. l.POSTFIX_MATCH .. " == NULL) { return"),
+      c(1, {
+        sn(nil, { t" ", i(1, ' false')} ),
+        t"",
+      }),
+      t("; }"),
       t {"", ""}, -- newline
     }
   ),
