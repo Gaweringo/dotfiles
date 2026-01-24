@@ -54,6 +54,9 @@ depends = ["bin"]
 [rofi.files]
 "config/rofi" = "~/.config/rofi"
 
+[ly.files]
+"ly-config.ini" = { target = "/etc/ly/config.ini", type = "template", if = '(is_executable "ly-dm")', owner = 'root' }
+
 #######
 
 [chromium.files]
