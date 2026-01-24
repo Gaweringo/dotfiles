@@ -3,6 +3,9 @@ local function get_comment_string()
   return comment_str
 end
 
+-- NOTE: There is also a autocommand in autocommands.lua which
+-- registers aut-generated filetype specific snippets
+
 return {
   s('todo',
     {

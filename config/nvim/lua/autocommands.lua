@@ -97,3 +97,69 @@ vim.api.nvim_create_autocmd('QuitPre', {
     end
   end,
 })
+
+-- Section indicator snippet auto created for each language (LuaSnip)
+local already_registered = {}
+local lsg = vim.api.nvim_create_augroup('LuaSnipSnippets', { clear = true })
+
+-- How many characters should be put before the
+-- section text. so 7 would mean for C: ///////
+local pre_text_len = 7
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = lsg,
+  callback = function (args)
+    local filetype = args.match
+    if vim.list_contains(already_registered, filetype) then return end
+    table.insert(already_registered, filetype)
+
+    local comment_str = vim.bo.commentstring
+    comment_str = string.gmatch(comment_str, '%S+')()
+    if comment_str == nil then return end
+
+    local ls = require('luasnip')
+    local s = require("luasnip.nodes.snippet").S
+    local sn = require("luasnip.nodes.snippet").SN
+    local t = require("luasnip.nodes.textNode").T
+    local i = require("luasnip.nodes.insertNode").I
+    local d = require("luasnip.nodes.dynamicNode").D
+    local l = require("luasnip.extras").lambda
+    local dl = require("luasnip.extras").dynamic_lambda
+    local fmta = require("luasnip.extras.fmt").fmta
+
+    local comment_repeat = comment_str:sub(-1)
+    local pretext = comment_str .. string.rep(comment_repeat, pre_text_len - comment_str:len() )
+
+    ls.add_snippets(filetype, {
+      s(
+        comment_str .. 'sec',
+        fmta(
+          [[
+    <pre> <section> <fill_line>
+    <finish>
+    ]],
+          {
+            pre = t(pretext),
+            section = dl(1, l.CAPTURE1, {}),
+            fill_line = d(2, function(args, parent, _old_state, _user_args)
+              local section = args[1][1]
+              if section == nil then return sn(nil, {}) end
+
+              -- parent.env.TM_CURRENT_LINE is the line up to and including the snippet trigger <comment_str>sec
+              -- So we substract the commentstring and 'sec' part to get the line indentation
+              local line_indent = string.len(parent.env.TM_CURRENT_LINE) - comment_str:len() - 3
+              local section_len = string.len(section)
+              local tw = vim.o.textwidth
+              if tw == 0 then tw = 100 end
+              -- The -2 is because of the two spaces added around the section
+              return sn(nil, t { string.rep(comment_repeat, tw - section_len - line_indent - pre_text_len - 2 )})
+            end, {1}),
+            finish = i(0)
+          }
+        )
+      ),
+    }, { type = "autosnippets", key = filetype .. comment_str })
+
+  end
+})
+

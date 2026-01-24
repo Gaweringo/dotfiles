@@ -50,11 +50,21 @@ return {
     '//===',
     fmta(
       [[
-    // ========== <section> ==========<finish>
+    //===== <section> <fill_line>
+    <finish>
     ]],
       {
-        section = i(1),
-        finish = i(0),
+        section = dl(1, l.CAPTURE1, {}),
+        fill_line = d(2, function(args, parent, _old_state, _user_args)
+          local section = args[1][1]
+          if section == nil then return sn(nil, {}) end
+
+          local line_len = string.len(parent.env.TM_CURRENT_LINE)
+          local section_len = string.len(section)
+          local tw = vim.o.textwidth
+          return sn(nil, t { string.rep("=", tw - section_len - line_len - 4 )})
+        end, {1}),
+        finish = i(0)
       }
     )
   ),
