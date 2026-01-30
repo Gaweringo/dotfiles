@@ -5,10 +5,10 @@ vim.lsp.config("tinymist", {
     -- semanticTokens = "disable", -- Maybe disable?
     lint          = { enabled = true },
   },
-  -- TODO: figure out way to set root dir nicely (seems to not work when setting it here like that. LSP Doesn't start)
-  -- root_dir = function()
-  --   return vim.fn.getcwd()
-  -- end
+
+  root_dir = function(bufnr, on_dir)
+    on_dir(vim.fn.getcwd())
+  end
 })
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
