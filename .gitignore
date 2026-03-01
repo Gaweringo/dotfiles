@@ -3,3 +3,11 @@
 Session.vim
 # !.dotter/include/
 # !.dotter/global.toml
+
+# Sway
+# nwg-displays
+/config/sway/outputs
+/config/sway/output_persist
+
+# Nvim
+/config/nvim/spell/
