@@ -13,9 +13,9 @@ return {
         'devicetree', 'diff', 'disassembly', 'dockerfile', 'doxygen', 'ebnf', 'editorconfig', 'fish', 'git_config',
         'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'html', 'ini', 'jq', 'json', 'json5', 'julia',
         'just', 'kconfig', 'kitty', 'latex', 'lua', 'make', 'markdown', 'markdown_inline', 'matlab', 'mermaid', 'ninja',
-        'nix', 'objdump', 'powershell', 'printf', 'python', 'query', 'regex', 'rst', 'rust', 'sql', 'ssh_config',
-        'strace', 'sway', 'systemverilog', 'tcl', 'toml', 'typst', 'udev', 'vhdl', 'vim', 'vimdoc', 'xml', 'yaml',
-        'zig',
+        'nix', 'objdump', 'powershell', 'printf', 'python', 'qmldir', 'qmljs', 'query', 'regex', 'rst', 'rust', 'sql',
+        'ssh_config', 'strace', 'sway', 'systemverilog', 'tcl', 'toml', 'typst', 'udev', 'vhdl', 'vim', 'vimdoc', 'xml',
+        'yaml', 'zig',
       }
       local no_ts_indent = { --[[ 'vhdl' ]] }
 
