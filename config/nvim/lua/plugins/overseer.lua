@@ -12,6 +12,7 @@ return {
     { '<leader>oQ', '<cmd>OverseerQuickAction open output in quickfix<cr>', desc = 'open output in [Q]uickfix' },
     { '<leader>oT', '<cmd>OverseerQuickAction open tab<cr>',                desc = 'open output in [T]ab' },
     { '<leader>ov', '<cmd>OverseerQuickAction open vsplit<cr>',             desc = 'open output in [v]split' },
+    { '<leader>of', '<cmd>OverseerQuickAction open float<cr>',              desc = 'open output in [f]loat' },
     { '<leader>os', '<cmd>OverseerQuickAction stop<cr>',                    desc = '[s]top' },
     { '<leader>os', '<cmd>OverseerQuickAction stop<cr>',                    desc = '[s]top' },
     { '<leader>ol', '<cmd>OverseerLoadBundle<cr>',                          desc = '[l]oad bundle' },
