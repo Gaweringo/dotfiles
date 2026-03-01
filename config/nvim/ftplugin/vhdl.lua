@@ -1,4 +1,5 @@
-vim.b.shiftwidth = 3
-vim.o.expandtab = true
+vim.bo.shiftwidth = 4
+vim.bo.expandtab = true
 vim.b.disable_autoformat = true
--- vim.cmd [[comments=:--]]
+vim.bo.comments = ':--'
+vim.opt_local.formatoptions:append('r')
