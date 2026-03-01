@@ -109,6 +109,7 @@ sudo pacman -S --noconfirm --needed \
     speedcrunch \
     libreoffice \
     nautilus \
+    dolphin \
     qalculate-qt \
     audacity \
     obs-studio
