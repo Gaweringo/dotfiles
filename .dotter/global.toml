@@ -28,7 +28,7 @@ ideavimrc = "~/.ideavimrc"
 
 ####### Sway
 [sway]
-depends = ["swayosd", "swaylock", "bin", "rofi", "i3status-rust", "chromium", "kitty", "systemd", "foot"]
+depends = ["swayosd", "swaylock", "bin", "rofi", "i3status-rust", "chromium", "kitty", "systemd", "foot", "satty"]
 
 [sway.files]
 "config/sway" = { target = "~/.config/sway", type = "symbolic", recurse = false }
@@ -56,6 +56,9 @@ depends = ["bin"]
 
 [ly.files]
 "ly-config.ini" = { target = "/etc/ly/config.ini", type = "template", if = '(is_executable "ly-dm")', owner = 'root' }
+
+[satty.files]
+"config/satty-config.toml" = "~/.config/satty/config.toml"
 
 #######
 

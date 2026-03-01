@@ -85,11 +85,13 @@ sudo pacman -S --noconfirm --needed \
     playerctl \
     wiremix \
     wireplumber \
+    slurp \
+    grim \
     satty \
     wlsunset \
+    wf-recorder \
     wl-clip-persist cliphist \
-    hyprpicker \
-    slurp
+    hyprpicker
 
 paru -S --noconfirm --needed wl-screenrec
 
