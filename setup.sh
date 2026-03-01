@@ -69,8 +69,14 @@ sudo pacman -S --noconfirm --needed \
     valgrind \
     strace \
     openocd \
-    arm-none-eabi-gdb arm-none-eabi-gcc \
+    arm-none-eabi-gdb arm-none-eabi-gcc arm-none-eabi-newlib \
     uv \
+    wireshark-qt \
+    meson \
+    bear \
+    minicom picocom \
+    progress \
+    inetutils \
     xmake
 
 # Desktop utilities
@@ -102,6 +108,7 @@ sudo pacman -S --noconfirm --needed \
     libreoffice \
     nautilus \
     qalculate-qt \
+    audacity \
     obs-studio
 
 # TODO: Look into localsend (firewall things)
@@ -123,10 +130,10 @@ sudo pacman -S --noconfirm --needed \
     swaylock \
     swayosd \
     rofi rofi-calc \
-    autotiling-rs \
     xdg-desktop-portal xdg-desktop-portal-wlr \
     nwg-displays \
     i3status-rust \
+    xorg-xwayland \
     dmenu
 
 # wifi / network
