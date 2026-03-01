@@ -40,11 +40,12 @@ local vunit_test_tmpl = {
         testcase = { optional = true, type = 'string', desc = 'The testcase to run' },
         gui = { optional = true, type = 'boolean', desc = 'Run test case in gui', default = false },
         cwd = { optional = true, type = 'string', desc = 'Directory of vunit run.py file', default = findVunitDir() },
-        parallel = { optional = true, type = 'integer', desc = 'How many testcases to run in parallel', default = #vim.uv.cpu_info() }
+        parallel = { optional = true, type = 'integer', desc = 'How many testcases to run in parallel', default = #vim.uv.cpu_info() },
+        minimal = { optional = true, type = 'boolean', desc = 'Only build required modules for testcase', default = true },
     },
     builder = function(params)
         -- https://github.com/stevearc/overseer.nvim/blob/master/doc/guides.md#custom-tasks
-        local uses_uv = vim.fs.find('pyproject.toml', { dir = params.cwd }) ~= nil
+        local uses_uv = vim.fs.find('pyproject.toml', { dir = params.cwd }) ~= nil and vim.fn.executable('uv')
 
         local cmd = 'python'
         if uses_uv then
@@ -60,6 +61,10 @@ local vunit_test_tmpl = {
             -- prepend run -q
             table.insert(args, 1, '-q')
             table.insert(args, 1, 'run')
+        end
+
+        if params.minimal then
+            table.insert(args, '-m')
         end
 
         if params.gui then
