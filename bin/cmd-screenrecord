@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+TIMESTAMP=$(date +%Y-%m-%d_%H:%M:%S)
+TMP_DIR="/tmp/screenrecord"
+CURRENT_RECORDING_FILE="$TMP_DIR/current-recording.txt"
+RECORDING_DIR=~/Videos/Screenrecordings
+
+finish_record() {
+    pkill --signal SIGINT wf-recorder
+    ACTION=$(notify-send -e "Stopped recording" "File saved at: $(cat $CURRENT_RECORDING_FILE)" \
+                         -A "open=Open folder" -A "view=View recording")
+
+    case $ACTION in
+        "open")
+            xdg-open "$RECORDING_DIR"
+            ;;
+        "view")
+            xdg-open "$(cat "$CURRENT_RECORDING_FILE")"
+            ;;
+    esac
+}
+
+# Check if there is already a recording running
+if [ -n "$(pidof wf-recorder)" ]; then
+    finish_record
+else
+    mkdir -p "$TMP_DIR"
+    mkdir -p "$RECORDING_DIR"
+    RECORD_FILE="$RECORDING_DIR/Recording_$TIMESTAMP.mp4"
+    echo "$RECORD_FILE" > "$CURRENT_RECORDING_FILE"
+
+    REGION=$(slurp -w 0 -d)
+    if [ $? -ne 0 ]; then exit 1; fi
+
+    wf-recorder -g "$REGION" --file "$(realpath "$RECORD_FILE")" &
+
+    # Check if recording started
+    PID=$!
+    sleep 0.5
+    kill -0 "$PID" # Check if still alive
+    if [ $? -ne 0 ]; then
+        notify-send -e "Failed to start screenrecording"
+        exit 1
+    fi
+
+    # Notify the user
+    ACTION=$(notify-send "Started recording" "Writing to: $(cat $CURRENT_RECORDING_FILE)\nPress record shortcut again to stop" \
+                         -A "finish=Finish recording" -A "abort=Abort recording")
+    case $ACTION in
+        "finish")
+            finish_record
+            ;;
+        "abort")
+            pkill wf-recorder
+            rm "$(cat "$CURRENT_RECORDING_FILE")"
+            ;;
+    esac
+fi
+
