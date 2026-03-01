@@ -8,7 +8,8 @@ RECORDING_DIR=~/Videos/Screenrecordings
 finish_record() {
     pkill --signal SIGINT wf-recorder
     ACTION=$(notify-send -e "Stopped recording" "File saved at: $(cat $CURRENT_RECORDING_FILE)" \
-                         -A "open=Open folder" -A "view=View recording")
+                         -i media-video \
+                         -A "open=Open folder" -A "view=View recording" -A "delete=Delete recording")
 
     case $ACTION in
         "open")
@@ -16,6 +17,9 @@ finish_record() {
             ;;
         "view")
             xdg-open "$(cat "$CURRENT_RECORDING_FILE")"
+            ;;
+        "delete")
+            rm "$(cat "$CURRENT_RECORDING_FILE")"
             ;;
     esac
 }
@@ -36,15 +40,16 @@ else
 
     # Check if recording started
     PID=$!
-    sleep 0.5
+    sleep 0.3
     kill -0 "$PID" # Check if still alive
     if [ $? -ne 0 ]; then
-        notify-send -e "Failed to start screenrecording"
+        notify-send -e "Failed to start screenrecording" -i process-error
         exit 1
     fi
 
     # Notify the user
     ACTION=$(notify-send "Started recording" "Writing to: $(cat $CURRENT_RECORDING_FILE)\nPress record shortcut again to stop" \
+                        --icon=media-record \
                          -A "finish=Finish recording" -A "abort=Abort recording")
     case $ACTION in
         "finish")
@@ -53,6 +58,7 @@ else
         "abort")
             pkill wf-recorder
             rm "$(cat "$CURRENT_RECORDING_FILE")"
+            notify-send -e "Aborted recording" -i process-stop
             ;;
     esac
 fi
