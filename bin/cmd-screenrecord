@@ -33,7 +33,7 @@ else
     RECORD_FILE="$RECORDING_DIR/Recording_$TIMESTAMP.mp4"
     echo "$RECORD_FILE" > "$CURRENT_RECORDING_FILE"
 
-    REGION=$(slurp -w 0 -d)
+    REGION=$(slurp -w 1 -d)
     if [ $? -ne 0 ]; then exit 1; fi
 
     wf-recorder -g "$REGION" --file "$(realpath "$RECORD_FILE")" &
