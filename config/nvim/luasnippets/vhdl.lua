@@ -37,33 +37,37 @@ library vunit_lib;
 context vunit_lib.vunit_context;
 
 entity {tb_name} is
-  generic (runner_cfg : string);
+    generic (runner_cfg : string);
 end entity;
 
 architecture tb of {tb_name} is
-   signal clk    : std_ulogic := '0';
-   signal nReset : std_ulogic := '0';
+    constant c_clk_freq   : positive     := 50e6;
+    constant c_clk_period : delay_length := 1 sec / c_clk_freq;
+
+    signal clk    : std_ulogic := '0';
+    signal reset_n : std_ulogic := '0';
 begin
-  main : process
-  begin
-    test_runner_setup(runner, runner_cfg);
 
-    while test_suite loop
+    main : process
+    begin
+        test_runner_setup(runner, runner_cfg);
 
-      if run("{test_case1}") then
-        report "This will pass";
-        {finish}
+        while test_suite loop
 
-      elsif run("{test_case2}") then
-        assert false report "It fails";
+            if run("{test_case1}") then
+                report "This will pass";
+                {finish}
 
-      end if;
-    end loop;
+            elsif run("{test_case2}") then
+                assert false report "It fails";
 
-    test_runner_cleanup(runner);
-  end process;
+            end if;
+        end loop;
 
-  clk <= not clk after ((1 sec)/cClkFrequency)/2;
+      test_runner_cleanup(runner);
+    end process;
+
+    clk <= not clk after c_clk_period / 2;
 
 end architecture;
     ]],
@@ -150,14 +154,85 @@ end process RAM;
       }
     )
   ),
+  s(
+    'm_axistream_if',
+    fmta(
+      [[
+      m_axis_tdata  : out std_ulogic_vector(<width>-1 downto 0);
+      m_axis_tvalid : out std_ulogic;
+      m_axis_tready : in std_ulogic;
+      <optional><finish>
+    ]],
+      {
+        width = i(1),
+        optional = c(2, {
+          t "",
+          t "m_axis_tlast  : out std_ulogic;",
+          sn(nil, { t "m_axis_tuser  : out std_ulogic_vector(", i(1), t "-1 downto 0);" }),
+          sn(nil, {
+            t { "m_axis_tlast  : out std_ulogic;", "" },
+            t "m_axis_tuser  : out std_ulogic_vector(", i(1), t "-1 downto 0);",
+          }),
+        }),
+        finish = i(0),
+      }
+    )
+  ),
+  s(
+    's_axistream_if',
+    fmta(
+      [[
+      s_axis_tdata  : in std_ulogic_vector(<width>-1 downto 0);
+      s_axis_tvalid : in std_ulogic;
+      s_axis_tready : out std_ulogic;
+      <optional><finish>
+    ]],
+      {
+        width = i(1),
+        optional = c(2, {
+          t "",
+          t "s_axis_tlast  : in std_ulogic;",
+          sn(nil, { t "s_axis_tuser  : in std_ulogic_vector(", i(1), t "-1 downto 0);" }),
+          sn(nil, {
+            t { "s_axis_tlast  : in std_ulogic;", "" },
+            t "s_axis_tuser  : in std_ulogic_vector(", i(1), t "-1 downto 0);",
+          }),
+        }),
+        finish = i(0),
+      }
+    )
+  ),
+  s(
+    'axissignal',
+    fmta(
+      [[
+      signal tdata  : std_ulogic_vector(<width>-1 downto 0);
+      signal tvalid, tready, tlast : std_ulogic;
+      <optional><finish>
+    ]],
+      {
+        width = i(1),
+        optional = c(2, {
+          t "",
+          t "signal tlast : std_ulogic;",
+          sn(nil, { t "signal tuser  : std_ulogic_vector(", i(1), t "-1 downto 0);" }),
+          sn(nil, {
+            t { "signal tlast : std_ulogic;", "" },
+            t "signal tuser : std_ulogic_vector(", i(1), t "-1 downto 0);",
+          }),
+        }),
+        finish = i(0),
+      }
+    )
+  ),
 }, {
   s(
     '----',
     fmta(
       [[
-    -- ----------------------------------------
+    -- ------------------------------------------------------------------------
     -- <finish>
-    -- ----------------------------------------
+    -- ------------------------------------------------------------------------
     ]],
       {
         finish = i(0),
