@@ -10,7 +10,7 @@ accent_error = { background = "cc241f", foreground = "ebdbb2" }
 clock_highlight_line = { color = "3c3836", width = 2 }
 clock_highlight_cycle = "3c3836"
 clock_rising_marker = true
-highlight_background = "2f2951"
+highlight_background = "49515D"
 variable_default = "009e73"
 variable_undef = "d55e00"
 variable_highimp = "f0e442"
