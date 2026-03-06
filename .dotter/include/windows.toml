@@ -8,3 +8,5 @@
 [lazygit.files]
 "config/lazygit/config.yml" = { target = "~/AppData/Roaming/lazygit/config.yml", type = "template", if = '(is_executable "lazygit")' }
 
+[surfer.files]
+"config/surfer" = { target = "~/AppData/Roaming/surfer-project/surfer/config", type = "symbolic", recurse = false }

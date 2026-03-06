@@ -94,6 +94,9 @@ depends = ["bin"]
 [ghostty.files]
 "config/ghostty" = { target = "~/.config/ghostty", type = "symbolic", recurse = false }
 
+[surfer.files]
+"config/surfer" = { target = "~/.config/surfer", type = "symbolic", recurse = false }
+
 # variables are constants for templated files
 [default.variables]
 
