@@ -12,6 +12,8 @@ sudo pacman -S --noconfirm --needed \
     base-devel \
     rustup \
     git \
+    wget \
+    bc \
     unzip
 
 # paru install if not already installed
