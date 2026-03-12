@@ -57,7 +57,7 @@
 -- %1B[37m(%(worktreepath))%1B[m\
 %(end) \
 -- %(contents:subject) (%(color:blue)%(committerdate:relative)%(color:reset)) \
-%1B[90m -- %(refname:short)%1B[m' --color=always | fzf --height=40% --ansi --reverse --info=inline --query="$1" --delimiter='--' --accept-nth=1 --select-1 --preview='git log -n5 {-1} --color=always')
+%1B[90m -- %(refname:short)%1B[m' --color=always | fzf --height=40% --ansi --reverse --info=inline --query="$1" --delimiter='--' --accept-nth=1 --select-1 --preview='git log -n5 --color=always {-1} --')
 
 	# show incoming and outgoing commits
 	in = log --oneline '@..@{u}'
