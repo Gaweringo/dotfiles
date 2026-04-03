@@ -119,7 +119,7 @@
 {{#if (is_executable "difft")}}
 # Difftastic setup
 [diff]
-	external = difft
+	external = difft --color=always
 {{/if}}
 
 {{#if (is_executable "delta")}}
