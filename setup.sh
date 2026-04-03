@@ -6,6 +6,8 @@ set -e
 
 # Color for pacman
 grep -q '^Color' /etc/pacman.conf || sudo sed -i '/^\[options\]/a Color' /etc/pacman.conf
+grep -q '^VerbosePkgLists' /etc/pacman.conf || sudo sed -i '/^\[options\]/a VerbosePkgLists' /etc/pacman.conf
+grep -q '^ILoveCandy' /etc/pacman.conf || sudo sed -i '/^\[options\]/a ILoveCandy' /etc/pacman.conf
 
 # base
 sudo pacman -S --noconfirm --needed \
