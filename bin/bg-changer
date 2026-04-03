@@ -7,4 +7,4 @@ NEW_BG=$(find $WALLPAPER_FOLDER -type f | shuf -n1)
 
 echo "$NEW_BG"
 
-swww img "$NEW_BG"
+awww img "$NEW_BG"

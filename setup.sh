@@ -130,7 +130,7 @@ sudo pacman -S --noconfirm --needed \
     swaync \
     sway \
     swaybg \
-    swww \
+    awww \
     swayidle \
     swaylock \
     swayosd \
