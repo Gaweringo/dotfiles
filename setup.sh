@@ -73,15 +73,42 @@ sudo pacman -S --noconfirm --needed \
     valgrind \
     strace \
     openocd \
-    arm-none-eabi-gdb arm-none-eabi-gcc arm-none-eabi-newlib \
+    arm-none-eabi-{gdb,gcc,newlib} \
+    bloaty \
     uv \
     wireshark-qt \
     meson \
+    ninja \
     bear \
     minicom picocom \
     progress \
     inetutils \
+    dos2unix \
+    hyperfine \
+    watchexec \
+    bottom \
     xmake
+
+paru -S --noconfirm --needed \
+    dragon-drop
+
+# Embedded
+sudo pacman -S --noconfirm --needed \
+    probe-rs
+
+paru -S --noconfirm --needed \
+    orbuculum-git saleae-logic2
+
+# VHDL
+paru -S --noconfirm --needed \
+    gtkwave nvc python-vsg emacs surfer-waveform-git
+
+# Electronics
+sudo pacman -S --noconfirm --needed \
+    kicad kicad-library kicad-library-3d
+
+paru -S --noconfirm --needed \
+    qucs-s ngspice
 
 # Desktop utilities
 sudo pacman -S --noconfirm --needed \
@@ -89,6 +116,8 @@ sudo pacman -S --noconfirm --needed \
     playerctl \
     wiremix \
     wireplumber \
+    pipewire-{alsa,jack,pulse} \
+    alsa-utils \
     slurp \
     grim \
     satty \
@@ -148,7 +177,7 @@ sudo pacman -S --noconfirm --needed networkmanager network-manager-applet
 sudo systemctl enable --now NetworkManager.service
 
 # Bluetooth
-sudo pacman -S --noconfirm bluetui blueberry bluez
+sudo pacman -S --noconfirm bluetui blueman bluez
 sudo systemctl enable --now bluetooth.service
 
 # Printer
