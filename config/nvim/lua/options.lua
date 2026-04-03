@@ -78,7 +78,7 @@ opt.showmode = false
 opt.signcolumn = 'yes'
 
 opt.termguicolors = true  -- 24-bit color
-opt.textwidth = 120
+opt.textwidth = 100
 opt.colorcolumn = "+1"    -- vertical line at 120
 -- opt.showmatch = true    -- highlight matching brackets
 opt.matchtime = 2         -- how long to show matching brackets
