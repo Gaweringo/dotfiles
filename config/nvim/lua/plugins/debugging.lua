@@ -123,6 +123,25 @@ return {
           },
         },
         {
+          name = 'Launch file with args (cppdbg)',
+          type = 'cppdbg',
+          request = 'launch',
+          program = '${command:pickFile}',
+          cwd = '${workspaceFolder}',
+          args = function()
+            local args_string = vim.fn.input('Arguments: ')
+            return vim.split(args_string, " +")
+          end,
+          stopAtEntry = true,
+          setupCommands = {
+            {
+              text = '-enable-pretty-printing',
+              description = 'enable pretty printing',
+              ignoreFailures = false
+            },
+          },
+        },
+        {
           name = 'Attach to gdbserver :1234 (cppdbg)',
           type = 'cppdbg',
           request = 'launch',
