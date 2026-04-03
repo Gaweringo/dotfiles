@@ -65,6 +65,9 @@ return {
 				'tinymist',
 				'jsonls',
 				'zls',
+				-- Python
+				'ty',
+				'ruff',
 			}
 		}
 	},
