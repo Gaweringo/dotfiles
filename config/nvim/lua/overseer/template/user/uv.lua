@@ -18,6 +18,7 @@ end
 local uv_run_tmpl = {
     name = 'uv run',
     tags = { TAG.RUN },
+    priority = 10,
     params = {
         target = { optional = false, type = 'string', desc = 'The script or command to run' },
         target_args = { optional = true, type = 'list', delimiter = ' ', desc = 'Arguments passed to the command' },
@@ -49,14 +50,19 @@ return {
     generator = function(opts, cb)
         local pyproject = assert(get_pyproject_file(opts))
         local py_files = find_python_files(vim.fn.fnamemodify(pyproject, ":p:h"))
+        local current_file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
         local ret = { uv_run_tmpl }
         for _, target in ipairs(py_files) do
-            local relative_target =vim.fn.fnamemodify(target, ":.")
+            local relative_target = vim.fn.fnamemodify(target, ":.")
             table.insert(
                 ret,
                 overseer.wrap_template(
                     uv_run_tmpl,
-                    { name = string.format('uv run %s', relative_target) },
+                    {
+                        name = string.format('uv run %s', relative_target),
+                        -- Move the current file up in the list
+                        priority = relative_target == current_file and 9 or nil,
+                    },
                     { target = relative_target }
                 )
             )

@@ -26,7 +26,6 @@ local function vunit_get_testcases(use_uv, cwd)
     end
     vim.list_extend(command, { 'run.py', '--list' })
     local obj = vim.system(command, { cwd = cwd }):wait()
-    vim.print(obj)
     local testcases = vim.split(obj.stdout, '\r?\n', { trimempty = true })
     table.remove(testcases) -- remove last line (not a testcase)
     return testcases
@@ -36,6 +35,7 @@ end
 local vunit_test_tmpl = {
     name = 'vunit test',
     tags = { TAG.TEST },
+    priority = 5,
     params = {
         testcase = { optional = true, type = 'string', desc = 'The testcase to run' },
         gui = { optional = true, type = 'boolean', desc = 'Run test case in gui', default = false },
