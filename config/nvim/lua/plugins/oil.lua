@@ -12,7 +12,7 @@ return {
     oil.setup({
       columns = {
         { 'mtime', highlight = 'Comment' },
-        { 'size', highlight = 'Type' },
+        { 'size', highlight = 'Type', align = "right" },
         'icon',
       },
       keymaps = {
