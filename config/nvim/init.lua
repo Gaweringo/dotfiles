@@ -7,9 +7,7 @@ require 'autocommands'
 require 'commands'
 require 'keymap'
 
--------------------- Lazy --------------------
-
--- here begins lazy and plugins
+------- Plugins ------------------------------------------------------------------------------------
 
 -- Lazy bootstrap
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -31,4 +29,6 @@ require("lazy").setup({
     checker = { enabled = true, notify = false },
     change_detection = { notify = false },
 })
+
+require('plugins-builtin')
 
