@@ -15,6 +15,12 @@
 {{/if}}
 [init]
 	defaultBranch = main
+[url "https://github.com/"]
+	insteadOf = gh:
+[url "https://codeberg.org/"]
+	insteadOf = cb:
+[url "https://gitlab.com/"]
+	insteadOf = gl:
 [alias]
 	# Better git logs from Slipp D. Thompson: https://stackoverflow.com/a/34467298
 	l = lg1 -n 25
