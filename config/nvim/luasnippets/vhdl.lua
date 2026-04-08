@@ -405,7 +405,6 @@ end process RAM;
           t "signal tlast : std_ulogic;",
           sn(nil, { t "signal tuser  : std_ulogic_vector(", i(1), t "-1 downto 0);" }),
           sn(nil, {
-            t { "signal tlast : std_ulogic;", "" },
             t "signal tuser : std_ulogic_vector(", i(1), t "-1 downto 0);",
           }),
         }),
@@ -468,10 +467,8 @@ end process RAM;
   s('uvvm_vvc_framework', t { "library uvvm_vvc_framework;", "context uvvm_vvc_framework.vvc_framework_context;" }),
   s('vip_axilite', t { "library bitvis_vip_axilite;", "context bitvis_vip_axilite.vvc_context;" }),
   s('vip_axistream', t { "library bitvis_vip_axistream;", "context bitvis_vip_axistream.vvc_context;" }),
-
-}, {
   s(
-    '----',
+    'hdr',
     fmta(
       [[
     -- ------------------------------------------------------------------------
@@ -483,11 +480,13 @@ end process RAM;
       }
     )
   ),
+}, {
   -- Misspellings
   s( 'sulv',   t 'std_ulogic_vector'),
   s( 'slv',    t 'std_logic_vector'),
   s( 'stdu',   t 'std_ulogic'),
   s( 'dowtno', t 'downto'),
   s( 'donwto', t 'downto'),
-  s('othres',  t 'others'),
+  s( 'downo',  t 'downto'),
+  s( 'othres', t 'others'),
 }
