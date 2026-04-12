@@ -49,18 +49,6 @@ return {
       require('luasnip').log.set_loglevel(p.args)
     end, { nargs = 1, desc = 'Show Luasnip logs' })
 
-    vim.keymap.set({ 'i', 's' }, '<A-l>', function()
-      if ls.choice_active() then
-        ls.change_choice(1)
-      end
-    end, { silent = true, desc = 'Next choice from snippet' })
-
-    vim.keymap.set({ 'i', 's' }, '<A-h>', function()
-      if ls.choice_active() then
-        ls.change_choice(-1)
-      end
-    end, { silent = true, desc = 'Previous choice from snippet' })
-
     vim.keymap.set({ 'i', 's' }, '<C-j>', function()
       if ls.choice_active() then
         ls.change_choice(1)
