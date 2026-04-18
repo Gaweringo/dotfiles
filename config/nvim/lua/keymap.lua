@@ -18,8 +18,20 @@ vim.keymap.set({ 'n', 'v', 'x' }, '<A-c>', '"_c')
 vim.keymap.set({ 'n', 'v', 'x' }, '<A-C>', '"_C')
 
 -- Do not jump to next match with *
--- https://stackoverflow.com/a/4257175
-vim.keymap.set('n', '*', ':keepjumps normal! mi*`i<CR>', { silent = true, noremap = true })
+-- https://www.vim.org/scripts/script.php?script_id=4335
+vim.keymap.set('n', '*', function ()
+  local word = vim.fn.expand('<cword>')
+  vim.fn.setreg('/', word)
+  vim.api.nvim_set_vvar('hlsearch', true)
+  vim.fn.setreg('/', '\\<' .. word .. '\\>')
+  -- local prev_unnamed = vim.fn.getreg('"')
+  -- vim.cmd 'normal! ""yiw'
+  -- local current_cursor_word = vim.fn.getregs('"')
+  -- if current_cursor_word ~= word then
+  --   vim.cmd('normal! n')
+  -- end
+  -- vim.fn.setregs('"', prev_unnamed)
+end, { silent = true, noremap = true })
 
 -- Keep selection after indenting with '<' and '>'
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
