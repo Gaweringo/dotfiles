@@ -66,25 +66,36 @@ vim.api.nvim_create_user_command('Pwdc', function()
   vim.cmd [[let @+ = trim(execute('pwd'))]]
 end, { desc = 'Copy pwd to system clipboard' })
 
--- Copy path to folder of current file relative to the current working directory if possible
-vim.api.nvim_create_user_command('CopyFolderPathOfCurrentFile', function()
-    vim.cmd [[let @+ = trim(expand('%:.:h'))]]
-end, { desc = 'Copy path to current files folder (relative to pwd) to system clipboard' })
-
--- Copy path to folder of current file
-vim.api.nvim_create_user_command('CopyFolderPathOfCurrentFileFull', function()
-    vim.cmd [[let @+ = trim(expand('%:p:h'))]]
-end, { desc = 'Copy path to current files folder to system clipboard' })
-
--- Copy path to the current file relative to the current working directory if possible
-vim.api.nvim_create_user_command('CopyCurrentFilePath', function()
-    vim.cmd [[let @+ = trim(expand('%:.'))]]
-end, { desc = 'Copy path to current file (relative to pwd) to system clipboard' })
-
--- Copy full path to the current file
-vim.api.nvim_create_user_command('CopyCurrentFilePathFull', function()
-    vim.cmd [[let @+ = trim(expand('%:p'))]]
-end, { desc = 'Copy full path to current files folder to system clipboard' })
+vim.api.nvim_create_user_command('Copy', function(args)
+    local target = args.args
+    if target == "ParentRelative" then
+        vim.cmd [[let @+ = trim(expand('%:.:h'))]]
+    elseif target == "ParentAbsolute" then
+        vim.cmd [[let @+ = trim(expand('%:p:h'))]]
+    elseif target == "FileAbsolute" then
+        vim.cmd [[let @+ = trim(expand('%:p'))]]
+    elseif target == "FileRelative" then
+        vim.cmd [[let @+ = trim(expand('%:.'))]]
+    end
+end, {
+    desc = "Copy file information to the clipboard",
+    nargs = 1,
+    complete = function (arg_lead, cmdline, cursor_pos)
+        local targets = {
+                'ParentRelative',
+                'ParentAbsolute',
+                'FileRelative',
+                'FileAbsolute',
+            }
+        local matches = {}
+        for _, m in ipairs(targets) do
+            if vim.startswith(m, arg_lead) then
+                table.insert(matches, m)
+            end
+        end
+        return matches
+    end,
+})
 
 -- Clear the temp shada files (mostly for windows)
 vim.api.nvim_create_user_command('ClearTempShada', function()
