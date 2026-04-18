@@ -174,3 +174,7 @@ if vim.fn.has('wsl') == 1 then
     cache_enabled = 0,
   }
 end
+
+if vim.version().minor == 12 then
+  require('vim._core.ui2').enable()
+end
