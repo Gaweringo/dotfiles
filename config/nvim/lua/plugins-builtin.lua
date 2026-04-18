@@ -2,7 +2,9 @@
 
 vim.cmd ':packadd termdebug'
 
-vim.g.termdebug_config = {}
+vim.cmd [[let g:termdebug_config = {}]]
+vim.cmd [[let g:termdebug_config['disasm_window'] = 1]]
+vim.cmd [[let g:termdebug_config['variables_window'] = 1]]
 
 vim.api.nvim_create_user_command('TermdebugArm', function()
   vim.g.termdebug_config['command'] = { 'arm-none-eabi-gdb', '-ix', 'commands.gdb' }
