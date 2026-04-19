@@ -40,6 +40,8 @@ vim.lsp.config('tinymist', {
 	},
 })
 
+vim.lsp.document_color.enable(true, {}, {style = 'virtual'})
+
 -- All the setup regarding lsps
 return {
 	{
