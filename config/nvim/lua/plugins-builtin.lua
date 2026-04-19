@@ -64,3 +64,7 @@ vim.api.nvim_create_autocmd('User', {
     original_mappings = {}
   end,
 })
+
+------- Difftool -----------------------------------------------------------------------------------
+
+vim.cmd 'packadd nvim.difftool'

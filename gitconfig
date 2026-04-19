@@ -46,6 +46,7 @@
 	s = status
 	d = diff
 	ds = diff --staged
+	dt = difftool -d
 
 	# fzf based branch switching
 	sw = !git switch $(git branch -a --format='\
@@ -127,6 +128,11 @@
 [diff]
 	external = difft --color=always
 {{/if}}
+
+[difftool "nvim_difftool"]
+	cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
+[diff]
+	tool = nvim_difftool
 
 {{#if (is_executable "delta")}}
 # delta for all diff operations and blame
