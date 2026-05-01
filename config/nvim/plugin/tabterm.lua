@@ -17,3 +17,9 @@ vim.api.nvim_create_user_command('VTerm', function()
     vim.cmd.startinsert({ bang = true })
 end, { desc = 'Vertical split terminal' })
 
+vim.api.nvim_create_user_command('STerm', function()
+    vim.cmd.new()
+    vim.cmd.terminal()
+    vim.cmd.startinsert({ bang = true })
+end, { desc = 'Horizontal split terminal' })
+
