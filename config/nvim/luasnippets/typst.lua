@@ -42,7 +42,26 @@ qty("<num>", "<unit>")<finish>
           )
         return sn(nil, snippets)
       end)
-    }),
+    }
+  ),
+  s(
+    'ifig',
+    fmt(
+      [[
+#figure(
+  image("{img_path}", width: 100%),
+  caption: [{caption}],
+)<{label}>
+{finish}
+]],
+      {
+        img_path = i(1),
+        caption = i(3),
+        label = i(2),
+        finish = i(0),
+      }
+    )
+  ),
 }, {
   s({ trig = 't(%d+)x(%d+)', trigEngine = "pattern", desc = "Table" },
       fmta([[
