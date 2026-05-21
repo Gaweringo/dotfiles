@@ -6,8 +6,6 @@
   "arrow.nvim": { "branch": "master", "commit": "6e0f726f55f99332dd726a53effd6813786b6d49" },
   "blink-cmp-git": { "branch": "master", "commit": "10783593af764424018a95e75df6ad5a8b66fe07" },
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
-  "blink.download": { "branch": "main", "commit": "a459c8fbf51359902971874b5ebe05f6602db8b4" },
-  "blink.pairs": { "branch": "main", "commit": "4e43012356d33a26f69eae475f746fbe9f325f44" },
   "conform.nvim": { "branch": "master", "commit": "086a40dc7ed8242c03be9f47fbcee68699cc2395" },
   "debugmaster.nvim": { "branch": "main", "commit": "505d9a269d657ce8e0fa5601e0530f0d8798038c" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
