@@ -38,7 +38,7 @@ local vunit_test_tmpl = {
     priority = 5,
     params = {
         testcase = { optional = true, type = 'string', desc = 'The testcase to run' },
-        gui = { optional = true, type = 'boolean', desc = 'Run test case in gui', default = false },
+        gui = { optional = true, type = 'boolean', desc = 'Run test case in gui', default = true },
         cwd = { optional = true, type = 'string', desc = 'Directory of vunit run.py file', default = findVunitDir() },
         parallel = { optional = true, type = 'integer', desc = 'How many testcases to run in parallel', default = #vim.uv.cpu_info() },
         minimal = { optional = true, type = 'boolean', desc = 'Only build required modules for testcase', default = true },
@@ -77,7 +77,7 @@ local vunit_test_tmpl = {
             cwd = params.cwd,
             -- https://github.com/stevearc/overseer.nvim/blob/master/doc/components.md#on_output_quickfix
             components = {
-                { 'on_output_quickfix', errorformat = nvc_errorformat, open_on_match = true, set_diagnostics = true },
+                { 'on_output_quickfix', errorformat = nvc_errorformat, open_on_match = false, set_diagnostics = true },
                 'on_result_diagnostics',
                 'on_complete_notify',
                 'on_exit_set_status',
