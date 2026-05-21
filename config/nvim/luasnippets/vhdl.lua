@@ -122,11 +122,11 @@ architecture tb of {tb_name} is
 
 begin
 
+    engine: entity uvvm_vvc_framework.ti_uvvm_engine;
+
     -- ------------------------------------------------------------------------
     -- VVCs
     -- ------------------------------------------------------------------------
-
-    engine: entity uvvm_vvc_framework.ti_uvvm_engine;
 
     -- ------------------------------------------------------------------------
     -- DUT
@@ -462,7 +462,7 @@ end process RAM;
         finish = i(0),
       }
     )),
-  s('i_clocked', t { "i_clk : in std_ulogic;", "i_reset_n : in std_ulogic" }),
+  s('i_clocked', t { "i_clk : in std_ulogic;", "i_reset_n : in std_ulogic;" }),
   s('uvvm_util', t { "library uvvm_util;", "context uvvm_util.uvvm_util_context;" }),
   s('uvvm_vvc_framework', t { "library uvvm_vvc_framework;", "context uvvm_vvc_framework.vvc_framework_context;" }),
   s('vip_axilite', t { "library bitvis_vip_axilite;", "context bitvis_vip_axilite.vvc_context;" }),
@@ -471,12 +471,23 @@ end process RAM;
     'hdr',
     fmta(
       [[
-    -- ------------------------------------------------------------------------
+    -- <fill_line>
     -- <finish>
-    -- ------------------------------------------------------------------------
+    -- <fill_line>
     ]],
       {
         finish = i(0),
+        fill_line = d(1, function(args, parent, _old_state, _user_args)
+            -- parent.env.TM_CURRENT_LINE is the line up to and including the snippet trigger <comment_str>sec
+            -- So we substract the commentstring and 'sec' part to get the line indentation
+            local line_indent = string.len(parent.env.TM_CURRENT_LINE)
+            local tw = vim.o.textwidth
+            if tw == 0 then tw = 100 end
+            return sn(nil, t { string.rep('-', tw - line_indent )})
+        end, {}),
+      },
+      {
+        repeat_duplicates = true,
       }
     )
   ),
