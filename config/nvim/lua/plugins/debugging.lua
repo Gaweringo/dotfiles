@@ -341,6 +341,11 @@ return {
       -- vim.keymap.set("n", "<Esc>", dm.mode.disable)
       -- This might be unwanted if you already use Esc for ":noh"
       vim.keymap.set('t', '<C-\\>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+      -- Add target selection for step into
+      dm.keys.get('m').action = function ()
+            require("dap").step_into({ askForTargets = true })
+      end
     end,
     keys = {
       { '<leader>dm', function() require('debugmaster').mode.toggle() end, nowait = true, desc = 'debug(m)aster', mode = { 'n', 'v' }, },
