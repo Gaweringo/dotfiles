@@ -43,6 +43,8 @@ if status is-interactive
     alias snv=svn
     {{/if}}
 
+    alias lsusb-d='lsusb -d $(lsusb | fzf --accept-nth=6) -v'
+
     {{#if (is_executable "opam")}}
     # opam configuration
     source /home/gawer/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
