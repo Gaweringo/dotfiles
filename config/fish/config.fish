@@ -80,8 +80,8 @@ if status is-interactive
     {{#if (is_executable "pacman")}}
     alias pacman-search="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
     {{/if}}
-    {{#if (is_executable "paru")}}
-    alias paru-search="paru -Slq | fzf --preview 'paru -Si {}' --layout=reverse"
+    {{#if (is_executable "yay")}}
+    alias aur-search="yay -Slq | fzf --preview 'yay -Si {}' --layout=reverse"
     {{/if}}
 
     function cdf --description 'Change to first directory that matches'
