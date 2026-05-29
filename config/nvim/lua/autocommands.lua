@@ -124,6 +124,7 @@ vim.api.nvim_create_autocmd('FileType', {
     local i = require("luasnip.nodes.insertNode").I
     local d = require("luasnip.nodes.dynamicNode").D
     local l = require("luasnip.extras").lambda
+    local f = require("luasnip").function_node
     local dl = require("luasnip.extras").dynamic_lambda
     local fmta = require("luasnip.extras.fmt").fmta
 
@@ -135,9 +136,9 @@ vim.api.nvim_create_autocmd('FileType', {
         comment_str .. 'sec',
         fmta(
           [[
-    <pre> <section> <fill_line>
-    <finish>
-    ]],
+            <pre> <section> <fill_line>
+            <finish>
+          ]],
           {
             pre = t(pretext),
             section = dl(1, l.CAPTURE1, {}),
@@ -158,7 +159,44 @@ vim.api.nvim_create_autocmd('FileType', {
           }
         )
       ),
-    }, { type = "autosnippets", key = filetype .. comment_str })
+    }, { type = "autosnippets", key = filetype .. comment_str .. 'sec' })
+
+    -- Small seciton (no comment line after text)
+    ls.add_snippets(filetype, {
+      s(
+        comment_str .. 'ssec',
+        fmta(
+          "<pre> <section>",
+          {
+            pre = t(pretext),
+            section = i(0)
+          }
+        )
+      ),
+    }, { type = "autosnippets", key = filetype .. comment_str .. 'ssec' })
+
+    ls.add_snippets(filetype, {
+      s(
+        comment_str .. 'div',
+        fmta(
+          "<div>\n<finish>",
+          {
+            div = f(
+              function(args, parent, user_args)
+                -- parent.env.TM_CURRENT_LINE is the line up to and including the snippet trigger <comment_str>div
+                -- So we substract the commentstring and 'div' part to get the line indentation
+                local line_indent = string.len(parent.env.TM_CURRENT_LINE) - comment_str:len() - string.len("div")
+                local tw = vim.o.textwidth
+                if tw == 0 then tw = 100 end
+                local divider = string.rep(comment_repeat, tw - line_indent )
+                return divider
+              end
+            ),
+            finish = i(0)
+          }
+        )
+      ),
+    }, { type = "autosnippets", key = filetype .. comment_str .. 'div' })
 
   end
 })
