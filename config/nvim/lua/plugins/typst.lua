@@ -61,9 +61,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
       -- tinymist mappings
       vim.keymap.set('n', '<localleader>m', '<Cmd>TypstPin<Cr>',
-        { desc = "Typst [p]in main", buffer = buf, silent = true })
-      vim.keymap.set('n', '<localleader>u', '<Cmd>TypstPin!<Cr>',
-        { desc = "Typst [u]npin main", buffer = buf, silent = true })
+        { desc = "Typst pin [m]ain", buffer = buf, silent = true })
+      vim.keymap.set('n', '<localleader>M', '<Cmd>TypstPin!<Cr>',
+        { desc = "Typst unpin [M]ain", buffer = buf, silent = true })
 
       vim.api.nvim_buf_create_user_command(buf, 'TypstPin', function(args)
         if args.bang ~= true then
