@@ -472,12 +472,13 @@ end process RAM;
     fmta(
       [[
     -- <fill_line>
-    -- <finish>
+    -- <text>
     -- <fill_line>
+    <finish>
     ]],
       {
-        finish = i(0),
-        fill_line = d(1, function(args, parent, _old_state, _user_args)
+        text = i(1),
+        fill_line = d(2, function(args, parent, _old_state, _user_args)
             -- parent.env.TM_CURRENT_LINE is the line up to and including the snippet trigger <comment_str>sec
             -- So we substract the commentstring and 'sec' part to get the line indentation
             local line_indent = string.len(parent.env.TM_CURRENT_LINE)
@@ -485,6 +486,7 @@ end process RAM;
             if tw == 0 then tw = 100 end
             return sn(nil, t { string.rep('-', tw - line_indent )})
         end, {}),
+        finish = i(0),
       },
       {
         repeat_duplicates = true,
