@@ -18,6 +18,8 @@ if status is-interactive
     # aliases
     alias ..='cd ..'
 
+    alias :q='exit'
+
     {{#if (is_executable "exa")}}
     alias x=exa
     alias xt='eza -lah --icons=always --tree --level'
