@@ -267,7 +267,7 @@ return {
       local dapui = require('dapui')
       dapui.setup(opts)
       -- Running dap-disasm setup after setting up dap-ui, as the registering of dap-disasm requires dap-ui to be loaded
-      require('dap-disasm').setup()
+      require('dap-disasm').setup(opts)
 
       -- -- Autostart dapui
       -- dap.listeners.before.attach.dapui_config = function()
