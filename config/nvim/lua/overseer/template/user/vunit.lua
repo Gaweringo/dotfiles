@@ -19,18 +19,6 @@ local function findVunitDir()
     return vunit_dir
 end
 
-local function vunit_get_testcases(use_uv, cwd)
-    local command = { 'python' }
-    if use_uv then
-        command = { 'uv', 'run', '-q' }
-    end
-    vim.list_extend(command, { 'run.py', '--list' })
-    local obj = vim.system(command, { cwd = cwd }):wait()
-    local testcases = vim.split(obj.stdout, '\r?\n', { trimempty = true })
-    table.remove(testcases) -- remove last line (not a testcase)
-    return testcases
-end
-
 ---@type overseer.TemplateFileDefinition
 local vunit_test_tmpl = {
     name = 'vunit test',
@@ -98,22 +86,36 @@ local vunit_test_tmpl = {
 return {
     generator = function(opts, cb)
         local vunit_dir = findVunitDir() or '.'
-        local ret = { overseer.wrap_template(vunit_test_tmpl, { name = 'vunit test' }, { cwd = vunit_dir }) }
-        local uses_uv = vim.fs.find('pyproject.toml', { dir = vunit_dir }) ~= nil
-        local testcases = vunit_get_testcases(uses_uv, vunit_dir)
+        local use_uv = vim.fs.find('pyproject.toml', { dir = vunit_dir }) ~= nil
 
-        for _, testcase in ipairs(testcases) do
-            table.insert(
-                ret,
-                overseer.wrap_template(
-                    vunit_test_tmpl,
-                    { name = string.format('vunit test \'%s\'', testcase) },
-                    { testcase = testcase }
-                )
-            )
+        -- Get testcases
+        local command = { 'python' }
+        if use_uv then
+            command = { 'uv', 'run', '-q' }
         end
+        vim.list_extend(command, { 'run.py', '--list' })
 
-        cb(ret)
+        -- Register tasks
+        vim.system(command, { cwd = vunit_dir, text = true },
+            vim.schedule_wrap(function(out)
+                local testcases = vim.split(out.stdout, '\n', { trimempty = true })
+                table.remove(testcases) -- remove last line (not a testcase)
+
+                ---@type overseer.TemplateFileDefinition[]
+                local ret = { overseer.wrap_template(vunit_test_tmpl, { name = 'vunit test' }, { cwd = vunit_dir }) }
+                for _, testcase in ipairs(testcases) do
+                    table.insert(
+                        ret,
+                        overseer.wrap_template(
+                            vunit_test_tmpl,
+                            { name = string.format('vunit test \'%s\'', testcase) },
+                            { testcase = testcase }
+                        )
+                    )
+                end
+                cb(ret)
+            end)
+        )
     end,
     condition = {
         filetype = { 'vhdl', 'python' },
