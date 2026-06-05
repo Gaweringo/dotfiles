@@ -17,6 +17,16 @@ return {
     end,
   },
   {
+      "slugbyte/lackluster.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {
+        tweak_background = {
+          normal = 'none'
+        }
+      }
+  },
+  {
     'blazkowolf/gruber-darker.nvim',
     lazy = false,
     priority = 1000,
