@@ -71,6 +71,9 @@ depends = ["bin"]
 [zathura.files]
 "zathurarc" = "~/.config/zathura/zathurarc"
 
+[sioyek.files]
+"config/sioyek/" = { target = "~/.config/sioyek", type = "symbolic", recurse = false }
+
 [fish.files]
 "config/fish/config.fish" = "~/.config/fish/config.fish"
 "config/fish/completions/render.fish" = { target = "~/.config/fish/completions/render.fish", type = "symbolic", if = '(is_executable "render")' }
