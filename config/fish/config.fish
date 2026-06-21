@@ -42,6 +42,9 @@ if status is-interactive
     {{#if (is_executable "exa")}}
     alias snv=svn
     {{/if}}
+    {{#if (is_executable "gh")}}
+    alias gas='gh auth switch'
+    {{/if}}
 
     alias lsusb-d='lsusb -d $(lsusb | fzf --accept-nth=6) -v'
 
