@@ -102,7 +102,7 @@ return {
                 table.remove(testcases) -- remove last line (not a testcase)
 
                 ---@type overseer.TemplateFileDefinition[]
-                local ret = { overseer.wrap_template(vunit_test_tmpl, { name = 'vunit test' }, { cwd = vunit_dir }) }
+                local ret = { overseer.wrap_template(vunit_test_tmpl, { name = 'vunit test' }, { cwd = vunit_dir, gui = false }) }
                 for _, testcase in ipairs(testcases) do
                     table.insert(
                         ret,
