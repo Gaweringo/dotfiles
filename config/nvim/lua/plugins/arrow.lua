@@ -6,7 +6,7 @@ return {
   event = 'VeryLazy',
   opts = {
     show_icons = true,
-    -- leader_key = '<Tab>',        -- Recommended to be a single key
+    leader_key = '<leader>a',        -- Recommended to be a single key
     buffer_leader_key = 'M', -- Per Buffer Mappings
     save_key = 'cwd',
   },
