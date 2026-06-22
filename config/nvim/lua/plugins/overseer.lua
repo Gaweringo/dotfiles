@@ -27,6 +27,7 @@ return {
       'user.vunit',
       'user.fhlow',
       'user.uv',
+      'user.zig',
     },
     task_list = {
       max_height = { 20, 0.3 },
