@@ -73,6 +73,10 @@ Function gas {
 }
 {{/if}}
 
+Function :q {
+  exit
+}
+
 ##### Better cds ###############################################################
 Function .. { cd .. }
 
