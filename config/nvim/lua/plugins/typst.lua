@@ -100,10 +100,18 @@ return {
       open_cmd = [[chromium --app=%s 2>&1]],
       -- Use tinymist from mason
       dependencies_bin = { ['tinymist'] = 'tinymist' },
-      get_root = function(path_of_main_file)
-        return vim.fn.getcwd()
+      extra_args = {
+        '--verbose', -- TODO: https://github.com/chomosuke/typst-preview.nvim/pull/135
+        '--partial-rendering=true', -- TODO: https://github.com/chomosuke/typst-preview.nvim/pull/134
+      },
+      get_main_file = function(main_file)
+        -- Because tinymist doesn't seem to like windows backslashes
+        return vim.fs.normalize(main_file)
+      end,
+      get_root = function(main_file)
+        return vim.fs.normalize(vim.fn.getcwd())
       end,
     },
-    cmd = { 'TypstPreview' },
+    cmd = { 'TypstPreview', 'TypstPreviewToggle' },
   },
 }
