@@ -67,6 +67,12 @@ Set-Alias -Name tx -Value xt
 Set-Alias -Name snv -Value svn
 {{/if}}
 
+{{#if (is_executable 'gh')}}
+Function gas {
+  gh auth switch
+}
+{{/if}}
+
 ##### Better cds ###############################################################
 Function .. { cd .. }
 
