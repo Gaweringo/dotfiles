@@ -99,9 +99,8 @@ end, {
 
 -- Clear the temp shada files (mostly for windows)
 vim.api.nvim_create_user_command('ClearTempShada', function()
-    local path = vim.fn.stdpath('data') .. '/shada/'
+    local path = vim.fs.normalize(vim.fn.stdpath('data') .. '/shada/')
     local files = vim.fn.globpath(path, "*.tmp.[A-z]", true, true)
-    vim.print(files)
     for _, file in ipairs(files) do
       vim.fs.rm(file)
     end
