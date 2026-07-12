@@ -493,6 +493,23 @@ end process RAM;
       }
     )
   ),
+  s(
+    'regset',
+    fmta(
+      [[
+      type t_state is (idle, <finish>);
+
+      type t_regset is record
+          state : t_state;
+      end record;
+
+      signal r, nxr : t_regset;
+      ]],
+      {
+        finish = i(0),
+      }, {}
+    )
+  ),
 }, {
   -- Misspellings
   s( 'sulv',   t 'std_ulogic_vector'),
