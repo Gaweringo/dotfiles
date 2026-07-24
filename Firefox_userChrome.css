@@ -28,6 +28,6 @@ Instructions:
 Note: This assumes vertical tabs are enabled in Firefox.
 */
 
-#main-window[titlepreface*="[Sidebery]"] #sidebar-main {
+#main-window[titlepreface*="[Sidebery]"] sidebar-main {
   display: none !important;
 }
