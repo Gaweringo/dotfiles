@@ -121,12 +121,12 @@ map('n', '<C-Right>', '"<Cmd>vertical resize +" . v:count1 . "<CR>"', { expr = t
 ------ movement ------
 
 -- Tabs
-vim.keymap.set('n', '<C-w><C-t>', ':tabnew<cr>', { desc = 'New Tab', silent = true })
-vim.keymap.set('n', '<C-w><C-q>', ':tabclose<cr>', { desc = 'Close Tab', silent = true })
-vim.keymap.set('n', '<C-w><C-l>', ':tabnext<cr>', { desc = 'Next Tab', silent = true })
-vim.keymap.set('n', '<C-w><C-h>', ':tabprevious<cr>', { desc = 'Previous tab', silent = true })
-vim.keymap.set('n', '<right>', ':tabnext<cr>', { desc = 'Next Tab', silent = true })
-vim.keymap.set('n', '<left>', ':tabprevious<cr>', { desc = 'Previous tab', silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-w><C-t>', ':tabnew<cr>', { desc = 'New Tab', silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-w><C-q>', ':tabclose<cr>', { desc = 'Close Tab', silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-w><C-l>', ':tabnext<cr>', { desc = 'Next Tab', silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-w><C-h>', ':tabprevious<cr>', { desc = 'Previous tab', silent = true })
+vim.keymap.set({ 'n', 'v' }, '<right>', ':tabnext<cr>', { desc = 'Next Tab', silent = true })
+vim.keymap.set({ 'n', 'v' }, '<left>', ':tabprevious<cr>', { desc = 'Previous tab', silent = true })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
