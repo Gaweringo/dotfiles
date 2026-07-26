@@ -510,6 +510,21 @@ end process RAM;
       }, {}
     )
   ),
+  s( 'uvvm', { t ({
+'library uvvm_util;',
+'context uvvm_util.uvvm_util_context;',
+'',
+'library uvvm_vvc_framework;',
+'context uvvm_vvc_framework.vvc_framework_context;',
+      })} ),
+  s( 'uvvm_sbi', { t {'library bitvis_vip_sbi;', 'context bitvis_vip_sbi.vvc_context;',} } ),
+  s( 'uvvm_axistream', { t {'library bitvis_vip_axistream;', 'context bitvis_vip_axistream.vvc_context;',} } ),
+  s( 'uvvm_axilite', { t {'library bitvis_vip_axilite;', 'context bitvis_vip_axilite.vvc_context;',} } ),
+  s( 'uvvm_clock_generator', { t {'library bitvis_vip_clock_generator;', 'context bitvis_vip_clock_generator.vvc_context;',} } ),
+  s( 'uvvm_axi', { t {'library bitvis_vip_axi;', 'context bitvis_vip_axi.vvc_context;',} } ),
+  s( 'uvvm_gpio', { t {'library bitvis_vip_gpio;', 'context bitvis_vip_gpio.vvc_context;',} } ),
+  s( 'uvvm_avalon_mm', { t {'library bitvis_vip_avalon_mm;', 'context bitvis_vip_avalon_mm.vvc_context;',} } ),
+  s( 'uvvm_avalon_st', { t {'library bitvis_vip_avalon_st;', 'context bitvis_vip_avalon_st.vvc_context;',} } ),
 }, {
   -- Misspellings
   s( 'sulv',   t 'std_ulogic_vector'),
