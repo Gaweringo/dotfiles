@@ -26,13 +26,8 @@ config.color_scheme =  "Dark Pastel"
 -- config.color_scheme =  "Nocturnal Winter"
 -- config.color_scheme =  "synthwave"
 
--- Make the cursor be bg and fg reversed of thext it is on
--- config.force_reverse_video_cursor = true
--- Make cursor always black on white
-config.colors = {
-	cursor_fg = "black",
-	cursor_bg = "white",
-}
+-- Make the cursor be bg and fg reversed of text it is on
+config.force_reverse_video_cursor = true
 
 config.use_fancy_tab_bar = false
 if string.find(config.font.font[1].family, "JetBrains") then
