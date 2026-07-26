@@ -134,28 +134,4 @@
 [diff]
 	tool = nvim_difftool
 
-{{#if (is_executable "delta")}}
-# delta for all diff operations and blame
-[core]
-	pager = delta
-
-[interactive]
-	diffFilter = delta --color-only
-
-[delta]
-	navigate = true
-	hyperlinks = true
-	side-by-side = true
-	line-number = true
-	commit-decoration-style = none
-	file-decoration-style = none
-	hunk-header-decoration-style = none
-
-	line-numbers-left-format = {nm:^4}
-	line-numbers-right-format = {nm:^4}
-
-[diff]
-	colorMoved = default
-{{/if}}
-
 # vim:ft=gitconfig
