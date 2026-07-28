@@ -15,6 +15,8 @@ return {
         t 'NOTE',
         t 'INFO',
         t 'WARN',
+        t 'HACK',
+        t 'BUG',
         i(nil)
       }), -- Todo type
       c(2, { -- Optional name
