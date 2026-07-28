@@ -3,18 +3,18 @@ return {
     'header',
     fmta(
       [[
--------------------------------------------------------------------------------
--- Title      : <title>
--- Project    : <project>
--- Date       : <date>
--------------------------------------------------------------------------------
--- Abstract: <abstract>
--------------------------------------------------------------------------------
--- Authors are:
--- hanl: Martin Hanl
--------------------------------------------------------------------------------
-<finish>
-]],
+      -------------------------------------------------------------------------------
+      -- Title      : <title>
+      -- Project    : <project>
+      -- Date       : <date>
+      -------------------------------------------------------------------------------
+      -- Abstract: <abstract>
+      -------------------------------------------------------------------------------
+      -- Authors are:
+      -- hanl: Martin Hanl
+      -------------------------------------------------------------------------------
+      <finish>
+      ]],
       {
         title = d(4, function()
           return sn(nil, t(vim.fn.expand '%:t:r'))
@@ -26,6 +26,39 @@ return {
         end),
         abstract = i(1),
         finish = i(0),
+      }
+    )
+  ),
+  s(
+    'entity',
+    fmta(
+      [[
+      library IEEE;
+          use IEEE.std_logic_1164.all;
+          use IEEE.numeric_std.all;
+
+      entity <name> is
+          port (
+              clk    : in std_ulogic;
+              rst_an : in std_ulogic;
+              <finish>
+          );
+      end entity <name>;
+
+      architecture rtl of <name> is
+
+      begin
+
+
+
+      end architecture rtl;
+      ]], {
+        name = d(1, function()
+          return sn(nil, t(vim.fn.expand '%:t:r'))
+        end),
+        finish = i(0)
+      }, {
+        repeat_duplicates = true,
       }
     )
   ),
@@ -48,8 +81,8 @@ architecture tb of {tb_name} is
     constant c_clk_freq   : positive     := 50e6;
     constant c_clk_period : delay_length := 1 sec / c_clk_freq;
 
-    signal clk     : std_ulogic := '0';
-    signal reset_n : std_ulogic := '0';
+    signal clk    : std_ulogic := '0';
+    signal rst_an : std_ulogic := '0';
 begin
 
     main : process
@@ -118,7 +151,7 @@ architecture tb of {tb_name} is
     constant c_clk_period : delay_length := 1 sec / c_clk_freq;
 
     signal clk     : std_ulogic := '0';
-    signal reset_n : std_ulogic := '0';
+    signal rst_an : std_ulogic := '0';
 
 begin
 
@@ -177,12 +210,12 @@ end architecture;
     )
   ),
   s(
-    'uvvm_axistream_setup',
+    'axistream_setup',
     fmt(
       [[
     subtype axistream_if is t_axistream_if(
         tdata(c_data_width-1 downto 0), tkeep(c_data_width/8 -1 downto 0),
-        tuser(c_user_width-1 downto 0), tstrb(1-1 downto 0), tid(0-1 downto 0), tdest(0-1 downto 0)
+        tuser(c_user_width-1 downto 0), tstrb(c_data_width/8-1 downto 0), tid(0-1 downto 0), tdest(0-1 downto 0)
     );
 
     constant c_axistream_cfg : t_axistream_bfm_config := (
@@ -257,43 +290,123 @@ end architecture;
     )
   ),
   s(
+    'axilite_setup',
+    fmt(
+      [[
+    constant c_{name}_addr_width : positive := {addr_width};
+    constant c_{name}_data_width : positive := {data_width};
+
+    subtype t_{name}_if is t_axilite_if(
+        write_address_channel(awaddr(c_{name}_addr_width-1 downto 0)),
+        write_data_channel(wdata(c_{name}_data_width-1 downto 0), wstrb(c_{name}_data_width/8-1 downto 0)),
+        read_address_channel(araddr(c_{name}_addr_width-1 downto 0)),
+        read_data_channel(rdata(c_{name}_data_width-1 downto 0))
+    );
+
+    constant c_{name}_cfg : t_axilite_bfm_config := (
+        max_wait_cycles            => 1000,
+        max_wait_cycles_severity   => TB_FAILURE,
+        clock_period               => C_UNDEFINED_TIME,
+        clock_period_margin        => 0 ns,
+        clock_margin_severity      => TB_ERROR,
+        setup_time                 => C_UNDEFINED_TIME,
+        hold_time                  => C_UNDEFINED_TIME,
+        bfm_sync                   => SYNC_ON_CLOCK_ONLY,
+        match_strictness           => MATCH_EXACT,
+        expected_response          => OKAY,
+        expected_response_severity => TB_FAILURE,
+        protection_setting         => UNPRIVILEGED_NONSECURE_DATA,
+        num_aw_pipe_stages         => 1,
+        num_w_pipe_stages          => 1,
+        num_ar_pipe_stages         => 1,
+        num_r_pipe_stages          => 1,
+        num_b_pipe_stages          => 1,
+        id_for_bfm                 => ID_BFM,
+        id_for_bfm_wait            => ID_BFM_WAIT,
+        id_for_bfm_poll            => ID_BFM_POLL
+    );
+
+    constant c_init_{name}_if : t_{name}_if
+        := init_axilite_if_signals(c_{name}_addr_width, c_{name}_data_width);
+
+    constant c_idx_{name} : natural := {idx};
+    signal {name}_if : t_{name}_if := c_init_{name}_if;
+    {finish}
+    ]],
+      {
+        name = i(1, 'axilite'),
+        addr_width = i(2, '32'),
+        data_width = i(3, '32'),
+        idx = i(4, '0'),
+        finish = i(0),
+      },
+      {
+        repeat_duplicates = true,
+      }
+    )
+  ),
+  s(
+    'axilite_vvc',
+    fmt(
+      [[
+    {name}_vvc: entity bitvis_vip_axilite.axilite_vvc
+     generic map(
+        gc_addr_width     => c_{name}_addr_width,
+        gc_data_width     => c_{name}_data_width,
+        gc_instance_idx   => c_idx_{name},
+        gc_axilite_config => c_{name}_cfg
+    ) port map(clk, {name}_if);
+    {finish}
+    ]],
+      {
+        name = i(1, 'regs'),
+        finish = i(0),
+      }, {
+        repeat_duplicates = true
+      }
+    )
+  ),
+  s(
     'fsmd',
     fmt(
       [[
 architecture rtl of {entity_name} is
 
-    type aState is (idle);
+    type t_state is (idle);
 
-    type aRegSet is record
-        state : aState;
+    type t_regset is record
+        state : t_state;
         {record_data}
     end record;
 
-    constant c_regset_init : aRegSet := (
+    constant c_regset_init : t_regset := (
         state => idle
         {finish}
     );
 
-    signal R, NxR : aRegSet;
+    signal r, nxr : t_regset;
 
 begin
 
-    comb : process(all)
+    comb: process(all)
     begin
-        NxR <= R;
+        nxr <= r;
 
-        case R.state is
+        case r.state is
             when idle =>
+
             when others => report "Hit unhandled case: " & to_string(R.state) severity error;
+
         end case;
+
     end process;
 
     regs : process({clk_name}, {reset_name})
     begin
         if {reset_name} = not '1' then
-            R <= c_regset_init;
+            r <= c_regset_init;
         elsif rising_edge({clk_name}) then
-            R <= NxR;
+            r <= nxr;
         end if;
     end process;
 
@@ -303,8 +416,8 @@ end architecture rtl;
         entity_name = d(1, function(args)
           return sn(nil, i(1, string.match(vim.fn.expand '%:t:r', '^[^-]+')))
         end),
-        clk_name = i(2, 'i_clk'),
-        reset_name = i(3, 'i_reset_n'),
+        clk_name = i(2, 'clk'),
+        reset_name = i(3, 'rst_an'),
         record_data = i(4),
         finish = i(0),
       },
@@ -447,22 +560,22 @@ end process RAM;
   s('uvvm_axistream_if_type', fmt(
       [[
       subtype {name} is t_axistream_if(
-          tdata({data_width}-1 downto 0), tkeep({data_width_again}/8 -1 downto 0),
-          tuser({user_width}-1 downto 0), tstrb({strb_width}-1 downto 0), tid({id_width}-1 downto 0), tdest({dest_width}-1 downto 0)
+          tdata({data_width}-1 downto 0), tkeep({data_width}/8 -1 downto 0),
+          tuser({user_width}-1 downto 0), tstrb({data_width}/8-1 downto 0), tid({id_width}-1 downto 0), tdest({dest_width}-1 downto 0)
       );{finish}
       ]],
       {
         name = i(1, 'axistream_if'),
         data_width = i(2, 'c_data_width'),
-        data_width_again = rep(2),
         user_width = i(3, '0'),
-        strb_width = i(4, '1'),
-        id_width = i(5, '0'),
-        dest_width = i(6, '0'),
+        id_width = i(4, '0'),
+        dest_width = i(5, '0'),
         finish = i(0),
+      }, {
+        repeat_duplicates = true,
       }
     )),
-  s('i_clocked', t { "i_clk : in std_ulogic;", "i_reset_n : in std_ulogic;" }),
+  s('clkd', t { "clk : in std_ulogic;", "rst_an : in std_ulogic;" }),
   s('uvvm_util', t { "library uvvm_util;", "context uvvm_util.uvvm_util_context;" }),
   s('uvvm_vvc_framework', t { "library uvvm_vvc_framework;", "context uvvm_vvc_framework.vvc_framework_context;" }),
   s('vip_axilite', t { "library bitvis_vip_axilite;", "context bitvis_vip_axilite.vvc_context;" }),
@@ -495,13 +608,17 @@ end process RAM;
   ),
   s(
     'regset',
-    fmta(
+    fmt(
       [[
-      type t_state is (idle, <finish>);
+      type t_state is (idle, {finish});
 
       type t_regset is record
           state : t_state;
       end record;
+
+      constant c_regset_init : t_regset := (
+          state => idle
+      );
 
       signal r, nxr : t_regset;
       ]],
@@ -525,6 +642,78 @@ end process RAM;
   s( 'uvvm_gpio', { t {'library bitvis_vip_gpio;', 'context bitvis_vip_gpio.vvc_context;',} } ),
   s( 'uvvm_avalon_mm', { t {'library bitvis_vip_avalon_mm;', 'context bitvis_vip_avalon_mm.vvc_context;',} } ),
   s( 'uvvm_avalon_st', { t {'library bitvis_vip_avalon_st;', 'context bitvis_vip_avalon_st.vvc_context;',} } ),
+  s(
+    'comb',
+    fmt(
+      [[
+      comb: process(all)
+      begin
+          nxr <= r;
+
+          {finish}
+      end process;
+      ]],
+      {
+        finish = c(1, {
+          sn(1, {
+            t { 'case r.state is', '' },
+            t { '        when idle => ' },
+            i(1),
+            t { '', '    end case;', '' },
+          }),
+          t '',
+        }),
+      }, {}
+    )
+  ),
+  s(
+    'regs',
+    fmt(
+      [[
+      regs: process(clk, {rst})
+      begin
+          {type}
+      end process;
+      ]],
+      {
+        rst = i(1),
+        type = c(2, {
+          t {
+            'if rst_an = not \'1\' then',
+            '        r <= c_regset_init;',
+            '    elsif rising_edge(clk) then',
+            '        r <= nxr;',
+            '    end if;',
+          },
+          t {
+            'if rising_edge(clk) then',
+            '        if rst = \'1\' then',
+            '            r <= c_regset_init;',
+            '        else',
+            '            r <= nxr;',
+            '        end if;',
+            '    end if;',
+          },
+          t {
+            'if rst_a = \'1\' then',
+            '        r <= c_regset_init;',
+            '    elsif rising_edge(clk) then',
+            '        r <= nxr;',
+            '    end if;',
+          },
+          t {
+            'if rising_edge(clk) then',
+            '        if rst_n = not \'1\' then',
+            '            r <= c_regset_init;',
+            '        else',
+            '            r <= nxr;',
+            '        end if;',
+            '    end if;',
+          },
+        }),
+      }, {}
+    )
+  ),
 }, {
   -- Misspellings
   s( 'sulv',   t 'std_ulogic_vector'),
