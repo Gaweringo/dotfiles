@@ -58,6 +58,7 @@ missing_format = ""
 [[block]]
 block = "battery"
 format = " $icon  $percentage ($time_remaining.dur(hms:true, min_unit:m) $power) "
+not_charging_format = " $icon  $percentage "
 missing_format = ""
 
 [[block]]
