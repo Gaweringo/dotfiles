@@ -3,6 +3,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, { desc = "LSP Hover", buffer = true })
 		vim.keymap.set('n', '<leader>la', function() vim.lsp.buf.code_action() end, { desc = "LSP code action" })
 		vim.keymap.set('n', '<leader>r', function() vim.lsp.buf.rename() end, { desc = "LSP Rename" })
+		vim.keymap.set('n', '<C-w>gd', '<Cmd>vertical wincmd ]<Cr>', { desc = "Go to definition in split window" })
 		-- Client / Language specific
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		local buf = ev.buf
