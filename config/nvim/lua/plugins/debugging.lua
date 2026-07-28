@@ -206,6 +206,7 @@ return {
 
       dap.configurations.c = dap.configurations.cpp
       dap.configurations.rust = dap.configurations.cpp
+      dap.configurations.zig = dap.configurations.cpp
 
       -- Cortex debug
       dap.adapters.cortex_debug = {
