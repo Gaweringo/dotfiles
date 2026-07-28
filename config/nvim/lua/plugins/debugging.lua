@@ -168,6 +168,32 @@ return {
           args = {},
         },
         {
+          name = 'Launch with args (codelldb)',
+          type = 'codelldb',
+          request = 'launch',
+          program = '${command:pickFile}',
+          cwd = '${workspaceFolder}',
+          stopOnEntry = false,
+          args = function()
+            local args_string = vim.fn.input('Arguments: ')
+            return vim.split(args_string, " +")
+          end,
+        },
+        {
+          name = 'Launch with args and cwd (codelldb)',
+          type = 'codelldb',
+          request = 'launch',
+          program = '${command:pickFile}',
+          cwd = function ()
+            return vim.fn.input('CWD: ')
+          end,
+          stopOnEntry = false,
+          args = function()
+            local args_string = vim.fn.input('Arguments: ')
+            return vim.split(args_string, " +")
+          end,
+        },
+        {
           -- If you get an "Operation not permitted" error using this, try disabling YAMA:
           --  echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
           name = "Attach to process (codelldb)",
