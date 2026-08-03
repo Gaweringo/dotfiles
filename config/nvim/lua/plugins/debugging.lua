@@ -341,7 +341,7 @@ return {
     config = function(_, opts)
       require('dap-view').setup(opts)
       -- Running dap-disasm setup after setting up dap-view, as the registering of dap-disasm requires dap-view to be loaded
-      require('dap-disasm').setup()
+      require('dap-disasm').setup({})
     end,
     keys = {
       { '<leader>dU', '<cmd>DapViewToggle<Cr>', desc = 'Toggle dap-view-(U)I' }
