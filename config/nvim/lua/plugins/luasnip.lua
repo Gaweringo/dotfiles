@@ -5,7 +5,7 @@ return {
   -- install jsregexp (optional!).
   build = 'make install_jsregexp',
   event = 'InsertEnter',
-  dependencies = { 'rafamadriz/friendly-snippets' },
+  dependencies = { 'rafamadriz/friendly-snippets', 'RobertBrunhage/flutter-riverpod-snippets' },
   opts = {
     history = true, enable_autosnippets = true, update_events = "TextChanged,TextChangedI",
   },
@@ -30,6 +30,7 @@ return {
 
     -- For loading frindly snippets (but is also done automatically by blink-cmp)
     require("luasnip.loaders.from_vscode").lazy_load()
+    require'luasnip'.filetype_extend('dart', { 'flutter' })
     -- Lazy load snippets from vim.fn.stdpath('config')/luasnippets/*.lua
     require('luasnip.loaders.from_lua').lazy_load()
 
