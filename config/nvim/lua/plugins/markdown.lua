@@ -1,15 +1,3 @@
--- TODO: Toggle commands for render markdown (<localleader>r or m) and markdown preview (<localleader>p)
--- Using autocommand for markdown filetype, or ftplugin
-
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-    pattern = { '*.md',  '*.mkd', '*.mdx' },
-    callback = function(ev)
-      vim.keymap.set('n', '<localleader>p', '<Cmd>MarkdownPreviewToggle<Cr>', { desc = "Toggle Markdown[p]review", buffer = ev.buf, silent = true })
-      vim.keymap.set('n', '<localleader>r', '<Cmd>RenderMarkdown buf_toggle<Cr>', { desc = "Toggle [r]ender-markdown", buffer = ev.buf, silent = true })
-    end,
-  }
-)
-
 return {
   {
     'MeanderingProgrammer/render-markdown.nvim',
@@ -20,6 +8,9 @@ return {
       code = { border = 'thick' },
     },
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim', 'saghen/blink.cmp' },
+    keys = {
+      { '<localleader>r', '<Cmd>RenderMarkdown buf_toggle<Cr>', desc = "Toggle [r]ender-markdown", ft = 'markdown' },
+    },
   },
 
   -- install without yarn or npm
@@ -27,6 +18,9 @@ return {
     'gaweringo/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     ft = { 'markdown' },
+    keys = {
+      { '<localleader>p', '<Cmd>MarkdownPreviewToggle<Cr>', desc = "Toggle Markdown[p]review", ft = 'markdown' },
+    },
     build = function()
       require('lazy').load { plugins = { 'markdown-preview.nvim' } }
       vim.fn['mkdp#util#install']()
