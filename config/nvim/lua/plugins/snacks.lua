@@ -426,6 +426,8 @@ return {
     { "gt",         function() Snacks.picker.lsp_type_definitions() end,                                            desc = "Goto Type Definition" },
     { "<leader>ls", function() Snacks.picker.lsp_symbols({ filter = { default = true }, keep_parents = true }) end, desc = "LSP Symbols" },
     { "<leader>lf", function() Snacks.picker.lsp_symbols({ filter = { default = { "Function", "Method" } }, keep_parents = true }) end, desc = "LSP Functions" },
+    { "<leader>lk", function() Snacks.picker.lsp_symbols({ filter = { default = { "Class", "Interface", "Struct" } }, keep_parents = true }) end, desc = "LSP Classes" },
+    { "<leader>ln", function() Snacks.picker.lsp_symbols({ filter = { default = { "Namespace" } }, keep_parents = true }) end, desc = "LSP Namespaces" },
     { "<leader>lS", function() Snacks.picker.lsp_workspace_symbols({ keep_parents = true }) end,                    desc = "LSP Workspace Symbols" },
     { "gai",        function() Snacks.picker.lsp_incoming_calls() end,                                              desc = "C[a]lls Incoming" },
     { "gao",        function() Snacks.picker.lsp_outgoing_calls() end,                                              desc = "C[a]lls Outgoing" },
