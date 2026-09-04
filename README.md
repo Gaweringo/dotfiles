@@ -26,6 +26,11 @@ programming_folder = 'P:\..\Programming'
 5. Deploy the config by running `dotter`
     - *Check with* `--dry-run` *before*
 
+# Firefox settings to change
+These are in `about:config`
+- `browser.tabs.insertAfterCurrent` so that Ctrl+T opens a new tab next to the current one
+- `browser.compactmode.show` for more compact UI
+
 ## Things to install that are in config:
 ### General
 - [starship](https://starship.rs)
