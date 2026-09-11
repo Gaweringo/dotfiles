@@ -14,7 +14,6 @@ vim.g.have_nerd_font = true
 ----- basic options ------------------------------------------------------------
 -- Show line numbers and make them relative to the cursor position
 opt.number = true
-opt.relativenumber = true
 
 -- Disable visual wrapping of lines, as that is disorienting for code.
 -- But because it can sometimes be useful, there is a keymap to
