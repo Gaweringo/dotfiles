@@ -260,7 +260,6 @@ return {
             return (vim.o.winbar ~= "")
           end,
           set = function(state)
-            vim.print(state)
             if state then
               vim.o.winbar = [[%{%v:lua.dropbar()%}]]
             else
