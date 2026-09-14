@@ -172,6 +172,10 @@ sudo pacman -S --noconfirm --needed \
     xorg-xwayland \
     dmenu
 
+# Fix for java apps like Quartus Platform Designer or Vivado
+grep -q 'Exec=sway' /usr/share/wayland-sessions/sway.desktop && \
+    sudo sed -i 's/Exec=sway/Exec=env _JAVA_AWT_WM_NONREPARENTING=1 sway/' /usr/share/wayland-sessions/sway.desktop || true
+
 # wifi / network
 sudo pacman -S --noconfirm --needed networkmanager network-manager-applet
 sudo systemctl enable --now NetworkManager.service
