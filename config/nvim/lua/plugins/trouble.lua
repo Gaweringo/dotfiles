@@ -48,6 +48,11 @@ return {
       desc = '[l]sp [o]utline document (Trouble)',
     },
     {
+      '<leader>lf',
+      "<cmd>Trouble symbols toggle modes.symbols.mode=lsp_document_symbols focus=true win={size=80, position=right} modes.symbols.filter.any.kind={Function, Method}<cr>",
+      desc = '[l]sp [f]funcitons (Trouble)',
+    },
+    {
       '<leader>lr',
       '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
       desc = 'LSP references/definitions/... (Trouble)',
