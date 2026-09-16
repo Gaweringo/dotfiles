@@ -1,3 +1,17 @@
+vim.api.nvim_create_autocmd('User', { pattern = 'TSUpdate',
+callback = function()
+  require('nvim-treesitter.parsers').systemrdl = {
+    tier = 2,
+    install_info = {
+      url = 'https://github.com/maltaisn/tree-sitter-systemrdl',
+      branch = 'add-highlights-query',
+      generate = true, -- only needed if repo does not contain pre-generated `src/parser.c`
+      generate_from_json = false, -- only needed if repo does not contain `src/grammar.json` either
+      queries = 'queries', -- also install queries from given directory
+    },
+  }
+end})
+
 return {
   {
     -- Highlight, edit, and navigate code
@@ -14,8 +28,8 @@ return {
         'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'html', 'ini', 'jq', 'json', 'json5', 'julia',
         'just', 'kconfig', 'kitty', 'latex', 'lua', 'make', 'markdown', 'markdown_inline', 'matlab', 'mermaid', 'ninja',
         'nix', 'objdump', 'powershell', 'printf', 'python', 'qmldir', 'qmljs', 'query', 'regex', 'rst', 'rust', 'sql',
-        'ssh_config', 'strace', 'sway', 'systemverilog', 'tcl', 'toml', 'typst', 'udev', 'vhdl', 'vim', 'vimdoc', 'xml',
-        'yaml', 'zig',
+        'ssh_config', 'strace', 'sway', 'systemrdl', 'systemverilog', 'tcl', 'toml', 'typst', 'udev', 'vhdl', 'vim',
+        'vimdoc', 'xml', 'yaml', 'zig',
       }
       local no_ts_indent = { --[[ 'vhdl' ]] }
 
