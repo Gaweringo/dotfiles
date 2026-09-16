@@ -87,7 +87,9 @@ sudo pacman -S --noconfirm --needed \
     hyperfine \
     watchexec \
     bottom \
-    xmake
+    xmake \
+    dua-cli \
+    duf
 
 paru -S --noconfirm --needed \
     dragon-drop
