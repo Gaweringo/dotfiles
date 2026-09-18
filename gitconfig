@@ -8,10 +8,13 @@
 [credential "https://gist.github.com"]
 	helper = !gh auth git-credential
 {{/if}}
-{{#if (and email git_username)}}
+
 [user]
-    email = {{email}}
-    name = {{git_username}}
+{{#if git_username}}
+	name = {{git_username}}
+{{/if}}
+{{#if email}}
+	email = {{email}}
 {{/if}}
 [init]
 	defaultBranch = main
