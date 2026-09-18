@@ -16,6 +16,15 @@
 {{#if email}}
 	email = {{email}}
 {{/if}}
+{{#if signkey}}
+	signingkey = {{signkey}}
+{{/if}}
+
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+
 [init]
 	defaultBranch = main
 [url "https://github.com/"]

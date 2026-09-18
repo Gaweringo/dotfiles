@@ -5,5 +5,6 @@ packages = ["default", "sway", "fish"]
 [variables]
 email = "40121865+Gaweringo@users.noreply.github.com"
 git_username = "Gaweringo"
+# signkey = "/path/to/key.pub"
 
 # pacman -S ttf-jetbrains-mono-nerd
