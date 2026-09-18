@@ -147,4 +147,12 @@
 [diff]
 	tool = nvim_difftool
 
+{{#if (is_executable "git-lfs")}}
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+{{/if}}
+
 # vim:ft=gitconfig
