@@ -213,9 +213,13 @@ end architecture;
     'axistream_setup',
     fmt(
       [[
+
+    constant c_tdata_width : natural := {tdata_width};
+    constant c_tuser_width : natural := {tuser_width};
+
     subtype axistream_if is t_axistream_if(
-        tdata(c_data_width-1 downto 0), tkeep(c_data_width/8 -1 downto 0),
-        tuser(c_user_width-1 downto 0), tstrb(c_data_width/8-1 downto 0), tid(0-1 downto 0), tdest(0-1 downto 0)
+        tdata(c_tdata_width-1 downto 0), tkeep(c_tdata_width/8 -1 downto 0),
+        tuser(c_tuser_width-1 downto 0), tstrb(c_tdata_width/8-1 downto 0), tid(0-1 downto 0), tdest(0-1 downto 0)
     );
 
     constant c_axistream_cfg : t_axistream_bfm_config := (
@@ -244,17 +248,19 @@ end architecture;
     );
 
     constant c_init_axis_if : axistream_if
-        := init_axistream_if_signals(false, c_data_width, c_user_width, 0, 0, c_axistream_cfg);
+        := init_axistream_if_signals(false, c_tdata_width, c_tuser_width, 0, 0, c_axistream_cfg);
 
-    constant c_idx_{axis_m_again} : natural := 1;
+    constant c_idx_{axis_m_again} : natural := 0;
     signal {axis_m}_if : axistream_if := c_init_axis_if;
-    constant c_idx_{axis_s_again} : natural := 2;
+    constant c_idx_{axis_s_again} : natural := 1;
     signal {axis_s}_if : axistream_if := c_init_axis_if;
     {finish}
     ]],
       {
         axis_m = i(1, 'axis_m'), axis_m_again = rep(1),
         axis_s = i(2, 'axis_s'), axis_s_again = rep(2),
+        tdata_width = i(3, '8');
+        tuser_width = i(4, '0');
         finish = i(0),
       },
       {
@@ -282,8 +288,8 @@ end architecture;
       {
         name = i(1, 'axis_m'), name_again = rep(1),
         master = i(2, 'true'),
-        data_width = i(3, 'c_data_width'),
-        user_width = i(4, 'c_user_width'),
+        data_width = i(3, 'c_tdata_width'),
+        user_width = i(4, 'c_tuser_width'),
         cfg = i(5, 'c_axistream_cfg'),
         finish = i(0),
       }
