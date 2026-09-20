@@ -19,7 +19,7 @@ set $term kitty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # Switch with Ctrl+Tab to between modes
-set $menu rofi -modes "drun,run" -show drun -show-icons -show-actions -drun-display-format "{name} [<span weight='light' size='small'><i>({generic})</i></span>] | <span weight='light' size='small'>{exec}</span>"
+set $menu rofi -modes "drun,run" -show drun -show-icons -show-actions -drun-display-format "{name} [<span weight='light' size='small'><i>({generic}) </i></span>]<span weight='light' size='small'>&gt; {exec}</span>"
 
 # Mouse follows to the focused container
 mouse_warping container
