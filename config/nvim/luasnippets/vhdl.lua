@@ -714,6 +714,7 @@ end process RAM;
       }, {}
     )
   ),
+  s('await_all', {t 'await_completion(ALL_VVCS, ', i(1), t ');', i(0)}),
 }, {
   -- Misspellings
   s( 'sulv',   t 'std_ulogic_vector'),
