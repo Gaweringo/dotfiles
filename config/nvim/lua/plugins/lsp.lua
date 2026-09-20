@@ -43,6 +43,11 @@ vim.lsp.config('tinymist', {
 
 vim.lsp.document_color.enable(true, {}, {style = 'virtual'})
 
+vim.lsp.config('vhdl_ls', {
+	-- https://github.com/neovim/nvim-lspconfig/pull/4494
+	workspace_required = false,
+})
+
 -- All the setup regarding lsps
 return {
 	{
