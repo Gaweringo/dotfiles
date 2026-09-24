@@ -18,12 +18,11 @@
 {{/if}}
 {{#if signkey}}
 	signingkey = {{signkey}}
-{{/if}}
-
 [gpg]
 	format = ssh
 [commit]
 	gpgsign = true
+{{/if}}
 
 [init]
 	defaultBranch = main
