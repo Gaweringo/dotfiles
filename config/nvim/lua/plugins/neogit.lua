@@ -1,3 +1,8 @@
+local graph_style = 'unicode'
+if vim.env.TERM == 'xterm-kitty' then
+  graph_style = 'kitty'
+end
+
 return {
   -- Like emacs Magit
   'NeogitOrg/neogit',
@@ -16,6 +21,6 @@ return {
     { '<leader>gl', '<cmd>NeogitLogCurrent<cr>', desc = '[g]it [l]og current file' },
     { '<leader>gL', function() require('neogit').action('log', 'log_current', {'--graph', '--decorate'})() end, desc = '[g]it [L]og' },
   },
-  opts = { graph_style = 'unicode' },
+  opts = { graph_style = graph_style },
   config = true,
 }
