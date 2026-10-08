@@ -126,6 +126,7 @@ vim.filetype.add {
   extension = {
     -- Do files for VHDL simulators are tcl files
     ['do'] = 'tcl',
+    ['pro'] = 'tcl',
     ['rdl'] = 'systemrdl',
   }
 }

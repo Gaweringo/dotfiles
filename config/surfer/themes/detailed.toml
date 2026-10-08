@@ -20,6 +20,7 @@ cursor = { color="ffffff", width=2 }
 gesture = { color="ffffff", width=2 }
 linewidth = 2
 alt_frequency = 0
+focus_highlight = "LineWidthAndBrightnessShift"
 
 [colors]
 Green = "009e73"
