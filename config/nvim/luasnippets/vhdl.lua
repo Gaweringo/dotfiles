@@ -150,7 +150,7 @@ architecture tb of {tb_name} is
     constant c_clk_freq   : positive     := 50e6;
     constant c_clk_period : delay_length := 1 sec / c_clk_freq;
 
-    signal clk     : std_ulogic := '0';
+    signal clk    : std_ulogic := '0';
     signal rst_an : std_ulogic := '0';
 
 begin
@@ -720,7 +720,7 @@ end process RAM;
       }, {}
     )
   ),
-  s('await_all', {t 'await_completion(ALL_VVCS, ', i(1), t ');', i(0)}),
+  s('await_all', {t 'await_completion(ALL_VVCS, ', i(1, '10 us'), t ');', i(0)}),
 }, {
   -- Misspellings
   s( 'sulv',   t 'std_ulogic_vector'),
