@@ -1,6 +1,8 @@
 vim.lsp.config("tinymist", {
   settings = {
     formatterMode = "typstyle",
+    formatterProseWrap = "sentence",
+    formatterPrintWidth = 100,
     -- exportPdf      = "onType", -- TODO: onSave doesn't work for some reason
     -- semanticTokens = "disable", -- Maybe disable?
     lint          = { enabled = true },
