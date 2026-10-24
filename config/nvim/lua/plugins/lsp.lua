@@ -76,7 +76,13 @@ return {
 				-- Python
 				'ty',
 				'ruff',
-			}
+			},
+			automatic_enable = {
+				exclude = {
+					-- Disabled by default, needs to be enabled manually `lsp enable harper_ls` if desired
+					"harper_ls"
+				},
+			},
 		}
 	},
 	-- Shows LSP messages in the bottom right to see what the LSP is doing on startup
