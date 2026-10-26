@@ -48,7 +48,7 @@ return {
       desc = '[l]sp [o]utline document (Trouble)',
     },
     {
-      '<leader>lf',
+      '<leader>xf',
       "<cmd>Trouble symbols toggle modes.symbols.mode=lsp_document_symbols focus=true win={size=80, position=right} modes.symbols.filter.any.kind={Function, Method}<cr>",
       desc = '[l]sp [f]funcitons (Trouble)',
     },
@@ -73,12 +73,12 @@ return {
       desc = 'Quickfix List (Trouble)',
     },
     {
-      '<leader>lc',
+      '<leader>xc',
       '<cmd>Trouble lsp_outgoing_calls toggle<cr>',
       desc = 'Outgoing (c)alls',
     },
     {
-      '<leader>li',
+      '<leader>xi',
       '<cmd>Trouble lsp_incoming_calls toggle<cr>',
       desc = '(i)ncoming calls',
     },

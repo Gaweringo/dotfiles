@@ -430,6 +430,8 @@ return {
     { "<leader>lS", function() Snacks.picker.lsp_workspace_symbols({ keep_parents = true }) end,                    desc = "LSP Workspace Symbols" },
     { "gai",        function() Snacks.picker.lsp_incoming_calls() end,                                              desc = "C[a]lls Incoming" },
     { "gao",        function() Snacks.picker.lsp_outgoing_calls() end,                                              desc = "C[a]lls Outgoing" },
+    { "<leader>li", function() Snacks.picker.lsp_incoming_calls() end,                                              desc = "C[a]lls Incoming" },
+    { "<leader>lc", function() Snacks.picker.lsp_outgoing_calls() end,                                              desc = "C[a]lls Incoming" },
 
     -- Scratch
     { "<leader>,",  function() Snacks.scratch() end,                                           desc = "Create scratch buffer" },
