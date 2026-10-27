@@ -117,3 +117,7 @@ if status is-interactive
     end
 end
 
+{{#if (is_executable "direnv")}}
+direnv hook fish | source
+{{/if}}
+

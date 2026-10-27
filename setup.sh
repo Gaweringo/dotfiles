@@ -89,7 +89,8 @@ sudo pacman -S --noconfirm --needed \
     bottom \
     xmake \
     dua-cli \
-    duf
+    duf \
+    direnv
 
 paru -S --noconfirm --needed \
     dragon-drop

@@ -7,3 +7,5 @@ right_format = '$os'
 format = '[$name $symbol]($style)'
 disabled = false
 
+[direnv]
+disabled = false
