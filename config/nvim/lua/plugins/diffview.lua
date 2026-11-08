@@ -7,29 +7,33 @@ local function get_default_branch_name()
 end
 
 return {
-  'sindrets/diffview.nvim',
+  'dlyongemallo/diffview-plus.nvim',
   opts = {
+    use_icons = true,
+    -- enhanced_diff_hl = true,
     view = {
       merge_tool = {
         layout = 'diff1_plain',
       },
+      cycle_layouts = {
+        default = { "diff1_inline", "diff1_plain", "diff2_horizontal", "diff2_vertical" },
+      },
+      -- inline = { style = "overleaf" },
     },
   },
   -- For icons
   dependencies = { 'nvim-mini/mini.nvim' },
-  init = function()
-    -- Diffview only supports nvim-web-devicons, so we let mini.icons mock it
-    require('mini.icons').mock_nvim_web_devicons()
-  end,
-  cmd = { 'DiffviewOpen', 'DiffviewFileHistory', },
+  cmd = { 'DiffviewOpen', 'DiffviewToggle', 'DiffviewFileHistory', },
   keys = {
-    { '<leader>gd%', '<cmd>DiffviewFileHistory --follow %<cr>',                                        desc = '[d]iffview current file history' },
-    { '<leader>gdh', '<cmd>DiffviewFileHistory<cr>',                                                   desc = '[d]iffview [h]istory' },
-    { '<leader>gdl', "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>",                                desc = '[d]iffview [l]ine history', mode = { 'v' } },
-    { '<leader>gdl', "<Cmd>.DiffviewFileHistory --follow<CR>",                                         desc = '[d]iffview [l]ine history', mode = { 'n' } },
-    { '<leader>gdd', '<cmd>DiffviewOpen<cr>',                                                          desc = '[d]iffview [d]iff' },
-    { '<leader>gdq', '<cmd>DiffviewClose<cr>',                                                         desc = '[d]iffview [q]uit' },
-    { '<leader>gdm', function() vim.cmd('DivviewOpen ' .. get_default_branch_name()) end,              desc = '[d]iffview [m]ain' },
-    { '<leader>gdM', function() vim.cmd('DivviewOpen HEAD..origin/' .. get_default_branch_name()) end, desc = '[d]iffview origin/[M]ain' },
+    { '<leader>gd%', '<cmd>DiffviewFileHistory --follow %<cr>',                                        desc = 'current file history' },
+    { '<leader>gdh', '<cmd>DiffviewFileHistory<cr>',                                                   desc = 'history' },
+    { '<leader>gdl', "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>",                                desc = 'line history', mode = { 'v' } },
+    { '<leader>gdl', "<Cmd>.DiffviewFileHistory --follow<CR>",                                         desc = 'line history', mode = { 'n' } },
+    { '<leader>gdo', '<cmd>DiffviewOpen<cr>',                                                          desc = 'open' },
+    { '<leader>gdd', '<cmd>DiffviewToggle<cr>',                                                        desc = 'diffview (toggle)' },
+    { '<leader>gdw', '<cmd>DiffviewWorktreeOverview<cr>',                                              desc = 'worktree overview' },
+    { '<leader>gdq', '<cmd>DiffviewClose<cr>',                                                         desc = 'quit' },
+    { '<leader>gdm', function() vim.cmd('DivviewOpen ' .. get_default_branch_name()) end,              desc = 'main' },
+    { '<leader>gdM', function() vim.cmd('DivviewOpen HEAD..origin/' .. get_default_branch_name()) end, desc = 'origin/[M]ain' },
   },
 }

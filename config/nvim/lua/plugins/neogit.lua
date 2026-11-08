@@ -8,7 +8,7 @@ return {
   'NeogitOrg/neogit',
   dependencies = {
     'nvim-lua/plenary.nvim', -- required
-    'sindrets/diffview.nvim', -- Diff integration
+    'dlyongemallo/diffview-plus.nvim', -- Diff integration
     'gaweringo/snacks.nvim', -- Picker integration
   },
   cmd = 'Neogit',
