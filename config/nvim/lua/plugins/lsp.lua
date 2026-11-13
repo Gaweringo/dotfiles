@@ -48,6 +48,9 @@ vim.lsp.config('vhdl_ls', {
 	workspace_required = false,
 })
 
+-- Disabled by default
+vim.lsp.enable('harper_ls', false)
+
 -- All the setup regarding lsps
 return {
 	{
